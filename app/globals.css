@@ -19,3 +19,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@theme {
+  --animate-slide-up: slideUp 20s linear infinite;
+  --animate-slide-down: slideDown 20s linear infinite;
+
+  @keyframes slideUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  @keyframes slideDown {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+  }
+}
