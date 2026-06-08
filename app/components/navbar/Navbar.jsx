@@ -1,31 +1,29 @@
-import Topbar from "./Topbar";
+"use client";
+
 import Logo from "./Logo";
 import MenuLinks from "./MenuLinks";
 import RightActions from "./RightActions";
-import MobileMenu from "./MobileMenu";
+import MobileMenu from "./MobileMenu"; // <-- Plug in the newly generated tracking layout file
 
 export default function Navbar() {
   return (
-    <header className="w-full bg-white sticky top-0 z-50 shadow-sm shadow-gray-100/50">
-      {/* Topbar: Responsive settings built right inside Topbar component */}
-      <Topbar />
-      
-      {/* Main Bar */}
-      <div className="max-w-full mx-50 px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+    /* Absolute overlay frame configuration wrapper */
+    <header className="absolute top-0 left-0 w-full z-50 bg-transparent border-b border-white/10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between h-20 lg:h-24 relative">
           
-          {/* Logo - Always visible */}
+          {/* 1. Left aligned core brand signature block */}
           <Logo />
-          
-          {/* Menu links - Pushed to center, hidden on mobile, flex on desktop */}
+
+          {/* 2. Middle desktop track navigation link array (hidden on mobile displays) */}
           <MenuLinks />
-          
-          {/* Search Bar + Login Button - Hidden on mobile, flex on desktop */}
+
+          {/* 3. Right side dashboard utility items row (hidden on mobile displays) */}
           <RightActions />
 
-          {/* Mobile hamburger menu trigger - Only visible on mobile (`md:hidden`) */}
+          {/* 4. Responsive viewport fallback control component (hidden on desktop screens) */}
           <MobileMenu />
-          
+
         </div>
       </div>
     </header>

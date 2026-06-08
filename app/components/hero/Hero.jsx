@@ -1,27 +1,25 @@
 import HeroContent from "./HeroContent";
-import HeroImages from "./HeroImage";
+import HeroImage from "./HeroImage";
 
-export default function Hero() {
+export default function HeroSection() {
   return (
-    <section className="w-full bg-white py-6 sm:py-10 lg:py-4 px-4 sm:px-6 lg:px-8">
-      
-      {/* 
-        This is the main container with the soft greyish background, 
-        large border radius, and hidden overflow matching image_697987.jpg 
-      */}
-      <div className="max-w-full mx-auto bg-[#F8F9FA] rounded-[32px] overflow-visible lg:py-0 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] items-center gap-6 relative">
+    /* h-[150vh] defines the scrolling duration track for the parallax canvas. 
+       Adjust it up or down to speed up or slow down the transition effect. */
+    <section className="relative h-[150vh] w-full bg-[#0d1527]">
+      {/* The sticky wrapper locks the window viewport space on screen */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
         
-        {/* Background Decorative Watermarks (Airplane/Tent trails can be rendered inside here) */}
-        <div className="absolute inset-0 pointer-events-none opacity-40 select-none">
-          {/* If you have background illustrations, they sit behind content here */}
+        {/* Graphics Parallax Core Component */}
+        <HeroImage />
+        
+        {/* Text Content Overlay Layer (Scrolls upwards naturally) */}
+        <div className="absolute inset-0 z-30 w-full h-screen flex items-center justify-center px-4 pointer-events-none">
+          {/* Your text content scales/scrolls with standard flow container properties here */}
+          <div className="pointer-events-auto">
+            <HeroContent />
+          </div>
         </div>
 
-        {/* Content Side Layout */}
-        <HeroContent />
-        
-        {/* Image Grid Side */}
-        <HeroImages />
-        
       </div>
     </section>
   );

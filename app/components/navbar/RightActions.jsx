@@ -1,18 +1,21 @@
 import Link from "next/link";
-import SearchBar from "./SearchBar";
+import { ChevronDown } from "lucide-react";
 
 export default function RightActions() {
   return (
-    <div className="hidden md:flex items-center space-x-4 lg:space-x-6 whitespace-nowrap">
-      {/* Search pill element */}
-      <SearchBar />
+    <div className="hidden lg:flex items-center gap-6 flex-shrink-0">
+      {/* Language Trigger Toggle Selection */}
+      <button className="flex items-center gap-1 text-white text-sm font-bold tracking-wider hover:text-white/80 transition-colors">
+        <span>ENG</span>
+        <ChevronDown className="w-4 h-4 opacity-70" />
+      </button>
 
-      {/* Log in accent action button */}
+      {/* Frame Outlined Button Action Block */}
       <Link 
-        href="/login" 
-        className="bg-orange-500 text-white font-bold px-6 py-2.5 rounded-full text-sm hover:bg-orange-600 shadow-md shadow-orange-500/10 transition-all"
+        href="/enquire" 
+        className="border border-white hover:bg-white hover:text-[#0F2220] text-white text-sm font-semibold px-6 py-2.5 rounded-md transition-all duration-200 tracking-wide"
       >
-        Log in
+        Enquire Now
       </Link>
     </div>
   );
