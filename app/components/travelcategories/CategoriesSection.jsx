@@ -56,9 +56,9 @@ export default function CategoriesSection() {
       <div 
         className="absolute top-0 left-0 w-full h-[520px] sm:h-[480px] md:h-[440px] lg:h-[400px] z-0 bg-bottom bg-cover bg-no-repeat"
         style={{
-          backgroundImage: "linear-gradient(to bottom, #093c60, #0c5385), url('/images/bg-orange.png')",
+          backgroundImage: "linear-gradient(to bottom, #ff69005e, #ff8d0057), url('/images/bg-orange.png')",
           backgroundBlendMode: "multiply",
-          clipPath: "polygon(0 0, 100% 0, 100% 82%, 55% 96%, 0 88%)",
+          clipPath: "polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%)",
         }}
       />
 

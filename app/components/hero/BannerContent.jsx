@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { SLIDER_DATA } from "../../constants/sliderData";
+import { SLIDER_DATA } from "../../data/sliderData";
 
 export default function BannerContent() {
   const initialSlide = SLIDER_DATA[0] || {

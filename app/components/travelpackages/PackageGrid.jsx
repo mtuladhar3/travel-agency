@@ -1,29 +1,48 @@
-import { packageData } from "./packageData";
-import SectionHeader from "./SectionHeader";
-import PackageCard from "./PackageCard";
+// travelpackages/PackageGrid.jsx
+'use client';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import SectionHeader from './SectionHeader';
+import PackageCard from './PackageCard';
+import { travelPackages } from './packageData';
 
 export default function PackageGrid() {
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    const cards = gridRef.current.querySelectorAll('.package-card-wrapper');
+    
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power4.out',
+        delay: 0.4
+      }
+    );
+  }, []);
+
   return (
-    <section className="w-full bg-white py-16 sm:py-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Main Section Header */}
+    <section className="bg-white py-16 sm:py-20 px-4 flex flex-col">
+      <div className="max-w-7xl mx-auto w-full">
+        {/* Render Header */}
         <SectionHeader />
 
-        {/* Packages Display Layout Grid Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
-          {packageData.map((pkg) => (
-            <PackageCard key={pkg.id} pkg={pkg} />
+        {/* Responsive Flex/Grid Layout */}
+        <div 
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2 sm:px-6 lg:px-8 mt-4"
+        >
+          {travelPackages.map((pkg) => (
+            <div key={pkg.id} className="package-card-wrapper">
+              <PackageCard pkg={pkg} />
+            </div>
           ))}
         </div>
-
-        {/* CENTERED SEE MORE FOOTER BUTTON */}
-        <div className="flex justify-center mt-4">
-          <button className="bg-[#ffe9d5] hover:bg-[#FF7A00] text-[#FF7A00] hover:text-white text-[13px] font-extrabold uppercase tracking-wider px-8 py-4 rounded-md transition-all duration-200 active:scale-98 shadow-sm">
-            See More Tours
-          </button>
-        </div>
-
       </div>
     </section>
   );

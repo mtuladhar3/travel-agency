@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import BannerContent from "./BannerContent";
 import BannerImage from "./BannerImage";
-import { SLIDER_DATA } from "../../constants/sliderData";
+import { SLIDER_DATA } from "../../data/sliderData";
 
 const cardWidth = 200;
 const cardHeight = 300;

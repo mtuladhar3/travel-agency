@@ -6,7 +6,7 @@ export default function CategoryHeader() {
     <div className="w-full flex flex-col md:flex-row md:items-end justify-between text-white gap-4 px-2">
       <div className="flex flex-col gap-2 text-center md:text-left">
         {/* Tiny Green Tag */}
-        <div className="flex items-center justify-center md:justify-start gap-1.5 text-lime-400 font-bold text-xs uppercase tracking-widest">
+        <div className="flex items-center justify-center md:justify-start gap-1.5 text-white font-bold text-xs uppercase tracking-widest">
           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
             <path d="M12 2L2 22h20L12 2zm0 3.99L19.53 19H4.47L12 5.99zM13 16h-2v2h2v-2zm0-6h-2v4h2v-4z"/>
           </svg>

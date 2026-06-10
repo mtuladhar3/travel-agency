@@ -1,15 +1,9 @@
-export default function CardBadge({ text, variant = "category" }) {
-  if (variant === "featured") {
-    return (
-      <span className="bg-[#FF7A00] text-white text-[11px] font-bold px-2.5 py-1 rounded-md tracking-wider shadow-sm animate-pulse">
-        Featured
-      </span>
-    );
-  }
-
+// travelpackages/CardBadge.jsx
+export default function CardBadge({ value, icon }) {
   return (
-    <span className="bg-[#FFE500] text-gray-900 text-[11px] font-black px-3 py-1 rounded-md tracking-wide shadow-sm uppercase">
-      {text}
-    </span>
+    <div className="flex items-center gap-1 bg-[#8cc63f] text-white text-sm font-bold px-3 py-1 rounded-full tracking-wide">
+      {icon && <span className="text-xs">{icon}</span>}
+      <span>{value}</span>
+    </div>
   );
 }
