@@ -30,12 +30,12 @@ export default function BannerContent() {
           {initialSlide.description}
         </div>
         <div className="gCta flex items-center gap-4 mt-2">
-          <button className="flex items-center justify-center w-12 h-12 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black transition-colors duration-300">
+          <button type="button" className="flex items-center justify-center w-12 h-12 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black transition-colors duration-300">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
             </svg>
           </button>
-          <button className="px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-colors duration-300">
+          <button type="button" className="px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-colors duration-300">
             Discover Location
           </button>
         </div>
@@ -60,12 +60,12 @@ export default function BannerContent() {
           {initialSlide.description}
         </div>
         <div className="gCta flex items-center gap-4 mt-2">
-          <button className="flex items-center justify-center w-12 h-12 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black transition-colors duration-300">
+          <button type="button" className="flex items-center justify-center w-12 h-12 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-black transition-colors duration-300">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
             </svg>
           </button>
-          <button className="px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-colors duration-300">
+          <button type="button" className="px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 text-white text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-colors duration-300">
             Discover Location
           </button>
         </div>

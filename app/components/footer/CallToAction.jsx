@@ -92,7 +92,7 @@ export default function CallToAction() {
             Lock in your next adventure.
           </p>
 
-          <button className="flex items-center justify-between bg-[#8BC53F] hover:bg-[#7ab035] text-white font-bold py-3 pl-6 pr-2 rounded-full w-full max-w-[240px] shadow-lg shadow-[#8BC53F]/20 transition-all duration-300 group">
+          <button type="button" className="flex items-center justify-between bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 pl-6 pr-2 rounded-full w-full max-w-[240px] shadow-lg shadow-orange-500/20 transition-all duration-300 group">
             <span className="text-sm tracking-wide">Book Your Tour</span>
             <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#022644] transform transition-transform duration-300 group-hover:translate-x-1">
               ➔
@@ -101,9 +101,9 @@ export default function CallToAction() {
 
           <a 
             href="tel:+80045678901" 
-            className="flex items-center gap-2 text-white/90 hover:text-[#8BC53F] font-semibold text-sm mt-6 transition-colors duration-200"
+            className="flex items-center gap-2 text-white/90 hover:text-orange-500 font-semibold text-sm mt-6 transition-colors duration-200"
           >
-            <span className="text-xs text-[#8BC53F]">📞</span>
+            <span className="text-xs text-orange-500">📞</span>
             <span className="italic font-light text-gray-300">Talk to Us</span> +800 45 6789 01
           </a>
         </div>

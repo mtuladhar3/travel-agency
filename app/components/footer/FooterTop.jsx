@@ -40,7 +40,7 @@ export default function FooterTop() {
       </div>
 
       {/* 2. The Content Box (Overlaps the text via negative margin) */}
-      <div className="content-box relative w-full max-w-4xl mx-auto flex justify-center mt-[-20px] md:mt-[-40px] lg:mt-[-60px] z-20">
+      <div className="content-box relative w-full max-w-4xl mx-auto flex justify-center mt-[-20px] md:mt-[-30px] lg:mt-[-30px] z-20">
         
         {/* Left Floating Image (image-1) */}
         <figure 

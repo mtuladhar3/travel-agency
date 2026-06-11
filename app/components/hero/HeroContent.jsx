@@ -39,7 +39,7 @@ export default function HeroContent() {
       <p className="mt-4 text-sm md:text-base max-w-xl text-gray-200 drop-shadow-md mx-auto">
         Embark on a journey with our seasoned guides, discovering the allure of Nepal's landscapes with expert insights.
       </p>
-      <button className="mt-6 bg-[#ff5a1f] hover:bg-[#e04e1a] text-white font-medium px-8 py-3 rounded-md transition-colors pointer-events-auto">
+      <button type="button" className="mt-6 bg-orange-500 hover:bg-orange-600 text-white font-medium px-8 py-3 rounded-md transition-colors pointer-events-auto">
         Enquire Now
       </button>
     </div>

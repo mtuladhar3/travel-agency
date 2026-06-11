@@ -63,11 +63,11 @@ export default function CountryCard({ name, image, tours, price }) {
         <div className="flex items-center gap-1.5 text-xs font-medium text-gray-400">
           <span className="text-gray-600 font-semibold">{tours} Tours</span>
           <span>-</span>
-          <span className="text-[#82C134] font-bold">From {price}</span>
+          <span className="text-orange-500 font-bold">From {price}</span>
         </div>
         
         {/* Micro Arrow CTA Button */}
-        <button className="w-8 h-8 rounded-full bg-[#E8F1F5] group-hover:bg-[#82C134] flex items-center justify-center text-[#0B3546] group-hover:text-white transition-colors duration-300">
+        <button type="button" className="w-8 h-8 rounded-full bg-[#E8F1F5] group-hover:bg-orange-500 flex items-center justify-center text-[#0B3546] group-hover:text-white transition-colors duration-300">
           <svg
             className="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform"
             fill="none"

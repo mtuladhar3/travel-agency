@@ -4,7 +4,7 @@ export default function SectionHeader() {
   return (
     <div className="text-center mb-12 relative w-full">
       {/* Small top tag */}
-      <p className="animate-header text-sm font-semibold text-[#82C134] tracking-wide flex justify-center items-center gap-1">
+      <p className="animate-header text-sm font-semibold text-orange-500 tracking-wide flex justify-center items-center gap-1">
         <span className="inline-block w-4 h-4 bg-[#82C134] opacity-20 rounded-full"></span>
         Recommended Countries
       </p>

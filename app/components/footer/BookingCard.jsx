@@ -10,7 +10,7 @@ export default function BookingCard() {
       </p>
 
       {/* Button */}
-      <button className="flex items-center justify-between bg-[#8BC53F] hover:bg-[#7ab035] text-white font-bold py-2.5 pl-6 pr-2 rounded-full w-full max-w-[240px] transition-all duration-300 group shadow-lg shadow-[#8BC53F]/20">
+      <button type="button" className="flex items-center justify-between bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 pl-6 pr-2 rounded-full w-full max-w-[240px] transition-all duration-300 group shadow-lg shadow-orange-500/20">
         <span className="text-sm tracking-wide">Book Your Tour</span>
         <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#022644] font-bold transform transition-transform duration-300 group-hover:translate-x-1">
           ➔
@@ -20,9 +20,9 @@ export default function BookingCard() {
       {/* Contact Link */}
       <a 
         href="tel:+80045678901" 
-        className="flex items-center gap-2 text-white hover:text-[#8BC53F] font-semibold text-xs md:text-sm mt-6 transition-colors duration-200"
+        className="flex items-center gap-2 text-white hover:text-orange-500 font-semibold text-xs md:text-sm mt-6 transition-colors duration-200"
       >
-        <span className="text-[#8BC53F]">📞</span>
+        <span className="text-orange-500">📞</span>
         <span className="italic font-light text-gray-300">Talk to Us</span> +800 45 6789 01
       </a>
     </div>

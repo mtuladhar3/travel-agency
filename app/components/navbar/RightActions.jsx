@@ -5,7 +5,7 @@ export default function RightActions() {
   return (
     <div className="hidden lg:flex items-center gap-6 flex-shrink-0">
       {/* Language Trigger Toggle Selection */}
-      <button className="flex items-center gap-1 text-white text-sm font-bold tracking-wider hover:text-white/80 transition-colors">
+      <button type="button" className="flex items-center gap-1 text-white text-sm font-bold tracking-wider hover:text-white/80 transition-colors">
         <span>ENG</span>
         <ChevronDown className="w-4 h-4 opacity-70" />
       </button>

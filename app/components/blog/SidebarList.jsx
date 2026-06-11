@@ -63,7 +63,7 @@ export default function SidebarList() {
               <span>✍️ {post.author}</span>
             </div>
             
-            <button className="w-8 h-8 rounded-full bg-[#EBF2F7] hover:bg-orange-500 text-[#0B3558] hover:text-white flex items-center justify-center transition-colors group">
+            <button type="button" className="w-8 h-8 rounded-full bg-[#EBF2F7] hover:bg-orange-500 text-[#0B3558] hover:text-white flex items-center justify-center transition-colors group" aria-label="View post">
               <span className="text-xs transform transition-transform group-hover:translate-x-0.5">➔</span>
             </button>
           </div>

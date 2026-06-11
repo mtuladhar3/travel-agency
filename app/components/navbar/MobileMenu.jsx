@@ -107,7 +107,7 @@ export default function MobileMenu() {
 
         {/* BOTTOM ACTION BUTTON FOLLOWER FOR SMALLER SCREENS */}
         <div className="pt-6 border-t border-white/10 flex flex-col gap-4">
-          <button className="flex items-center justify-center gap-1 text-white text-sm font-bold tracking-wider py-2">
+          <button type="button" className="flex items-center justify-center gap-1 text-white text-sm font-bold tracking-wider py-2">
             <span>ENGLISH (ENG)</span>
           </button>
           <Link 

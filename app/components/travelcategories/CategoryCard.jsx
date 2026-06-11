@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-export default function CategoryCard({ title, image, count, price, isActive = false }) {
+export default function CategoryCard({ title, image, count, price }) {
   return (
     /* Outer column block layout matching col-lg-3 col-md-6 col-sm-12 categories-block */
     <div className="w-full categories-block">
@@ -10,19 +10,14 @@ export default function CategoryCard({ title, image, count, price, isActive = fa
           Changes background from transparent overlay look to solid white when active/hovered
       */}
       <div 
-        className={`group w-full rounded-[24px] flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-900/20 border
-          ${isActive 
-            ? "bg-white border-transparent shadow-xl" 
-            : "bg-[#063a62]/40 hover:bg-white border-[#EDF2F5] hover:border-transparent "
-          }`}
+        className="group w-full rounded-[24px] flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-900/20 border bg-[#063a62]/40 hover:bg-white border-[#EDF2F5] hover:border-transparent"
       >
         
         <div className="w-full text-center  p-3">
           <h3>
             <Link 
               href="/" 
-              className={`text-lg font-black tracking-wide transition-colors duration-300 block
-                ${isActive ? "text-[#074675]" : "text-white group-hover:text-[#074675]"}`}
+              className="text-lg font-black tracking-wide transition-colors duration-300 block text-slate-300 group-hover:text-orange-500"
             >
               {title}
             </Link>
@@ -52,13 +47,12 @@ export default function CategoryCard({ title, image, count, price, isActive = fa
             
           `}>
           
-          {/* Destinations Count Label */}
-          <p className="text-[13px] font-medium text-slate-500 tracking-normal mb-0.5">
+          <p className="text-[13px] font-medium text-slate-500 group-hover:text-orange-500 transition-colors tracking-normal mb-0.5">
             {count}
           </p>
 
           {/* Pricing Target (.special-text .price) */}
-          <span className="text-[15px] font-black text-[#8dc63f] tracking-wide">
+          <span className="text-[15px] font-black text-slate-600 group-hover:text-orange-500 transition-colors tracking-wide">
             {price}
           </span>
 
@@ -68,7 +62,7 @@ export default function CategoryCard({ title, image, count, price, isActive = fa
           <div className="absolute right-0 bottom-0">
             <Link 
               href="/"
-              className="w-12 h-12 rounded-tl-[14px] rounded-br-[20px] rounded-tr-none rounded-bl-none bg-[#dbecf6] text-[#074675] group-hover:bg-orange-500 group-hover:text-white flex items-center justify-center transition-all duration-300 outline-none active:scale-95 shadow-sm"
+              className="w-12 h-12 rounded-tl-[14px] rounded-br-[20px] rounded-tr-none rounded-bl-none bg-slate-200 text-slate-600 group-hover:bg-orange-500 group-hover:text-white flex items-center justify-center transition-all duration-300 outline-none active:scale-95 shadow-sm"
               aria-label={`Explore ${title}`}
             >
               {/* Fallback svg representing flaticon-arrow vector */}

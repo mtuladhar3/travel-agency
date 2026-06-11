@@ -24,7 +24,7 @@ export default function Topbar() {
         </div>
 
         {/* Language Selector (Hidden on mobile) */}
-        <button className="hidden md:flex items-center gap-1 hover:text-orange-500 transition-colors">
+        <button type="button" className="hidden md:flex items-center gap-1 hover:text-orange-500 transition-colors">
           <span>English</span>
           <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
         </button>

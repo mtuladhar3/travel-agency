@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function FloatingBadge({ variant = "dark-blue", title, subtitle }) {
+export default function FloatingBadge({ title, subtitle }) {
   return (
     <div className="w-[180px] h-[180px] rounded-2xl bg-sky-950 p-5 flex flex-col items-center justify-center text-center shadow-xl border border-sky-900/40 select-none">
       

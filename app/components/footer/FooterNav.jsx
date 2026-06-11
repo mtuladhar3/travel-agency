@@ -24,7 +24,7 @@ export default function FooterNav() {
           {links.map((link, idx) => (
             <li key={idx}>
               <a href="#" className="text-gray-400 hover:text-white text-xs sm:text-sm font-medium transition-colors duration-200">
-                {link.label || link}
+                {link}
               </a>
             </li>
           ))}

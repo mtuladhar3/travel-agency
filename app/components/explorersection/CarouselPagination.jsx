@@ -6,11 +6,12 @@ export default function CarouselPagination({ activeIndex, totalDots, onDotClick 
       {[...Array(totalDots)].map((_, index) => (
         <button
           key={index}
+          type="button"
           onClick={() => onDotClick(index)}
           aria-label={`Go to slide ${index + 1}`}
-          className={`h-1.5 rounded-full transition-all duration-300 outline-none focus:ring-1 focus:ring-[#82C134] ${
+          className={`h-1.5 rounded-full transition-all duration-300 outline-none focus:ring-1 focus:ring-orange-500 ${
             index === activeIndex 
-              ? "w-7 bg-[#82C134]" 
+              ? "w-7 bg-orange-500" 
               : "w-5 bg-gray-200 hover:bg-gray-300"
           }`}
         />
