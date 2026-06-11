@@ -6,15 +6,15 @@ import CardBadge from "./CardBadge";
 export default function PackageCard({ pkg }) {
   return (
     /* Outer column block layout matching col-lg-3 col-md-6 col-sm-12 categories-block */
-    <div className="w-full categories-block">
+    <div className="w-full categories-block overflow-hidden">
       
       {/* Main card box (.categories-block-one) */}
       <div 
-        className="group w-full rounded-[24px] flex flex-col transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/20 border bg-bg-slate-50/50 border-[#EDF2F5] hover:border-transparent"
+        className="group w-full rounded-[24px] flex flex-col transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/20 border bg-bg-slate-50/50 border-[#EDF2F5] hover:border-transparent overflow-hidden"
       >
         
         {/* Top Header - Location & Title exactly like your template layout */}
-        <div className="w-full p-4">
+        <div className="w-full p-4 min-w-0">
           <div className="flex items-center  gap-1 text-xs font-semibold text-orange-400 group-hover:text-orange-600 transition-colors duration-300 mb-0.5">
             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
@@ -48,7 +48,7 @@ export default function PackageCard({ pkg }) {
           style={{
             "--shape-url": "url('/images/card-shape.svg')"
           }}
-          className="relative block z-[2] mt-[-37px] pt-[18px] pr-[15px] pb-[19px] pl-[25px] rounded-r-[20px] rounded-bl-[20px] rounded-tl-none flex flex-col items-start justify-center transition-colors duration-300 bg-[#edf2f5]
+          className="relative block z-[2] mt-[-37px] pt-[18px] pr-[15px] pb-[19px] pl-[25px] rounded-r-[20px] rounded-bl-[20px] rounded-tl-none flex flex-col items-start justify-center transition-colors duration-300 bg-[#edf2f5] overflow-hidden
             
             /* BEFORE element: Renders your custom inverted masking curve layout accurately */
             before:content-[''] before:absolute before:top-[-38px] before:left-[-1px] before:w-[130px] before:h-[120px] before:bg-[image:var(--shape-url)] before:bg-no-repeat before:transition-opacity before:duration-300 before:opacity-100"

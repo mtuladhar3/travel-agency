@@ -27,7 +27,7 @@ export default function PackageGrid() {
   }, []);
 
   return (
-    <section className="bg-white py-16 sm:py-20 px-4 flex flex-col">
+    <section className="bg-white py-16 sm:py-20 px-4 flex flex-col overflow-hidden w-full">
       <div className="max-w-7xl mx-auto w-full">
         {/* Render Header */}
         <SectionHeader />

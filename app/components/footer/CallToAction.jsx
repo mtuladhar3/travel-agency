@@ -62,12 +62,12 @@ export default function CallToAction() {
 
       {/* Main Dynamic Text Layout */}
       <div className="relative z-10 text-center max-w-4xl w-full select-none mb-4">
-        <span className="block font-serif italic text-white text-2xl md:text-3xl font-light tracking-wide mb-1 opacity-90">
+        <span className="block italic text-white text-2xl md:text-3xl font-light tracking-wide mb-1 opacity-90">
           Ready to
         </span>
         <h2 className="text-6xl sm:text-8xl md:text-[110px] font-black tracking-tight text-white uppercase leading-none flex flex-wrap justify-center items-center gap-x-6">
           <span>Book</span>
-          <span className="text-transparent font-light [-webkit-text-stroke:1px_rgba(255,255,255,0.6)] font-sans">&amp;</span>
+          <span className="text-transparent font-light [-webkit-text-stroke:1px_rgba(255,255,255,0.6)]">&amp;</span>
           <span>Go</span>
         </h2>
       </div>

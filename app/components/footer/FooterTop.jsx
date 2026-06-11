@@ -28,7 +28,7 @@ export default function FooterTop() {
       
       {/* 1. Giant Background Text (FIXED: z-30 changed to z-0 so it stays behind the card) */}
       <div className="text-center w-full relative z-30">
-        <span className="block font-serif italic text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mb-2">
+        <span className="block italic text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light mb-2">
           Ready to
         </span>
         <h1 className="text-5xl sm:text-7xl md:text-[100px] lg:text-[130px] font-black uppercase tracking-tighter leading-none flex justify-center items-center gap-3 sm:gap-4 md:gap-6">

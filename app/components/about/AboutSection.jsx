@@ -6,7 +6,7 @@ import { Bike, Compass, ArrowRight } from "lucide-react";
 
 export default function AboutSection() {
   return (
-    <section className="w-full bg-white py-12 sm:py-20 relative overflow-hidden">
+    <section className="w-full max-w-full bg-white py-12 sm:py-20 relative overflow-hidden">
       
       <div className="absolute inset-y-0 left-0 w-full lg:w-1/2 bg-[#F8F9FA] rounded-r-[48px] pointer-events-none hidden lg:block" />
 
@@ -20,7 +20,7 @@ export default function AboutSection() {
               Last's Go Together
             </span>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-sans text-[#0F2220] font-bold leading-[1.15] mb-5 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] text-[#0F2220] font-bold leading-[1.15] mb-5 tracking-tight">
               Travel smarter <br />
               and safer with us
             </h2>

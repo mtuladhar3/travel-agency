@@ -27,19 +27,64 @@ export default function Banner() {
   const getSliderItemSelector = (idx) => `#slide-item-${idx}`;
 
   const getLayoutCoords = () => {
-    if (typeof window === "undefined") return { offsetTop: 0, offsetLeft: 0, viewportWidth: 1920, viewportHeight: 1080 };
-    const height = window.innerHeight;
-    const width = window.innerWidth;
+    const fallback = {
+      offsetTop: 0,
+      offsetLeft: 24,
+      viewportWidth: 1920,
+      viewportHeight: 1080,
+      cardW: cardWidth,
+      cardH: cardHeight,
+      gapSize: gap,
+    };
+    if (typeof window === "undefined") return fallback;
 
-    const offsetTop = width < 640 ? height - 300 : width < 1024 ? height - 360 : height - 430;
-    const rawLeft = width < 640 ? width - 260 : width < 1024 ? width - 500 : width - 830;
-    const offsetLeft = Math.max(rawLeft, 24);
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const padding = 16;
+    const thumbnailCount = SLIDER_DATA.length - 1;
+
+    let cardW = cardWidth;
+    let cardH = cardHeight;
+    let gapSize = gap;
+
+    if (viewportWidth < 640) {
+      cardW = 130;
+      cardH = 195;
+      gapSize = 14;
+    } else if (viewportWidth < 1024) {
+      cardW = 170;
+      cardH = 255;
+      gapSize = 28;
+    }
+
+    const available = viewportWidth - padding * 2;
+    let totalWidth =
+      thumbnailCount * cardW + Math.max(0, thumbnailCount - 1) * gapSize;
+
+    while (totalWidth > available && cardW > 70) {
+      cardW -= 6;
+      cardH = Math.round(cardW * 1.5);
+      totalWidth =
+        thumbnailCount * cardW + Math.max(0, thumbnailCount - 1) * gapSize;
+    }
+
+    const offsetTop =
+      viewportWidth < 640
+        ? viewportHeight - 300
+        : viewportWidth < 1024
+          ? viewportHeight - 360
+          : viewportHeight - 430;
+
+    const offsetLeft = Math.max(padding, viewportWidth - totalWidth - padding);
 
     return {
       offsetTop,
       offsetLeft,
-      viewportWidth: width,
-      viewportHeight: height
+      viewportWidth,
+      viewportHeight,
+      cardW,
+      cardH,
+      gapSize,
     };
   };
 
@@ -49,7 +94,7 @@ export default function Banner() {
 
     if (loopTimelineRef.current) loopTimelineRef.current.pause();
 
-    const { offsetTop, offsetLeft, viewportWidth, viewportHeight } = getLayoutCoords();
+    const { offsetTop, offsetLeft, viewportWidth, viewportHeight, cardW, cardH, gapSize } = getLayoutCoords();
     const targetThumbnail = heroRef.current?.querySelector(getCardSelector(incomingIndex));
 
     if (!targetThumbnail) {
@@ -129,12 +174,12 @@ export default function Banner() {
 
     tl.to(currentDetailsSelector, { opacity: 0, duration: 0.3, ease: ease }, 0);
     tl.to(getCardSelector(activeIndex), { scale: 1.1, opacity: 0, duration: 0.8, ease: ease }, 0);
-    tl.to(getCardContentSelector(incomingIndex), { y: offsetTop + cardHeight - 10, opacity: 0, duration: 0.3, ease: ease }, 0);
+    tl.to(getCardContentSelector(incomingIndex), { y: offsetTop + cardH - 10, opacity: 0, duration: 0.3, ease: ease }, 0);
 
     slidesOrder.slice(2).forEach((idx, index) => {
-      const targetX = offsetLeft + index * (cardWidth + gap);
-      tl.to(getCardSelector(idx), { x: targetX, y: offsetTop, width: cardWidth, height: cardHeight, ease: ease, duration: 0.8 }, 0);
-      tl.to(getCardContentSelector(idx), { x: targetX, y: offsetTop + cardHeight - 100, opacity: 1, ease: ease, duration: 0.8 }, 0);
+      const targetX = offsetLeft + index * (cardW + gapSize);
+      tl.to(getCardSelector(idx), { x: targetX, y: offsetTop, width: cardW, height: cardH, ease: ease, duration: 0.8 }, 0);
+      tl.to(getCardContentSelector(idx), { x: targetX, y: offsetTop + cardH - 100, opacity: 1, ease: ease, duration: 0.8 }, 0);
       tl.to(getSliderItemSelector(idx), { x: (index + 1) * numberSize, ease: ease, duration: 0.8 }, 0);
     });
 
@@ -155,18 +200,27 @@ export default function Banner() {
 
   }, [slidesOrder, isDetailsEven, activeIndex, incomingIndex]);
 
-  useEffect(() => {
-    const { offsetTop, offsetLeft, viewportWidth, viewportHeight } = getLayoutCoords();
+  const applyLayout = useCallback(() => {
+    const { offsetTop, offsetLeft, viewportWidth, viewportHeight, cardW, cardH, gapSize } = getLayoutCoords();
     const [active, ...rest] = slidesOrder;
+    const padding = 16;
+    const paginationWidth = viewportWidth < 640 ? 120 : viewportWidth < 1024 ? 280 : 340;
+    const paginationLeft = Math.max(
+      padding,
+      Math.min(
+        viewportWidth < 640 ? padding : offsetLeft,
+        viewportWidth - paginationWidth - padding
+      )
+    );
 
     gsap.set("#pagination", {
       top: Math.min(offsetTop + 320, viewportHeight - 88),
-      left: Math.min(offsetLeft, viewportWidth - 24),
+      left: paginationLeft,
       y: 0,
       opacity: 1,
       zIndex: 60
     });
-    gsap.set(".cover", { x: viewportWidth + 400 });
+    gsap.set(".cover", { x: viewportWidth + 400, visibility: "hidden" });
 
     gsap.set(getCardSelector(active), {
       x: 0,
@@ -193,12 +247,12 @@ export default function Banner() {
     gsap.set(".gProgF", { width: 500 * (1 / SLIDER_DATA.length) * (active + 1) });
 
     rest.forEach((i, index) => {
-      const currentX = offsetLeft + index * (cardWidth + gap);
+      const currentX = offsetLeft + index * (cardW + gapSize);
       gsap.set(getCardSelector(i), {
         x: currentX,
         y: offsetTop,
-        width: cardWidth,
-        height: cardHeight,
+        width: cardW,
+        height: cardH,
         zIndex: 30,
         borderRadius: 12,
         opacity: 1,
@@ -207,14 +261,21 @@ export default function Banner() {
       gsap.set(getCardContentSelector(i), {
         x: currentX,
         zIndex: 40,
-        y: offsetTop + cardHeight - 100,
+        y: offsetTop + cardH - 100,
         opacity: 1
       });
       gsap.set(getSliderItemSelector(i), { x: (index + 1) * numberSize });
     });
+  }, [slidesOrder, isDetailsEven]);
+
+  useEffect(() => {
+    applyLayout();
+
+    const onResize = () => applyLayout();
+    window.addEventListener("resize", onResize);
 
     if (loopTimelineRef.current) loopTimelineRef.current.kill();
-    
+
     gsap.set(".indicator", { scaleX: 0, transformOrigin: "left center" });
     loopTimelineRef.current = gsap.timeline({ repeat: -1 });
     loopTimelineRef.current
@@ -224,14 +285,15 @@ export default function Banner() {
       });
 
     return () => {
+      window.removeEventListener("resize", onResize);
       if (loopTimelineRef.current) loopTimelineRef.current.kill();
     };
-  }, [slidesOrder, handleNext]);
+  }, [slidesOrder, handleNext, applyLayout]);
 
   return (
-    <main 
+    <section 
       ref={heroRef} 
-      className="relative w-screen max-w-full h-screen overflow-x-hidden overflow-y-hidden select-none bg-black m-0 p-0"
+      className="relative w-full h-screen overflow-hidden select-none bg-black m-0 p-0"
     >
       {/* Background Cards Track */}
       <div id="demo" className="absolute top-0 left-0 w-full h-full overflow-hidden">
@@ -264,6 +326,6 @@ export default function Banner() {
 
       <div className="indicator absolute bottom-0 left-0 h-[4px] bg-amber-500 z-[99] w-full origin-left scale-x-0" style={{ willChange: "transform" }}></div>
       <div className="cover absolute z-[100]" id="cover"></div>
-    </main>
+    </section>
   );
 }

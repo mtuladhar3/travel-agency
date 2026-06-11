@@ -6,7 +6,7 @@ import FooterBottom from './FooterBottom';
 
 export default function Footer() {
   return (
-    <footer className="footer-style-three relative bg-[#0a0a0a] overflow-hidden">
+    <footer className="footer-style-three relative bg-[#0a0a0a] overflow-hidden w-full max-w-full">
       
       {/* 
         1. Background Image Layer

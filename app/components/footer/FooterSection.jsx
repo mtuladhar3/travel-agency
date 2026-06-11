@@ -40,12 +40,12 @@ export default function FooterSection() {
 
         {/* Headline Structure */}
         <div ref={headingRef} className="relative z-10 text-center mb-2 select-none">
-          <span className="block font-serif italic text-white text-xl md:text-2xl font-light tracking-wide mb-1">
+          <span className="block italic text-white text-xl md:text-2xl font-light tracking-wide mb-1">
             Ready to
           </span>
           <h2 className="text-5xl sm:text-7xl md:text-[95px] font-black tracking-tight text-white uppercase leading-none flex flex-wrap justify-center items-center gap-x-4">
             <span>Book</span>
-            <span className="text-transparent font-light [-webkit-text-stroke:1px_rgba(255,255,255,0.4)] font-sans">&amp;</span>
+            <span className="text-transparent font-light [-webkit-text-stroke:1px_rgba(255,255,255,0.4)]">&amp;</span>
             <span>Go</span>
           </h2>
         </div>

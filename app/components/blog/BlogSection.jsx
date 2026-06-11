@@ -8,8 +8,8 @@ import SidebarList from './SidebarList';
 
 export default function BlogSection() {
   return (
-    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 selection:bg-orange-100">
-      <div className="max-w-7xl mx-auto font-sans">
+    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 selection:bg-orange-100 overflow-hidden w-full">
+      <div className="max-w-7xl mx-auto">
 
       {/* Section Title */}
       <BlogHeader />

@@ -139,7 +139,7 @@ export default function DestinationsSlider() {
       {/* Visual Slit Viewport Container */}
       <div 
         ref={containerRef} 
-        className="w-full max-w-[95vw] mx-auto overflow-visible"
+        className="w-full overflow-hidden px-4 sm:px-6"
       >
         {/* Hardware Accelerated Infinite Track Layout */}
         <div 

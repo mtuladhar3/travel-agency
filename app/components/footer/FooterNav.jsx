@@ -13,7 +13,7 @@ export default function FooterNav() {
         <div className="w-7 h-7 rounded-full bg-orange-500 flex items-center justify-center transform transition-transform duration-500 group-hover:rotate-[360deg]">
           <span className="text-white text-[10px]">▲</span>
         </div>
-        <span className="text-lg sm:text-xl font-black tracking-wider text-white uppercase font-sans">
+        <span className="text-lg sm:text-xl font-black tracking-wider text-white uppercase">
           Aven<span className="text-orange-500">tour</span>
         </span>
       </div>

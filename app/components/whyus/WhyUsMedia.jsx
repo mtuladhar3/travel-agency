@@ -8,7 +8,7 @@ export default function WhyUsBg() {
       
       {/* 1. Background Grid Canvas Line Accent (.bg-shape-1) */}
       <div 
-        className="absolute bottom-0 right-[-70%] w-full h-[728px] opacity-80 bg-no-repeat"
+        className="absolute bottom-0 right-0 w-full h-[728px] opacity-80 bg-no-repeat translate-x-1/2"
         style={{ backgroundImage: "url('/images/shape-9.png')" }}
       />
 
