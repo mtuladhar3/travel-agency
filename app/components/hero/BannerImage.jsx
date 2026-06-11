@@ -4,13 +4,12 @@ import { SLIDER_DATA } from "../../data/sliderData";
 
 export default function BannerImage({ onNext, numberSize }) {
   return (
-    <div 
-      id="pagination" 
-      className="absolute z-[60] flex items-center gap-2 sm:gap-4 md:gap-6 text-white pointer-events-auto select-none max-w-[calc(100%-2rem)]"
+    <div
+      id="pagination"
+      className="absolute z-[60] flex items-center justify-center sm:justify-start gap-2 sm:gap-4 lg:gap-5 xl:gap-6 text-white pointer-events-auto select-none w-[calc(100%-2rem)] sm:w-auto max-w-[calc(100vw-2rem)] sm:max-w-none pr-2 pb-[env(safe-area-inset-bottom,0px)]"
     >
-      {/* Interaction Handlers */}
-      <div 
-        className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm cursor-pointer hover:bg-white hover:text-black transition-colors duration-300"
+      <div
+        className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm cursor-pointer hover:bg-white hover:text-black transition-colors duration-300 shrink-0"
         onClick={onNext}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -18,8 +17,8 @@ export default function BannerImage({ onNext, numberSize }) {
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </div>
-      <div 
-        className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm cursor-pointer hover:bg-white hover:text-black transition-colors duration-300"
+      <div
+        className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm cursor-pointer hover:bg-white hover:text-black transition-colors duration-300 shrink-0"
         onClick={onNext}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -28,14 +27,12 @@ export default function BannerImage({ onNext, numberSize }) {
         </svg>
       </div>
 
-      {/* Progress Tracking Line Element */}
-      <div className="hidden sm:block h-[2px] bg-white/20 relative rounded-full overflow-hidden shrink min-w-0 max-w-[500px] w-[min(500px,35vw)]">
+      <div className="w-[min(140px,calc(100vw-12.5rem))] sm:w-[280px] lg:w-[240px] xl:w-[500px] h-[2px] bg-white/20 relative rounded-full overflow-hidden shrink min-w-[80px]">
         <div className="gProgF h-full bg-amber-500 w-0 rounded-full transition-all duration-300"></div>
       </div>
 
-      {/* Sliding Numbers Track */}
-      <div 
-        id="slide-numbers" 
+      <div
+        id="slide-numbers"
         className="relative flex items-center overflow-hidden font-bold text-lg shrink-0"
         style={{ width: numberSize, height: numberSize }}
       >
@@ -50,7 +47,6 @@ export default function BannerImage({ onNext, numberSize }) {
           </div>
         ))}
       </div>
-
     </div>
   );
 }
