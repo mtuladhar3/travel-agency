@@ -29,7 +29,7 @@ export default function BannerImage({ onNext, numberSize }) {
       </div>
 
       {/* Progress Tracking Line Element */}
-      <div className="w-[500px] h-[2px] bg-white/20 relative rounded-full overflow-hidden">
+      <div className="h-[2px] bg-white/20 relative rounded-full overflow-hidden" style={{ width: 'min(500px, calc(100vw - 220px))' }}>
         <div className="gProgF h-full bg-amber-500 w-0 rounded-full transition-all duration-300"></div>
       </div>
 

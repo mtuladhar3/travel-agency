@@ -3,7 +3,7 @@ import { Phone, Mail, ChevronDown } from "lucide-react";
 export default function Topbar() {
   return (
     <div className="w-full bg-white border-b border-gray-100 text-xs text-gray-500 py-2.5">
-      <div className="max-w-full mx-50 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
         {/* Contact Info (Centered on mobile, left-aligned on desktop) */}
         <div className="flex items-center space-x-4 mx-auto md:mx-0">

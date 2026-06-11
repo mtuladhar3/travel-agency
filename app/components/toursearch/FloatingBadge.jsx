@@ -14,7 +14,7 @@ export default function FloatingBadge({ variant = "dark-blue", title, subtitle }
         <div className="w-7 h-7 rounded-full border border-sky-950 overflow-hidden bg-slate-300">
           <img src="/images/travel-1.webp" alt="destination" className="w-full h-full object-cover" />
         </div>
-        <div className="w-8 h-8 rounded-full border-2 border-sky-950 overflow-hidden bg-emerald-500 flex items-center justify-center z-10 shadow-md">
+        <div className="w-8 h-8 rounded-full border-2 border-sky-950 overflow-hidden bg-orange-500 flex items-center justify-center z-10 shadow-md">
           <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
           </svg>

@@ -30,9 +30,14 @@ export default function Banner() {
     if (typeof window === "undefined") return { offsetTop: 0, offsetLeft: 0, viewportWidth: 1920, viewportHeight: 1080 };
     const height = window.innerHeight;
     const width = window.innerWidth;
+
+    const offsetTop = width < 640 ? height - 300 : width < 1024 ? height - 360 : height - 430;
+    const rawLeft = width < 640 ? width - 260 : width < 1024 ? width - 500 : width - 830;
+    const offsetLeft = Math.max(rawLeft, 24);
+
     return {
-      offsetTop: height - 430,
-      offsetLeft: width - 830,
+      offsetTop,
+      offsetLeft,
       viewportWidth: width,
       viewportHeight: height
     };
@@ -154,7 +159,13 @@ export default function Banner() {
     const { offsetTop, offsetLeft, viewportWidth, viewportHeight } = getLayoutCoords();
     const [active, ...rest] = slidesOrder;
 
-    gsap.set("#pagination", { top: offsetTop + 330, left: offsetLeft, y: 0, opacity: 1, zIndex: 60 });
+    gsap.set("#pagination", {
+      top: Math.min(offsetTop + 320, viewportHeight - 88),
+      left: Math.min(offsetLeft, viewportWidth - 24),
+      y: 0,
+      opacity: 1,
+      zIndex: 60
+    });
     gsap.set(".cover", { x: viewportWidth + 400 });
 
     gsap.set(getCardSelector(active), {

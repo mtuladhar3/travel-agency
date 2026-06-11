@@ -28,7 +28,7 @@ export default function FeaturesGrid() {
 
   return (
     <section className="w-full py-16 bg-white">
-      <div className="max-w-full sm:mx-auto lg:mx-50 px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {featuresData.map((feature, idx) => (
             <FeatureCard 

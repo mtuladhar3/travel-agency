@@ -40,8 +40,8 @@ export const statsData = [
     value: "15+",
     title: "Years Experience",
     description: "Trusted travel expertise since 2010.",
-    icon: (
-      <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+      icon: (
+        <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
@@ -52,8 +52,8 @@ export const statsData = [
     value: "97%",
     title: "Satisfied Travelers",
     description: "Backed by real traveler reviews.",
-    icon: (
-      <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+      icon: (
+        <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M14 10h4.757a1 1 0 00.707-1.707l-5.414-5.414a1 1 0 00-.707-.293V3.514a1 1 0 01-.293.707L8 9.5" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13a2 2 0 012-2h4v8H7a2 2 0 01-2-2v-4z" />
       </svg>

@@ -14,7 +14,7 @@ export default function BannerContent() {
       {/* Alternating Text Details Section - Even Layout */}
       <div 
         id="details-even" 
-        className="absolute left-[10%] top-[30%] z-[22] flex max-w-[500px] flex-col gap-4 text-white pointer-events-auto"
+        className="absolute left-4 top-[22%] sm:left-[10%] sm:top-[30%] z-[22] flex max-w-[90vw] sm:max-w-[500px] flex-col gap-4 text-white pointer-events-auto"
       >
         <div className="overflow-hidden h-[30px]">
           <div className="gText text-sm font-semibold tracking-[4px] uppercase text-amber-500">
@@ -44,7 +44,7 @@ export default function BannerContent() {
       {/* Alternating Text Details Section - Odd Layout */}
       <div 
         id="details-odd" 
-        className="absolute left-[10%] top-[30%] z-[12] flex max-w-[500px] flex-col gap-4 text-white pointer-events-auto opacity-0"
+        className="absolute left-4 top-[22%] sm:left-[10%] sm:top-[30%] z-[12] flex max-w-[90vw] sm:max-w-[500px] flex-col gap-4 text-white pointer-events-auto opacity-0"
       >
         <div className="overflow-hidden h-[30px]">
           <div className="gText text-sm font-semibold tracking-[4px] uppercase text-amber-500">

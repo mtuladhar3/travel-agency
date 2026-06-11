@@ -8,6 +8,7 @@ import CategoriesSection from "./components/travelcategories/CategoriesSection";
 // import ExplorerSection from "./components/explorersection/ExplorerSection";
 import DestinationsSlider from "./components/destinationslider/DestinationSlider";
 import WhyUsSection from "./components/whyus/WhyUsSection";
+import BlogSection from "./components/blog/BlogSection";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <TravelPackage />
       <WhyUsSection />
       <VisualShowcase />
+      <BlogSection />
       {/* Future sections like features, testimonials, etc., go below */}
     </>
   );

@@ -19,7 +19,7 @@ export default function PackageCard({ pkg, isActive = false }) {
         
         {/* Top Header - Location & Title exactly like your template layout */}
         <div className="w-full p-4">
-          <div className="flex items-center  gap-1 text-xs font-semibold text-orange-400 group-hover:text-emerald-600 transition-colors duration-300 mb-0.5">
+          <div className="flex items-center  gap-1 text-xs font-semibold text-orange-400 group-hover:text-orange-600 transition-colors duration-300 mb-0.5">
             <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
             </svg>
