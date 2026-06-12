@@ -11,7 +11,6 @@ let cardGap = 40;
 const numberSize = 50;
 const ease = "sine.inOut";
 const BG_Z = 10;
-const OVERLAY_Z = 12;
 const THUMB_Z = 45;
 const CONTENT_Z = 25;
 const VISIBLE_THUMBS = 3;
@@ -21,6 +20,7 @@ const getHiddenThumbX = (offsetLeft) => getThumbX(offsetLeft, VISIBLE_THUMBS);
 
 export default function Banner() {
   const heroRef = useRef(null);
+  const bgLayerRef = useRef(null);
   const animatingRef = useRef(false);
   const loopTimelineRef = useRef(null);
   const handleNextRef = useRef(null);
@@ -40,6 +40,21 @@ export default function Banner() {
   const getCardContentSelector = (idx) => `#card-content-${idx}`;
   const getSliderItemSelector = (idx) => `#slide-item-${idx}`;
 
+  const getHeroMetrics = () => {
+    const hero = heroRef.current;
+    if (!hero || typeof window === "undefined") {
+      return {
+        width: typeof window !== "undefined" ? window.innerWidth : 1920,
+        height: typeof window !== "undefined" ? window.innerHeight : 1080,
+        left: 0,
+        top: 0,
+      };
+    }
+
+    const rect = hero.getBoundingClientRect();
+    return { width: rect.width, height: rect.height, left: rect.left, top: rect.top };
+  };
+
   const getLayoutCoords = () => {
     if (typeof window === "undefined") {
       return {
@@ -55,8 +70,7 @@ export default function Banner() {
       };
     }
 
-    const height = window.innerHeight;
-    const width = window.innerWidth;
+    const { width, height } = getHeroMetrics();
     const textInset =
       width < 640 ? 16 : width < 1024 ? Math.round(width * 0.06) : width < 1440 ? Math.round(width * 0.08) : Math.round(width * 0.10);
     const isLaptop = width >= 1024 && width < 1440;
@@ -241,9 +255,11 @@ export default function Banner() {
     if (loopTimelineRef.current) loopTimelineRef.current.pause();
 
     const { offsetTop, offsetLeft, viewportWidth, viewportHeight, progressBarWidth, hideThumbLabels } = getLayoutCoords();
+    const heroMetrics = getHeroMetrics();
+    const bgLayer = bgLayerRef.current;
     const targetThumbnail = heroRef.current?.querySelector(getCardSelector(incomingIndex));
 
-    if (!targetThumbnail) {
+    if (!targetThumbnail || !bgLayer) {
       const newOrder = [...slidesOrder.slice(1), slidesOrder[0]];
       positionCards(newOrder, !isDetailsEven);
       setSlidesOrder(newOrder);
@@ -254,6 +270,8 @@ export default function Banner() {
     }
 
     const rect = targetThumbnail.getBoundingClientRect();
+    const overlayLeft = rect.left - heroMetrics.left;
+    const overlayTop = rect.top - heroMetrics.top;
     const hiddenThumbX = getHiddenThumbX(offsetLeft);
 
     const currentDetailsSelector = isDetailsEven ? "#details-even" : "#details-odd";
@@ -280,21 +298,22 @@ export default function Banner() {
     gsap.set(currentDetailsSelector, { zIndex: CONTENT_Z - 1 });
 
     const overlayCanvas = document.createElement("div");
-    overlayCanvas.style.position = "fixed";
-    overlayCanvas.style.left = `${rect.left}px`;
-    overlayCanvas.style.top = `${rect.top}px`;
+    overlayCanvas.style.position = "absolute";
+    overlayCanvas.style.left = `${overlayLeft}px`;
+    overlayCanvas.style.top = `${overlayTop}px`;
     overlayCanvas.style.width = `${rect.width}px`;
     overlayCanvas.style.height = `${rect.height}px`;
-    overlayCanvas.style.zIndex = String(OVERLAY_Z);
+    overlayCanvas.style.zIndex = "2";
     overlayCanvas.style.borderRadius = "12px";
     overlayCanvas.style.backgroundImage = `url(${nextSlideData.image})`;
     overlayCanvas.style.backgroundSize = "cover";
     overlayCanvas.style.backgroundPosition = "center";
     overlayCanvas.style.willChange = "transform, width, height, top, left, border-radius";
     overlayCanvas.style.transform = "translate3d(0,0,0)";
+    overlayCanvas.style.pointerEvents = "none";
     overlayCanvas.className = "after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-b after:from-black/75 after:via-black/30 after:to-transparent after:z-10 after:rounded-[inherit]";
 
-    heroRef.current?.appendChild(overlayCanvas);
+    bgLayer.appendChild(overlayCanvas);
 
     gsap.set(getCardSelector(incomingIndex), { opacity: 0, visibility: "hidden" });
     gsap.set(getCardContentSelector(incomingIndex), { opacity: 0, visibility: "hidden" });
@@ -359,8 +378,8 @@ export default function Banner() {
     tl.to(overlayCanvas, {
       left: 0,
       top: 0,
-      width: viewportWidth,
-      height: viewportHeight,
+      width: heroMetrics.width,
+      height: heroMetrics.height,
       borderRadius: 0,
       duration: 0.8,
       ease: ease
@@ -453,10 +472,15 @@ export default function Banner() {
   return (
     <main
       ref={heroRef}
-      className="relative w-screen max-w-full h-[100dvh] min-h-[100svh] overflow-x-hidden overflow-y-hidden select-none bg-black m-0 p-0"
+      className="relative isolate w-full h-[100dvh] min-h-[100svh] overflow-hidden select-none bg-black m-0 p-0"
       style={{ "--banner-content-max": "340px" }}
     >
-      <div id="demo" className="absolute top-0 left-0 w-full h-full overflow-visible">
+      <div
+        ref={bgLayerRef}
+        className="absolute inset-0 overflow-hidden z-[1] pointer-events-none"
+        aria-hidden="true"
+      />
+      <div id="demo" className="absolute top-0 left-0 w-full h-full overflow-hidden">
         {SLIDER_DATA.map((slide, index) => (
           <div
             key={index}
