@@ -12,9 +12,6 @@ export default function MenuLinks() {
   const [activeMenu, setActiveMenu] = useState(null);
 
   return (
-    /* Note: We use 'static' on the container so that children with 'w-screen left-0' 
-       can stretch edge-to-edge relative to the entire page layout.
-    */
     <nav 
       className="hidden lg:flex items-center gap-8 xl:gap-10 h-full static"
       onMouseLeave={() => setActiveMenu(null)}

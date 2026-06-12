@@ -5,10 +5,9 @@ export default function MegaMenu({ item, isOpen }) {
   if (!isOpen) return null;
 
   return (
-    /* FIXED: Changed 'left-0 w-screen' to fixed positioning at the top viewport level 
-       so it aligns perfectly regardless of the navbar's size. */
-    <div className="fixed top-[72px] left-0 right-0 w-full bg-white text-gray-800 shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-t border-gray-100 py-10 px-6 sm:px-12 lg:px-16 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-      <div className="max-w-[1440px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-6">
+    <div className="fixed top-20 lg:top-24 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl bg-white text-gray-800 shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-gray-100 rounded-b-2xl py-10 px-6 sm:px-10 lg:px-12 animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-6">
         {item.items?.map((subItem, index) => (
           <Link
             key={index}
@@ -36,6 +35,7 @@ export default function MegaMenu({ item, isOpen }) {
             </div>
           </Link>
         ))}
+        </div>
       </div>
     </div>
   );
