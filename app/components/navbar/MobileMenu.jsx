@@ -82,10 +82,14 @@ export default function MobileMenu() {
                 {/* ACCORDION EXPANDABLE TRAY COMPONENT */}
                 {hasSubmenu && isExpanded && (
                   <div className="pl-4 border-l-2 border-white/10 flex flex-col mt-1 mb-2 space-y-1 animate-in slide-in-from-top-1 duration-150">
-                    {item.items?.map((subItem, index) => {
-                      const subHref = item.type === "mega" 
-                        ? `/destinations/${subItem.name.toLowerCase().replace(/ /g, "-")}`
-                        : subItem.href;
+                    {(item.type === "mega"
+                      ? item.tabs?.flatMap((tab) => tab.destinations) ?? []
+                      : item.items ?? []
+                    ).map((subItem, index) => {
+                      const subHref =
+                        item.type === "mega"
+                          ? subItem.href
+                          : subItem.href;
 
                       return (
                         <Link

@@ -5,9 +5,11 @@ import BannerContent from "./BannerContent";
 import BannerImage from "./BannerImage";
 import { SLIDER_DATA } from "../../data/sliderData";
 
-let cardWidth = 200;
-let cardHeight = 300;
-let cardGap = 40;
+let cardWidth = 160;
+let cardHeight = 92;
+let cardGap = 28;
+const THUMB_ASPECT = 9 / 16; // landscape 16:9 (height / width)
+const getThumbContentY = (top) => top + cardHeight - Math.min(52, Math.round(cardHeight * 0.72));
 const numberSize = 50;
 const ease = "sine.inOut";
 const BG_Z = 10;
@@ -17,6 +19,22 @@ const VISIBLE_THUMBS = 3;
 
 const getThumbX = (offsetLeft, slotIndex) => offsetLeft + slotIndex * (cardWidth + cardGap);
 const getHiddenThumbX = (offsetLeft) => getThumbX(offsetLeft, VISIBLE_THUMBS);
+
+const getPaginationChromeWidth = (viewportWidth, barWidth) => {
+  const btnSize = viewportWidth >= 1024 ? 48 : viewportWidth >= 640 ? 40 : 36;
+  const gap = viewportWidth >= 1280 ? 20 : viewportWidth >= 640 ? 16 : 8;
+  return btnSize * 2 + gap * 3 + barWidth + numberSize + 8;
+};
+
+const fitPaginationLayout = (width, sideMargin, anchorLeft, barWidth) => {
+  const chromeWithoutBar = getPaginationChromeWidth(width, 0);
+  const maxBar = width - anchorLeft - sideMargin - chromeWithoutBar;
+  const fittedBar = Math.max(80, Math.min(barWidth, maxBar));
+  const totalWidth = getPaginationChromeWidth(width, fittedBar);
+  const fittedLeft = Math.max(sideMargin, Math.min(anchorLeft, width - sideMargin - totalWidth));
+
+  return { progressBarWidth: fittedBar, paginationLeft: fittedLeft };
+};
 
 export default function Banner() {
   const heroRef = useRef(null);
@@ -84,25 +102,25 @@ export default function Banner() {
         maxCardWidth,
         Math.max(120, Math.floor((availableStackWidth - (VISIBLE_THUMBS - 1) * cardGap) / VISIBLE_THUMBS))
       );
-      cardHeight = Math.min(Math.round(cardWidth * 1.5), Math.round(height * maxHeightRatio));
+      cardHeight = Math.min(Math.round(cardWidth * THUMB_ASPECT), Math.round(height * maxHeightRatio));
     };
 
     if (width < 640) {
-      cardGap = 28;
-      cardWidth = Math.min(130, Math.floor((width - 32 - (VISIBLE_THUMBS - 1) * cardGap) / VISIBLE_THUMBS));
-      cardHeight = Math.min(Math.round(cardWidth * 1.5), Math.round(height * 0.28));
+      cardGap = 16;
+      cardWidth = Math.min(108, Math.floor((width - 32 - (VISIBLE_THUMBS - 1) * cardGap) / VISIBLE_THUMBS));
+      cardHeight = Math.min(Math.round(cardWidth * THUMB_ASPECT), Math.round(height * 0.16));
     } else if (width < 1024) {
-      sizeThumbsToSpace(28, 300, 40, 190, 0.36);
+      sizeThumbsToSpace(20, 300, 40, 148, 0.2);
     } else if (isLaptop) {
-      sizeThumbsToSpace(24, 320, 56, 210, 0.46);
+      sizeThumbsToSpace(18, 320, 56, 164, 0.22);
     } else {
-      sizeThumbsToSpace(32, 380, 80, 280, 0.5);
+      sizeThumbsToSpace(22, 380, 80, 196, 0.24);
     }
 
     const stackWidth = VISIBLE_THUMBS * cardWidth + (VISIBLE_THUMBS - 1) * cardGap;
     const paginationRowHeight = 48;
     const bottomSafe = Math.max(16, height * 0.02);
-    const progressBarWidth =
+    let progressBarWidth =
       width < 640
         ? Math.min(140, width - 196)
         : width < 1024
@@ -147,6 +165,13 @@ export default function Banner() {
       paginationLeft = offsetLeft;
     }
 
+    if (width >= 1024) {
+      const anchorLeft = isLaptop ? paginationLeft : offsetLeft;
+      const fitted = fitPaginationLayout(width, sideMargin, anchorLeft, progressBarWidth);
+      progressBarWidth = fitted.progressBarWidth;
+      paginationLeft = fitted.paginationLeft;
+    }
+
     const contentGap = width < 1024 ? 32 : width < 1440 ? 56 : 80;
     const contentMaxWidth =
       width < 640
@@ -181,6 +206,7 @@ export default function Banner() {
     const [active, ...rest] = order;
 
     heroRef.current?.style.setProperty("--banner-content-max", `${contentMaxWidth}px`);
+    heroRef.current?.style.setProperty("--banner-progress-width", `${progressBarWidth}px`);
 
     gsap.set("#pagination", { top: paginationTop, left: paginationLeft, y: 0, opacity: 1, zIndex: 60 });
     gsap.set(".cover", { x: viewportWidth + 400 });
@@ -209,6 +235,12 @@ export default function Banner() {
 
     gsap.set(".gProgF", { width: progressBarWidth * (1 / SLIDER_DATA.length) * (active + 1) });
 
+    SLIDER_DATA.forEach((_, i) => {
+      gsap.set(getSliderItemSelector(i), {
+        x: i === active ? 0 : numberSize * 2,
+      });
+    });
+
     rest.forEach((i, index) => {
       const isVisible = index < VISIBLE_THUMBS;
       const currentX = isVisible ? getThumbX(offsetLeft, index) : getHiddenThumbX(offsetLeft);
@@ -226,12 +258,9 @@ export default function Banner() {
       gsap.set(getCardContentSelector(i), {
         x: currentX,
         zIndex: THUMB_Z,
-        y: offsetTop + cardHeight - 100,
+        y: getThumbContentY(offsetTop),
         opacity: isVisible && !hideThumbLabels ? 1 : 0,
         visibility: isVisible ? "visible" : "hidden"
-      });
-      gsap.set(getSliderItemSelector(i), {
-        x: isVisible ? (index + 1) * numberSize : (VISIBLE_THUMBS + 1) * numberSize
       });
     });
   }, []);
@@ -358,7 +387,7 @@ export default function Banner() {
           });
           gsap.set(getCardContentSelector(idx), {
             x: thumbX,
-            y: offsetTop + cardHeight - 100,
+            y: getThumbContentY(offsetTop),
             zIndex: THUMB_Z,
             opacity: isVisible && !hideThumbLabels ? 1 : 0,
             visibility: isVisible ? "visible" : "hidden"
@@ -402,7 +431,7 @@ export default function Banner() {
     }, 0);
     tl.to(getCardContentSelector(activeIndex), {
       x: hiddenThumbX,
-      y: offsetTop + cardHeight - 100,
+      y: getThumbContentY(offsetTop),
       opacity: 0,
       visibility: "hidden",
       duration: 0.8,
@@ -424,7 +453,7 @@ export default function Banner() {
       }, 0);
       tl.to(getCardContentSelector(idx), {
         x: targetX,
-        y: offsetTop + cardHeight - 100,
+        y: getThumbContentY(offsetTop),
         opacity: hideThumbLabels ? 0 : 1,
         visibility: "visible",
         ease: ease,
@@ -473,7 +502,7 @@ export default function Banner() {
     <main
       ref={heroRef}
       className="relative isolate w-full h-[100dvh] min-h-[100svh] overflow-hidden select-none bg-black m-0 p-0"
-      style={{ "--banner-content-max": "340px" }}
+      style={{ "--banner-content-max": "340px", "--banner-progress-width": "240px" }}
     >
       <div
         ref={bgLayerRef}
@@ -484,19 +513,19 @@ export default function Banner() {
         {SLIDER_DATA.map((slide, index) => (
           <div
             key={index}
-            className="card absolute bg-cover bg-center shadow-2xl overflow-hidden will-change-transform transform-gpu
+            className="card absolute bg-cover bg-center shadow-lg overflow-hidden will-change-transform transform-gpu
                        after:content-[''] after:absolute after:inset-0 after:bg-gradient-to-b after:from-black/75 after:via-black/30 after:to-transparent after:z-10"
             id={`card${index}`}
             style={{ backgroundImage: `url(${slide.image})` }}
           >
             <div
-              className="card-content absolute p-5 text-white flex flex-col justify-end w-full h-full rounded-xl will-change-transform z-20"
+              className="card-content absolute p-2.5 sm:p-3 text-white flex flex-col justify-end w-full h-full rounded-lg will-change-transform z-20 pointer-events-none"
               id={`card-content-${index}`}
             >
-              <div className="text-[10px] font-bold tracking-[2px] uppercase text-amber-400">
+              <div className="text-[8px] sm:text-[9px] font-bold tracking-[1.5px] uppercase text-amber-400 line-clamp-1">
                 {slide.subtitle}
               </div>
-              <div className="text-sm font-black tracking-wide uppercase line-clamp-2 leading-tight mt-1">
+              <div className="text-[10px] sm:text-xs font-black tracking-wide uppercase line-clamp-1 leading-tight mt-0.5">
                 {slide.title}
               </div>
             </div>

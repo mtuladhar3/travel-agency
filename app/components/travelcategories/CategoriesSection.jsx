@@ -46,25 +46,27 @@ export default function CategoriesSection() {
   return (
     <section 
       ref={mainRef}
-      className="relative w-full bg-white pt-16 pb-28 px-4 sm:px-6 md:px-8 overflow-hidden select-none"
+      className="relative max-full  bg-white pt-16  pb-28 px-4 sm:px-6 md:px-8 overflow-hidden select-none"
     >
+      <div className="relative max-w-7xl mx-auto z-10 w-full flex flex-col gap-8 md:gap-12 pb-40">
+        {/* Dynamic header component */}
+        <CategoryHeader />
+        </div>
       {/* 
         The background container references your local public folder image.
         We use 'backgroundBlendMode: multiply' to blend the dark blue gradient 
         and your mountain silhouette image together cleanly!
       */}
       <div 
-        className="absolute top-0 left-0 w-full h-[520px] sm:h-[480px] md:h-[440px] lg:h-[400px] z-0 bg-bottom bg-cover bg-no-repeat"
+        className="absolute top-[120px] left-0 w-full h-[420px] sm:h-[380px] md:h-[340px] lg:h-[350px] z-0 bg-top bg-cover bg-no-repeat pt-30"
         style={{
-          backgroundImage: "linear-gradient(to bottom, #ff69005e, #ff8d0057), url('/images/bg-orange.png')",
+          backgroundImage: "linear-gradient(rgb(255 255 255 / 0%), rgb(0 0 0 / 34%)), url(/images/bg-dark-wo.png)",
           backgroundBlendMode: "multiply",
           clipPath: "polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%)",
         }}
       />
 
       <div className="relative max-w-7xl mx-auto z-10 w-full flex flex-col gap-8 md:gap-12">
-        {/* Dynamic header component */}
-        <CategoryHeader />
 
         {/* 1-2-4 Column Responsive Card Grid Layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">

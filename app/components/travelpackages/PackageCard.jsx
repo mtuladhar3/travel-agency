@@ -10,7 +10,7 @@ export default function PackageCard({ pkg }) {
       
       {/* Main card box (.categories-block-one) */}
       <div 
-        className="group w-full rounded-[24px] flex flex-col transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/20 border bg-bg-slate-50/50 border-[#EDF2F5] hover:border-transparent overflow-hidden"
+        className="group w-full rounded-[24px] flex flex-col transition-all duration-300 border bg-bg-slate-50/50 border-[#EDF2F5] hover:border-transparent overflow-hidden"
       >
         
         {/* Top Header - Location & Title exactly like your template layout */}
@@ -34,10 +34,12 @@ export default function PackageCard({ pkg }) {
         </div>
 
         {/* Card Main Image Asset with your native Aspect Ratio config */}
-        <figure className="relative w-full aspect-[270/298] overflow-hidden rounded-[20px] bg-slate-100">
+        <figure className="relative w-full aspect-[270/298] rounded-[20px] bg-slate-100">
           <img 
             src={pkg.image} 
             alt={pkg.title}
+             width={270}
+            height={298}
             className="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-105"
             loading="lazy"
           />
@@ -48,9 +50,8 @@ export default function PackageCard({ pkg }) {
           style={{
             "--shape-url": "url('/images/card-shape.svg')"
           }}
-          className="relative block z-[2] mt-[-37px] pt-[18px] pr-[15px] pb-[19px] pl-[25px] rounded-r-[20px] rounded-bl-[20px] rounded-tl-none flex flex-col items-start justify-center transition-colors duration-300 bg-[#edf2f5] overflow-hidden
+          className="relative block z-[2] mt-[-37px] pt-[18px] pr-[15px] pb-[19px] pl-[25px] rounded-r-[20px] rounded-bl-[20px] rounded-tl-none flex flex-col items-start justify-center transition-colors duration-300 bg-[#edf2f5] 
             
-            /* BEFORE element: Renders your custom inverted masking curve layout accurately */
             before:content-[''] before:absolute before:top-[-38px] before:left-[-1px] before:w-[130px] before:h-[120px] before:bg-[image:var(--shape-url)] before:bg-no-repeat before:transition-opacity before:duration-300 before:opacity-100"
         >
           

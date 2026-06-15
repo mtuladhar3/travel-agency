@@ -12,17 +12,6 @@ export default function CategoryCard({ title, image, count, price }) {
       <div 
         className="group w-full rounded-[24px] flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-900/20 border bg-[#063a62]/40 hover:bg-white border-[#EDF2F5] hover:border-transparent"
       >
-        
-        <div className="w-full text-center  p-3">
-          <h3>
-            <Link 
-              href="/" 
-              className="text-lg font-black tracking-wide transition-colors duration-300 block text-slate-300 group-hover:text-orange-500"
-            >
-              {title}
-            </Link>
-          </h3>
-        </div>
 
         <figure className="relative w-full aspect-[270/298] overflow-hidden rounded-[20px] bg-slate-100">
           <img 

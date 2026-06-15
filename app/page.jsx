@@ -15,7 +15,7 @@ export default function Home() {
     <>
       {/* Your Navbar handles layout.tsx, so we just drop the hero section here */}
       <Banner />
-      <TourSearchSection />
+      {/* <TourSearchSection /> */}
       <AboutSection />
       <CategoriesSection />
       <DestinationsSlider />

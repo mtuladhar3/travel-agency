@@ -33,6 +33,6 @@ export const SLIDER_DATA = [
     subtitle: "Nordic Fjords - Norway",
     title: "LOFOTEN ISLANDS",
     description: "Discover a striking wilderness archipelago within the Arctic Circle, featuring deep blue waters, sharp mountain peaks, and cozy coastal fishing villages.",
-    image: "/images/timed-cards-5.jpg"
+    image: "/images/timed-cards-6.jpg"
   }
 ];

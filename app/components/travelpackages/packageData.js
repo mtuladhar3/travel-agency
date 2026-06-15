@@ -4,7 +4,7 @@ export const travelPackages = [
     id: 1,
     location: "Bali, Indonesia",
     title: "Sunset & Spice Retreat",
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80",
+    image: "/images/timed-cards-4.jpg",
     price: "$849",
     rating: "4.6",
     duration: "7 Days - 6 Nights",

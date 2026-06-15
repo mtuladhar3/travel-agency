@@ -6,7 +6,7 @@ export default function BannerImage({ onNext, numberSize }) {
   return (
     <div
       id="pagination"
-      className="absolute z-[60] flex items-center justify-center sm:justify-start gap-2 sm:gap-4 lg:gap-5 xl:gap-6 text-white pointer-events-auto select-none w-[calc(100%-2rem)] sm:w-auto max-w-[calc(100vw-2rem)] sm:max-w-none pr-2 pb-[env(safe-area-inset-bottom,0px)]"
+      className="absolute z-[60] flex items-center justify-center sm:justify-start gap-2 sm:gap-4 lg:gap-5 xl:gap-6 text-white pointer-events-auto select-none w-[calc(100%-2rem)] sm:w-auto max-w-[calc(100vw-2rem)] sm:max-w-none pr-2 pb-[50px]"
     >
       <div
         className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm cursor-pointer hover:bg-white hover:text-black transition-colors duration-300 shrink-0"
@@ -27,21 +27,24 @@ export default function BannerImage({ onNext, numberSize }) {
         </svg>
       </div>
 
-      <div className="w-[min(140px,calc(100vw-12.5rem))] sm:w-[280px] lg:w-[240px] xl:w-[500px] h-[2px] bg-white/20 relative rounded-full overflow-hidden shrink min-w-[80px]">
+      <div
+        className="h-[2px] bg-white/20 relative rounded-full overflow-hidden shrink min-w-[80px]"
+        style={{ width: "var(--banner-progress-width, 240px)" }}
+      >
         <div className="gProgF h-full bg-amber-500 w-0 rounded-full transition-all duration-300"></div>
       </div>
 
       <div
         id="slide-numbers"
-        className="relative flex items-center overflow-hidden font-bold text-lg shrink-0"
+        className="relative flex items-center overflow-hidden font-bold text-lg shrink-0 text-white"
         style={{ width: numberSize, height: numberSize }}
       >
         {SLIDER_DATA.map((_, index) => (
           <div
             key={`slide${index}`}
             id={`slide-item-${index}`}
-            className="absolute flex items-center justify-center h-full font-black text-xl"
-            style={{ position: "absolute", width: numberSize }}
+            className="absolute inset-y-0 left-0 flex items-center justify-center font-black text-xl text-white"
+            style={{ width: numberSize }}
           >
             {index + 1}
           </div>
