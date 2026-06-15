@@ -3,133 +3,135 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight } from "lucide-react";
 
 export default function MegaMenu({ item, isOpen }) {
-  const [activeTabId, setActiveTabId] = useState(item.tabs?.[0]?.id ?? "");
+  const [activeRegionHref, setActiveRegionHref] = useState(
+    item.regions?.[0]?.href ?? ""
+  );
 
   useEffect(() => {
     if (isOpen) {
-      setActiveTabId(item.tabs?.[0]?.id ?? "");
+      setActiveRegionHref(item.regions?.[0]?.href ?? "");
     }
-  }, [isOpen, item.tabs]);
+  }, [isOpen, item.regions]);
 
-  if (!isOpen || !item.tabs?.length) return null;
+  if (!isOpen || !item.regions?.length) return null;
 
-  const activeTab = item.tabs.find((tab) => tab.id === activeTabId) ?? item.tabs[0];
+  const activeRegion =
+    item.regions.find((region) => region.href === activeRegionHref) ??
+    item.regions[0];
+  const activePackage = activeRegion.popularPackage;
 
   return (
     <div className="fixed top-20 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:top-24 lg:px-8">
-      <div className="w-full max-w-7xl overflow-hidden rounded-b-2xl border border-gray-100 bg-white text-gray-800 shadow-[0_20px_50px_rgba(0,0,0,0.12)] animate-in fade-in slide-in-from-top-2 duration-150">
-        <div className="flex flex-col lg:min-h-[300px] lg:flex-row lg:items-stretch">
-          {/* Left tab navigation */}
-          <div className="flex w-full shrink-0 flex-col border-b border-gray-100 lg:w-[220px] lg:border-b-0 lg:border-r">
-            <ul className="flex-1 py-2">
-              {item.tabs.map((tab) => {
-                const isActive = tab.id === activeTabId;
+      <div className="w-full max-w-7xl overflow-hidden rounded-b-2xl border border-[#E8E4DC] bg-[#F7F5F1] text-[#1C2B2A] shadow-[0_24px_60px_rgba(0,0,0,0.12)] animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="grid grid-cols-1 gap-4 p-4 lg:grid-cols-[220px_minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-5 lg:p-6 lg:min-h-[420px]">
+          {/* Left: trekking regions */}
+          <div className="flex flex-col border-b border-[#E0DBD2] pb-4 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-2">
+            <ul className="flex-1 space-y-0.5">
+              {item.regions.map((region) => {
+                const isActive = region.href === activeRegionHref;
 
                 return (
-                  <li key={tab.id}>
-                    <button
-                      type="button"
-                      onMouseEnter={() => setActiveTabId(tab.id)}
-                      onClick={() => setActiveTabId(tab.id)}
-                      className={`flex w-full items-center justify-between px-5 py-3.5 text-left text-[15px] font-medium transition-colors ${
+                  <li key={region.href}>
+                    <Link
+                      href={region.href}
+                      onMouseEnter={() => setActiveRegionHref(region.href)}
+                      onFocus={() => setActiveRegionHref(region.href)}
+                      className={`flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-[15px] font-medium transition-colors ${
                         isActive
-                          ? "text-[#FF4E25]"
-                          : "text-slate-800 hover:text-[#FF4E25]"
+                          ? "bg-white text-orange-500"
+                          : "text-[#1C2B2A] hover:bg-white/70 hover:text-orange-500"
                       }`}
                     >
-                      <span>{tab.label}</span>
-                      <ChevronRight
-                        className={`h-4 w-4 shrink-0 ${
-                          isActive ? "text-[#FF4E25]" : "text-slate-400"
-                        }`}
-                      />
-                    </button>
+                      <span>{region.label}</span>
+                    </Link>
                   </li>
                 );
               })}
             </ul>
 
-            <div className="border-t border-gray-100 px-5 py-4">
+            <div className="mt-4 border-t border-[#E0DBD2] pt-4">
               <Link
-                href={item.viewAllHref ?? "/destinations"}
-                className="text-sm font-semibold text-[#FF4E25] transition-colors hover:text-[#e0441f]"
+                href={item.viewAllHref ?? item.href}
+                className="px-3 text-sm font-bold text-[#1C2B2A] transition-colors hover:text-orange-500"
               >
-                View all
+                {item.viewAllLabel ?? "View all"}
               </Link>
             </div>
           </div>
 
-          {/* Middle destinations panel */}
-          <div className="flex min-w-0 flex-1 flex-col justify-between px-6 py-5 lg:px-8 lg:py-6">
-            <div className="flex min-h-0 flex-1 flex-col">
-              <h3 className="mb-4 shrink-0 text-xs font-semibold tracking-[0.18em] text-slate-400">
-                {activeTab.title}
-              </h3>
-
-              <div className="grid flex-1 grid-cols-3 grid-rows-3 gap-4">
-                {activeTab.destinations.map((destination) => (
-                  <Link
-                    key={destination.name}
-                    href={destination.href}
-                    className="group flex min-w-0 items-center gap-2.5"
-                  >
-                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
-                      <Image
-                        src={destination.image}
-                        alt={destination.name}
-                        fill
-                        sizes="40px"
-                        className="object-cover transition-transform duration-200 group-hover:scale-105"
-                      />
-                    </div>
-                    <span className="truncate text-sm font-medium text-slate-800 transition-colors group-hover:text-[#FF4E25]">
-                      {destination.name}
-                    </span>
-                  </Link>
-                ))}
+          {/* Middle: popular package for hovered region */}
+          {activePackage && (
+            <div className="flex min-h-[320px] flex-col rounded-2xl bg-[#E9E5DD] p-5 sm:p-6">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-orange-500">
+                  {item.featuredEyebrow ?? "Most popular in"}{" "}
+                  {item.featuredLabelMode === "full"
+                    ? activeRegion.label
+                    : activeRegion.label.replace(" Region", "")}
+                </p>
+                <h3 className="mt-2 text-lg font-semibold leading-snug text-[#1C2B2A] sm:text-xl">
+                  {activePackage.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#4A5C57]">
+                  {activePackage.description}
+                </p>
               </div>
-            </div>
 
-            <div className="mt-4 shrink-0">
-              <Link
-                href={activeTab.viewAllHref}
-                className="text-sm font-semibold text-[#FF4E25] transition-colors hover:text-[#e0441f]"
-              >
-                View all
-              </Link>
-            </div>
-          </div>
-
-          {/* Right promo card */}
-          {item.promo && (
-            <div className="flex w-full shrink-0 border-t border-gray-100 p-4 lg:w-[280px] lg:border-l lg:border-t-0 lg:p-5">
-              <div className="relative min-h-[220px] w-full flex-1 overflow-hidden rounded-2xl lg:min-h-[300px]">
+              <div className="relative my-5 flex min-h-[160px] flex-1 items-center justify-center overflow-hidden rounded-xl bg-[#DDD8CE]">
                 <Image
-                  src={item.promo.image}
-                  alt={item.promo.title}
+                  key={activePackage.image}
+                  src={activePackage.image}
+                  alt={activePackage.imageAlt ?? activePackage.title}
                   fill
-                  sizes="280px"
-                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 360px"
+                  className="object-cover transition-opacity duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/10" />
-                <div className="absolute inset-0 flex flex-col justify-end p-5">
-                  <h4 className="text-lg font-bold leading-snug text-white">
-                    {item.promo.title}
-                  </h4>
-                  <p className="mt-2 text-sm leading-relaxed text-white/85">
-                    {item.promo.subtitle}
-                  </p>
-                  <Link
-                    href={item.promo.ctaHref}
-                    className="mt-4 inline-flex w-fit rounded-lg bg-[#FF4E25] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e0441f]"
-                  >
-                    {item.promo.ctaLabel}
-                  </Link>
-                </div>
               </div>
+
+              <div className="border-t border-[#D5CFC3] pt-4">
+                <Link
+                  href={activePackage.ctaHref}
+                  className="text-sm font-semibold text-[#1C2B2A] transition-colors hover:text-orange-500"
+                >
+                  {activePackage.ctaLabel}
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* Right: stacked promo cards */}
+          {item.promos?.length > 0 && (
+            <div className="flex min-h-[320px] flex-col gap-4">
+              {item.promos.map((promo) => (
+                <div
+                  key={promo.ctaHref}
+                  className={`flex flex-1 flex-col justify-between rounded-2xl p-5 text-white ${
+                    promo.variant === "green" ? "bg-[#2F4F44]" : "bg-orange-500"
+                  }`}
+                >
+                  <div>
+                    <h4 className="text-lg font-semibold leading-snug sm:text-xl">
+                      {promo.title}
+                    </h4>
+                    {promo.description && (
+                      <p className="mt-2 text-sm leading-relaxed text-white/85">
+                        {promo.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="mt-5 border-t border-white/25 pt-4">
+                    <Link
+                      href={promo.ctaHref}
+                      className="text-sm font-semibold text-white transition-opacity hover:opacity-80"
+                    >
+                      {promo.ctaLabel}
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>

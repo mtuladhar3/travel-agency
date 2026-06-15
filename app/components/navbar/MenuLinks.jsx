@@ -50,7 +50,7 @@ export default function MenuLinks() {
 
             {/* B. Falling Dropdown Variant */}
             {item.type === "dropdown" && (
-              <DropdownMenu items={item.items} isOpen={isCurrentActive} />
+              <DropdownMenu item={item} isOpen={isCurrentActive} />
             )}
           </div>
         );

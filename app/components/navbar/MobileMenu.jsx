@@ -82,26 +82,41 @@ export default function MobileMenu() {
                 {/* ACCORDION EXPANDABLE TRAY COMPONENT */}
                 {hasSubmenu && isExpanded && (
                   <div className="pl-4 border-l-2 border-white/10 flex flex-col mt-1 mb-2 space-y-1 animate-in slide-in-from-top-1 duration-150">
-                    {(item.type === "mega"
-                      ? item.tabs?.flatMap((tab) => tab.destinations) ?? []
-                      : item.items ?? []
-                    ).map((subItem, index) => {
-                      const subHref =
-                        item.type === "mega"
-                          ? subItem.href
-                          : subItem.href;
-
-                      return (
+                    {item.type === "mega" &&
+                      (item.regions ?? []).map((subItem) => (
                         <Link
-                          key={index}
-                          href={subHref}
+                          key={subItem.href}
+                          href={subItem.href}
                           onClick={() => setIsOpen(false)}
                           className="py-2 text-[14px] font-medium text-white/60 hover:text-[#FF4E25] transition-colors"
                         >
-                          {subItem.name}
+                          {subItem.label}
                         </Link>
-                      );
-                    })}
+                      ))}
+
+                    {item.type === "dropdown" &&
+                      (item.groups?.length
+                        ? item.groups
+                        : [{ label: null, items: item.items ?? [] }]
+                      ).map((group) => (
+                        <div key={group.label ?? "default"} className="flex flex-col">
+                          {group.label && (
+                            <p className="pt-2 pb-1 text-[11px] font-semibold uppercase tracking-wider text-white/35">
+                              {group.label}
+                            </p>
+                          )}
+                          {group.items.map((subItem) => (
+                            <Link
+                              key={subItem.href}
+                              href={subItem.href}
+                              onClick={() => setIsOpen(false)}
+                              className="py-2 text-[14px] font-medium text-white/60 hover:text-[#FF4E25] transition-colors"
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
                   </div>
                 )}
               </div>
