@@ -60,7 +60,7 @@ export default function WhyUsSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-16 sm:py-24 overflow-hidden w-full min-h-[650px] flex items-center select-none"
+      className="relative py-16 sm:py-24 overflow-hidden bg-[#fafafa] w-full min-h-[650px] flex items-center select-none"
     >
       {/* Floating animation keyframe setup for template behavior */}
       <style jsx global>{`
@@ -73,7 +73,7 @@ export default function WhyUsSection() {
 <WhyUsMedia />
 
       {/* --- FOREGROUND CONTENT SYSTEM CONTAINER --- */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full">
+      <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8 relative z-10 w-full h-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Columns - Content Text Blocks & Dynamic Metrics Grid */}

@@ -1,46 +1,63 @@
 "use client";
-
-import React from 'react';
-import BlogHeader from './BlogHeader';
-import FeaturedPost from './FeaturedPost';
-import SecondaryPost from './SecondaryPost';
-import SidebarList from './SidebarList';
+import BlogHeaderSticky from "./BlogHeaderSticky";
+import BlogRowItem from "./BlogRowItem";
 
 export default function BlogSection() {
+  // Database array tracking live article configurations
+  const blogPosts = [
+    {
+      id: 1,
+      title: "Exploring the world's most stunning beaches",
+      date: "Mar 19, 2025",
+      readTime: "5 Min",
+      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 2,
+      title: "Embracing the journey of self-discovery",
+      date: "Mar 24, 2025",
+      readTime: "5 Min",
+      image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 3,
+      title: "Top thrilling travel experiences for explorers",
+      date: "Mar 24, 2025",
+      readTime: "5 Min",
+      image: "https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=600&auto=format&fit=crop&q=80"
+    },
+    {
+      id: 4,
+      title: "Navigating mountain passes with local experts",
+      date: "Apr 02, 2025",
+      readTime: "7 Min",
+      image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600&auto=format&fit=crop&q=80"
+    }
+  ];
+
   return (
-    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 selection:bg-orange-100 overflow-hidden w-full">
-      <div className="max-w-7xl mx-auto">
-
-      {/* Section Title */}
-      <BlogHeader />
-
-      {/* Main Structural Layout Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-[70%_30%] gap-6 md:gap-8 lg:gap-10 items-start mt-10">
+    /* Using 'relative' on the outer section guarantees a proper context boundary box
+      so the sticky child understands exactly when to stop tracking the scroll window.
+    */
+    <section className="relative w-full bg-white px-6 py-16 sm:px-12 md:py-24 lg:px-20 xl:px-32 border-t border-orange-950/5">
+      <div className="mx-auto max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-16">
         
-        {/* Left Side: Dynamic Two-Post Vertical Stack */}
-        <div className="flex flex-col gap-8">
-          <FeaturedPost />
-          <SecondaryPost />
+        {/* ================= LEFT SIDEBAR COLUMN (Sticky) ================= */}
+        <div className="lg:col-span-5 w-full">
+          <BlogHeaderSticky />
         </div>
 
-        {/* Right Side: Sidebar Aggregator */}
-        <div className="h-full">
-          <SidebarList />
+        {/* ================= RIGHT SCROLLABLE LIST COLUMN ================= */}
+        <div className="lg:col-span-7 w-full flex flex-col">
+          {blogPosts.map((post, index) => (
+            <BlogRowItem 
+              key={post.id} 
+              post={post} 
+              index={index} 
+            />
+          ))}
         </div>
-      </div>
 
-      {/* Center-Aligned Footer Link */}
-      <div className="text-center mt-20 flex flex-col items-center gap-4">
-        <p className="text-xs tracking-wider uppercase font-bold text-gray-500">
-          Continue your adventure through our blog.
-        </p>
-        <a 
-          href="#" 
-          className="inline-flex items-center gap-1.5 text-base font-extrabold text-[#0B3558] hover:text-orange-500 transition-colors group border-b-2 border-transparent group-hover:border-orange-500 pb-1"
-        >
-          All Blog Post ➔
-        </a>
-      </div>
       </div>
     </section>
   );

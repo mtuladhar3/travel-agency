@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function FeatureBox({ data }) {
   return (
-    <div className="whyus-animate-card bg-[#f8fafc]/60 border border-slate-200/50 rounded-[20px] p-6 flex flex-col items-start transition-all duration-300 hover:bg-white hover:shadow-xl hover:shadow-slate-100">
+    <div className="whyus-animate-card bg-white border border-slate-200/50 rounded-[20px] p-6 flex flex-col items-start transition-all duration-300 hover:bg-white hover:shadow-xl hover:shadow-slate-100">
       <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-5 text-[#0f2c59]">
         {data.icon}
       </div>

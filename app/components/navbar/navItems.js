@@ -10,6 +10,7 @@ export const navItems = [
       {
         label: "Everest Region",
         href: "/trekking/everest",
+        trekCount: 32,
         popularPackage: {
           title: "Everest Base Camp Trek",
           description:
@@ -24,6 +25,7 @@ export const navItems = [
       {
         label: "Annapurna Region",
         href: "/trekking/annapurna",
+        trekCount: 28,
         popularPackage: {
           title: "Annapurna Base Camp Trek",
           description:
@@ -38,6 +40,7 @@ export const navItems = [
       {
         label: "Langtang Region",
         href: "/trekking/langtang",
+        trekCount: 14,
         popularPackage: {
           title: "Langtang Valley Trek",
           description:
@@ -52,6 +55,7 @@ export const navItems = [
       {
         label: "Manaslu Region",
         href: "/trekking/manaslu",
+        trekCount: 12,
         popularPackage: {
           title: "Manaslu Circuit Trek",
           description:
@@ -66,6 +70,7 @@ export const navItems = [
       {
         label: "Mustang Region",
         href: "/trekking/mustang",
+        trekCount: 10,
         popularPackage: {
           title: "Upper Mustang Trek",
           description:
@@ -80,6 +85,7 @@ export const navItems = [
       {
         label: "Dolpo Region",
         href: "/trekking/dolpo",
+        trekCount: 8,
         popularPackage: {
           title: "Lower Dolpo Trek",
           description:
@@ -94,6 +100,7 @@ export const navItems = [
       {
         label: "Kanchenjunga Region",
         href: "/trekking/kanchenjunga",
+        trekCount: 9,
         popularPackage: {
           title: "Kanchenjunga Base Camp Trek",
           description:
@@ -108,6 +115,7 @@ export const navItems = [
       {
         label: "Makalu Region",
         href: "/trekking/makalu",
+        trekCount: 7,
         popularPackage: {
           title: "Makalu Base Camp Trek",
           description:

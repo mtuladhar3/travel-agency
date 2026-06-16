@@ -45,7 +45,7 @@ export default function FooterTop() {
         {/* Left Floating Image (image-1) */}
         <figure 
           ref={image1Ref}
-          className="hidden md:block absolute left-[5%] top-1/2 -translate-y-1/2 -rotate-[15deg] w-48 h-52 border-[5px] border-white rounded-[2rem] overflow-hidden shadow-2xl bg-neutral-800 z-10"
+          className="hidden md:block absolute left-[-50px] top-1/2 -translate-y-1/2 -rotate-[15deg] w-48 h-52 border-[5px] border-white rounded-[2rem] overflow-hidden shadow-2xl bg-neutral-800 z-10"
         >
           <Image src="/images/footer-11.webp" alt="Adventure snap" fill className="object-cover" />
         </figure>
@@ -78,7 +78,7 @@ export default function FooterTop() {
         {/* Right Floating Image (image-2) */}
         <figure 
           ref={image2Ref}
-          className="hidden md:block absolute right-[5%] top-1/2 -translate-y-1/2 rotate-[15deg] w-48 h-52 border-[5px] border-white rounded-[2rem] overflow-hidden shadow-2xl bg-neutral-800 z-10"
+          className="hidden md:block absolute right-[-50px] top-1/2 -translate-y-1/2 rotate-[15deg] w-48 h-52 border-[5px] border-white rounded-[2rem] overflow-hidden shadow-2xl bg-neutral-800 z-10"
         >
           <Image src="/images/footer-10.webp" alt="Destination snap" fill className="object-cover" />
         </figure>
