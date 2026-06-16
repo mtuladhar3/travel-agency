@@ -1,7 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function ActivityImageShowcase({ activeImage, locationLabel }) {
+export default function ActivityImageShowcase({ activeImage }) {
   return (
     <div className="flex flex-col gap-4 w-full max-w-md lg:max-w-none mx-auto">
       {/* Location Breadcrumb Meta string matching top left tag */}

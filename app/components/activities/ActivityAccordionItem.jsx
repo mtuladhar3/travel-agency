@@ -7,7 +7,7 @@ export default function ActivityAccordionItem({ item, isActive, onClick }) {
     <div className="border-b border-neutral-200 last:border-none">
       <button
         onClick={onClick}
-        className="w-full py-6 flex items-center justify-between text-left transition-colors group select-none"
+        className="flex w-full items-center justify-between py-4 text-left transition-colors group select-none sm:py-6"
       >
         <div className="flex items-center gap-6 sm:gap-10">
           {/* Static Item Number Indicator */}
@@ -15,7 +15,7 @@ export default function ActivityAccordionItem({ item, isActive, onClick }) {
             {item.id}
           </span>
           {/* Interactive Title Tag */}
-          <h3 className={`text-xl font-bold tracking-wide transition-colors sm:text-2xl ${
+          <h3 className={`text-lg font-bold tracking-wide transition-colors sm:text-xl md:text-2xl ${
             isActive ? "text-orange-500" : "text-neutral-500 group-hover:text-neutral-800"
           }`}>
             {item.title}

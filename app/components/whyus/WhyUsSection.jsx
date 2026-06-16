@@ -60,7 +60,7 @@ export default function WhyUsSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-16 sm:py-24 overflow-hidden bg-[#fafafa] w-full min-h-[650px] flex items-center select-none"
+      className="relative flex w-full min-h-0 items-center overflow-hidden bg-[#fafafa] py-16 select-none sm:min-h-[650px] sm:py-24"
     >
       {/* Floating animation keyframe setup for template behavior */}
       <style jsx global>{`

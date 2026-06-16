@@ -43,7 +43,7 @@ export default function ActivitiesSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="relative flex w-full min-h-screen items-center overflow-hidden bg-white px-6 py-16 sm:px-12 md:py-20 lg:px-20 xl:px-32">
+    <section className="relative flex w-full items-center overflow-hidden bg-white px-6 py-16 sm:px-12 md:py-20 lg:px-20 xl:px-32">
       
       {/* Background Vector Mountain Line-Art Accent Overlay 
           Reuses your extracted asset image_4c6901.jpg as a subtle dark background watermark texture
@@ -60,13 +60,12 @@ export default function ActivitiesSection() {
         <ActivitiesHeader />
 
         {/* Structural Main Grid split: Left (Image), Right (Accordion rows) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
           
           {/* Left Column: Image Area spanned over 5 layout units */}
           <div className="lg:col-span-5 order-2 lg:order-1">
-            <ActivityImageShowcase 
+            <ActivityImageShowcase
               activeImage={activitiesData[activeIndex].image}
-              locationLabel={activitiesData[activeIndex].location}
             />
           </div>
 

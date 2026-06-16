@@ -7,7 +7,7 @@ export default function TestimonialCard({ review }) {
     <motion.div 
       whileHover={{ y: -4 }}
       transition={{ duration: 0.3 }}
-      className="flex-shrink-0 w-[300px] sm:w-[380px] md:w-[420px] rounded-3xl bg-orange-50/50 p-8 md:p-10 flex flex-col justify-between gap-8 md:gap-12 border border-orange-100/30 shadow-sm select-none"
+      className="flex flex-shrink-0 w-[var(--slide-width,300px)] flex-col justify-between gap-8 rounded-3xl border border-orange-100/30 bg-orange-50/50 p-6 shadow-sm select-none sm:w-[380px] sm:gap-12 sm:p-8 md:w-[420px] md:p-10"
     >
       {/* Testimonial Quote Message Text */}
       <p className="text-base sm:text-lg leading-relaxed text-orange-950/80 font-medium">

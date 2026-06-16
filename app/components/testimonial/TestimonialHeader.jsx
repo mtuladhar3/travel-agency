@@ -18,7 +18,7 @@ export default function TestimonialHeader({ onPrev, onNext }) {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-orange-950 uppercase leading-[1.1]"
+          className="section-heading leading-[1.1]"
         >
           What Client Say <br /> About Us
         </motion.h2>

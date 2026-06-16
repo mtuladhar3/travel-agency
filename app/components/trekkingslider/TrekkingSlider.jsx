@@ -8,6 +8,7 @@ import { trekkingSliderPackages } from "./trekkingSliderData";
 
 const AUTO_SLIDE_MS = 4500;
 const GAP_PX = 24;
+const MOBILE_BREAKPOINT = 768;
 
 export default function TrekkingSlider() {
   const sectionRef = useRef(null);
@@ -15,13 +16,15 @@ export default function TrekkingSlider() {
   const trackRef = useRef(null);
   const isPausedRef = useRef(false);
   const [maxScroll, setMaxScroll] = useState(0);
+  const [slideWidth, setSlideWidth] = useState(0);
   const x = useMotionValue(0);
 
   const getStep = useCallback(() => {
+    if (slideWidth > 0) return slideWidth + GAP_PX;
     const firstCard = trackRef.current?.firstElementChild;
     if (!firstCard) return 380;
     return firstCard.getBoundingClientRect().width + GAP_PX;
-  }, []);
+  }, [slideWidth]);
 
   const getVisibleWidth = useCallback(() => {
     const viewport = viewportRef.current;
@@ -29,6 +32,11 @@ export default function TrekkingSlider() {
     if (!viewport) return 0;
 
     const viewportRect = viewport.getBoundingClientRect();
+
+    if (window.innerWidth < MOBILE_BREAKPOINT) {
+      return viewport.offsetWidth;
+    }
+
     const sectionRect = section?.getBoundingClientRect();
     const rightEdge = sectionRect?.right ?? window.innerWidth;
 
@@ -37,7 +45,11 @@ export default function TrekkingSlider() {
 
   const updateBounds = useCallback(() => {
     const track = trackRef.current;
-    if (!track) return;
+    const viewport = viewportRef.current;
+    if (!track || !viewport) return;
+
+    const viewportWidth = viewport.offsetWidth;
+    setSlideWidth(viewportWidth);
 
     const trackWidth = track.scrollWidth;
     const visibleWidth = getVisibleWidth();
@@ -53,17 +65,26 @@ export default function TrekkingSlider() {
   const slide = useCallback(
     (direction, { loop = false } = {}) => {
       const step = getStep();
+      if (!step) return;
+
       const currentX = x.get();
-      let targetX = direction === "next" ? currentX - step : currentX + step;
+      const currentIndex = Math.round(-currentX / step);
+      const maxIndex = Math.max(0, Math.round(-maxScroll / step));
+      let nextIndex =
+        direction === "next" ? currentIndex + 1 : currentIndex - 1;
 
-      if (targetX < maxScroll) {
-        targetX = loop ? 0 : maxScroll;
+      if (nextIndex > maxIndex) {
+        nextIndex = loop ? 0 : maxIndex;
       }
-      if (targetX > 0) {
-        targetX = loop ? maxScroll : 0;
+      if (nextIndex < 0) {
+        nextIndex = loop ? maxIndex : 0;
       }
 
-      animate(x, targetX, { type: "spring", stiffness: 220, damping: 28 });
+      animate(x, -nextIndex * step, {
+        type: "spring",
+        stiffness: 220,
+        damping: 28,
+      });
     },
     [getStep, maxScroll, x]
   );
@@ -118,7 +139,8 @@ export default function TrekkingSlider() {
 
         <div
           ref={viewportRef}
-          className="cursor-grab overflow-visible active:cursor-grabbing"
+          style={{ "--slide-width": `${slideWidth}px` }}
+          className="w-full cursor-grab overflow-hidden active:cursor-grabbing md:overflow-visible"
           onMouseEnter={pause}
           onMouseLeave={resume}
           onTouchStart={pause}
@@ -129,7 +151,7 @@ export default function TrekkingSlider() {
             style={{ x }}
             drag="x"
             dragConstraints={{ left: maxScroll, right: 0 }}
-            dragElastic={0.15}
+            dragElastic={0.08}
             onDragStart={pause}
             onDragEnd={resume}
             className="flex w-max gap-6"

@@ -9,7 +9,7 @@ export default function PackageCard({ item }) {
     <motion.div 
       whileHover={{ y: -6 }}
       transition={{ duration: 0.3 }}
-      className="flex-shrink-0 w-[290px] sm:w-[350px] md:w-[380px] rounded-3xl border border-orange-100 bg-white p-4 shadow-sm select-none"
+      className="flex-shrink-0 w-[var(--slide-width,290px)] rounded-3xl border border-orange-100 bg-white p-4 shadow-sm select-none sm:w-[350px] md:w-[380px]"
     >
       {/* Card Image Wrapper */}
       <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-orange-50">

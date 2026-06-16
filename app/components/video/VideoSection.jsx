@@ -7,7 +7,7 @@ export default function VideoSection() {
       The clip-path or relative positioning bounds the fixed viewport context 
       so the background video layers beautifully within this section block.
     */
-    <section className="relative w-full h-180 bg-transparent px-6 py-20 sm:px-12 md:py-32 lg:px-20 xl:px-32 flex items-center">
+    <section className="relative flex w-full min-h-[50vh] items-center bg-transparent px-6 py-16 sm:min-h-[60vh] sm:px-12 sm:py-20 md:min-h-[70vh] md:py-24 lg:px-20 xl:px-32">
       
       {/* 1. Fixed Background Layers */}
       <FixedVideoBg />
