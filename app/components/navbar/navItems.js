@@ -294,5 +294,6 @@ export const navItems = [
       },
     ],
   },
+  { name: "Contact", href: "/contact", type: "none" },
   { name: "Support", href: "/support", type: "none" },
 ];

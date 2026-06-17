@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/components/navbar/Logo.jsx", "app/components/navbar/MenuLinks.jsx", "app/components/navbar/MobileMenu.jsx", "app/components/navbar/Navbar.jsx", "app/components/navbar/RightActions.jsx", "app/components/navbar/SearchBar.jsx", "app/components/navbar/Topbar.jsx", "app/layout.jsx", "app/page.jsx", "app/components/navbar/navItems.js", "app/components/hero/HeroContent.jsx", "app/components/hero/HeroImage.jsx", "app/components/hero/Hero.jsx"  ],
+, "app/components/navbar/Logo.jsx", "app/components/navbar/MenuLinks.jsx", "app/components/navbar/MobileMenu.jsx", "app/components/navbar/Navbar.jsx", "app/components/navbar/RightActions.jsx", "app/components/navbar/SearchBar.jsx", "app/components/navbar/Topbar.jsx", "app/layout.jsx", "app/page.jsx", "app/components/navbar/navItems.js", "app/components/home/hero/HeroContent.jsx", "app/components/home/hero/HeroImage.jsx", "app/components/home/hero/Hero.jsx"  ],
   "exclude": ["node_modules"]
 }

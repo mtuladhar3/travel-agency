@@ -9,7 +9,7 @@ import { useNavbarScrolled } from "./NavbarScrollContext";
 import MegaMenu from "./MegaMenu";
 import DropdownMenu from "./DropdownMenu";
 
-export default function MenuLinks() {
+export default function MenuLinks() {0
   const [activeMenu, setActiveMenu] = useState(null);
   const isScrolled = useNavbarScrolled();
 
