@@ -1,31 +1,44 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import MenuLinks from "./MenuLinks";
 import RightActions from "./RightActions";
-import MobileMenu from "./MobileMenu"; // <-- Plug in the newly generated tracking layout file
+import MobileMenu from "./MobileMenu";
+import { NavbarScrollContext } from "./NavbarScrollContext";
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    /* Absolute overlay frame configuration wrapper */
-    <header className="absolute top-0 left-0 w-full z-50 bg-transparent border-b border-white/10">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-20 lg:h-24 relative">
-          
-          {/* 1. Left aligned core brand signature block */}
-          <Logo />
-
-          {/* 2. Middle desktop track navigation link array (hidden on mobile displays) */}
-          <MenuLinks />
-
-          {/* 3. Right side dashboard utility items row (hidden on mobile displays) */}
-          <RightActions />
-
-          {/* 4. Responsive viewport fallback control component (hidden on desktop screens) */}
-          <MobileMenu />
-
+    <NavbarScrollContext.Provider value={isScrolled}>
+      <header
+        className={`left-0 z-50 w-full transition-all duration-300 ${
+          isScrolled
+            ? "fixed top-0 border-b border-neutral-200/80 bg-white/95 shadow-sm backdrop-blur-md"
+            : "absolute top-0 border-0 bg-transparent"
+        }`}
+      >
+        <div className="mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-12">
+          <div className="relative flex h-20 items-center justify-between lg:h-24">
+            <Logo />
+            <MenuLinks />
+            <RightActions />
+            <MobileMenu />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </NavbarScrollContext.Provider>
   );
 }

@@ -6,8 +6,10 @@ import TestimonialHeader from "./TestimonialHeader";
 import TestimonialCard from "./TestimonialCard";
 
 const GAP_PX = 24;
+const MOBILE_BREAKPOINT = 768;
 
 export default function TestimonialSlider() {
+  const sectionRef = useRef(null);
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
   const [maxScroll, setMaxScroll] = useState(0);
@@ -53,8 +55,27 @@ export default function TestimonialSlider() {
     },
   ];
 
+  const getVisibleWidth = useCallback(() => {
+    const viewport = viewportRef.current;
+    const section = sectionRef.current;
+    if (!viewport) return 0;
+
+    const viewportRect = viewport.getBoundingClientRect();
+
+    if (window.innerWidth < MOBILE_BREAKPOINT) {
+      return viewport.offsetWidth;
+    }
+
+    const sectionRect = section?.getBoundingClientRect();
+    const rightEdge = sectionRect?.right ?? window.innerWidth;
+
+    return Math.max(viewport.offsetWidth, rightEdge - viewportRect.left);
+  }, []);
+
   const getStep = useCallback(() => {
-    if (slideWidth > 0) return slideWidth + GAP_PX;
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+    if (isMobile && slideWidth > 0) return slideWidth + GAP_PX;
+
     const firstCard = trackRef.current?.firstElementChild;
     if (!firstCard) return 420;
     return firstCard.getBoundingClientRect().width + GAP_PX;
@@ -65,18 +86,19 @@ export default function TestimonialSlider() {
     const viewport = viewportRef.current;
     if (!track || !viewport) return;
 
-    const viewportWidth = viewport.offsetWidth;
-    setSlideWidth(viewportWidth);
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+    setSlideWidth(isMobile ? viewport.offsetWidth : 0);
 
     const trackWidth = track.scrollWidth;
-    const max = Math.min(0, viewportWidth - trackWidth);
+    const visibleWidth = getVisibleWidth();
+    const max = Math.min(0, visibleWidth - trackWidth);
 
     setMaxScroll(max);
 
     const current = x.get();
     if (current < max) x.set(max);
     if (current > 0) x.set(0);
-  }, [x]);
+  }, [getVisibleWidth, x]);
 
   const handleSlide = useCallback(
     (direction) => {
@@ -120,7 +142,10 @@ export default function TestimonialSlider() {
   }, [updateBounds, reviewsData.length]);
 
   return (
-    <section className="w-full overflow-hidden bg-white px-6 py-16 sm:px-12 md:py-24 lg:px-20 xl:px-32">
+    <section
+      ref={sectionRef}
+      className="w-full overflow-hidden bg-white px-6 py-16 sm:px-12 md:py-24 lg:px-20 xl:px-32"
+    >
       <div className="mx-auto max-w-7xl">
         <TestimonialHeader
           onPrev={() => handleSlide("prev")}
@@ -129,8 +154,12 @@ export default function TestimonialSlider() {
 
         <div
           ref={viewportRef}
-          style={{ "--slide-width": `${slideWidth}px` }}
-          className="w-full overflow-hidden"
+          style={
+            slideWidth > 0
+              ? { "--slide-width": `${slideWidth}px` }
+              : undefined
+          }
+          className="w-full overflow-hidden md:overflow-visible"
         >
           <motion.div
             ref={trackRef}

@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} overflow-x-clip`}>
         {/* The Navbar goes right above the main content children */}
         <Navbar />
-        <main className="overflow-x-clip w-full">{children}</main>
+        <main className="w-full overflow-x-clip">{children}</main>
         <Footer />
       </body>
     </html>

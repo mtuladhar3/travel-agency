@@ -4,12 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { navItems } from "./navItems";
+import { useNavbarScrolled } from "./NavbarScrollContext";
 
 import MegaMenu from "./MegaMenu";
 import DropdownMenu from "./DropdownMenu";
 
 export default function MenuLinks() {
   const [activeMenu, setActiveMenu] = useState(null);
+  const isScrolled = useNavbarScrolled();
 
   return (
     <nav 
@@ -29,15 +31,23 @@ export default function MenuLinks() {
             {/* Primary Main Route Path Option */}
             <Link
               href={item.href}
-              className={`flex items-center gap-1 font-semibold text-sm tracking-wide transition-colors ${
-                isCurrentActive ? "text-[#FF4E25]" : "text-white hover:text-white/80"
+              className={`flex items-center gap-1 text-sm font-semibold tracking-wide transition-colors ${
+                isCurrentActive
+                  ? "text-[#FF4E25]"
+                  : isScrolled
+                    ? "text-neutral-900 hover:text-[#FF4E25]"
+                    : "text-white hover:text-white/80"
               }`}
             >
               <span>{item.name}</span>
               {hasSubmenu && (
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    isCurrentActive ? "rotate-180 text-[#FF4E25]" : "text-white/60"
+                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                    isCurrentActive
+                      ? "rotate-180 text-[#FF4E25]"
+                      : isScrolled
+                        ? "text-neutral-500"
+                        : "text-white/60"
                   }`}
                 />
               )}

@@ -4,10 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { X, ChevronDown, Menu } from "lucide-react";
 import { navItems } from "./navItems";
+import { useNavbarScrolled } from "./NavbarScrollContext";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState(null);
+  const isScrolled = useNavbarScrolled();
 
   const toggleAccordion = (menuName) => {
     setExpandedMenu(expandedMenu === menuName ? null : menuName);
@@ -18,7 +20,11 @@ export default function MobileMenu() {
       {/* HAMBURGER TRIGGER BUTTON */}
       <button
         onClick={() => setIsOpen(true)}
-        className="text-white p-2 focus:outline-none hover:text-white/80 transition-colors"
+        className={`p-2 transition-colors focus:outline-none ${
+          isScrolled
+            ? "text-neutral-900 hover:text-[#FF4E25]"
+            : "text-white hover:text-white/80"
+        }`}
         aria-label="Toggle Menu"
       >
         <Menu className="w-7 h-7" />

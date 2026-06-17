@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import MegaMenuPackageSlider from "./MegaMenuPackageSlider";
 
 export default function MegaMenu({ item, isOpen }) {
   const [activeRegionHref, setActiveRegionHref] = useState(
@@ -16,11 +16,6 @@ export default function MegaMenu({ item, isOpen }) {
   }, [isOpen, item.regions]);
 
   if (!isOpen || !item.regions?.length) return null;
-
-  const activeRegion =
-    item.regions.find((region) => region.href === activeRegionHref) ??
-    item.regions[0];
-  const activePackage = activeRegion.popularPackage;
 
   return (
     <div className="fixed top-20 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:top-24 lg:px-8">
@@ -61,45 +56,12 @@ export default function MegaMenu({ item, isOpen }) {
             </div>
           </div>
 
-          {/* Middle: popular package for hovered region */}
-          {activePackage && (
-            <div className="flex min-h-[320px] flex-col rounded-2xl bg-[#E9E5DD] p-5 sm:p-6">
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-orange-500">
-                  {item.featuredEyebrow ?? "Most popular in"}{" "}
-                  {item.featuredLabelMode === "full"
-                    ? activeRegion.label
-                    : activeRegion.label.replace(" Region", "")}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold leading-snug text-[#1C2B2A] sm:text-xl">
-                  {activePackage.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#4A5C57]">
-                  {activePackage.description}
-                </p>
-              </div>
-
-              <div className="relative my-5 flex min-h-[160px] flex-1 items-center justify-center overflow-hidden rounded-xl bg-[#DDD8CE]">
-                <Image
-                  key={activePackage.image}
-                  src={activePackage.image}
-                  alt={activePackage.imageAlt ?? activePackage.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 360px"
-                  className="object-cover transition-opacity duration-300"
-                />
-              </div>
-
-              <div className="border-t border-[#D5CFC3] pt-4">
-                <Link
-                  href={activePackage.ctaHref}
-                  className="text-sm font-semibold text-[#1C2B2A] transition-colors hover:text-orange-500"
-                >
-                  {activePackage.ctaLabel}
-                </Link>
-              </div>
-            </div>
-          )}
+          {/* Middle: package slider */}
+          <MegaMenuPackageSlider
+            regions={item.regions}
+            featuredEyebrow={item.featuredEyebrow}
+            activeRegionHref={activeRegionHref}
+          />
 
           {/* Right: stacked promo cards */}
           {item.promos?.length > 0 && (
