@@ -6,7 +6,7 @@ export default function BannerImage({ onNext, numberSize }) {
   return (
     <div
       id="pagination"
-      className="absolute z-[60] flex items-center justify-center sm:justify-start gap-2 sm:gap-4 lg:gap-5 xl:gap-6 text-white pointer-events-auto select-none w-[calc(100%-2rem)] sm:w-auto max-w-[calc(100vw-2rem)] sm:max-w-none pr-2 pb-[50px]"
+      className="absolute z-[60] top-[-20] flex items-center justify-center sm:justify-start gap-2 sm:gap-4 lg:gap-5 xl:gap-6 text-white pointer-events-auto select-none w-[calc(100%-2rem)] sm:w-auto max-w-[calc(100vw-2rem)] sm:max-w-none pr-2 pb-[50px]"
     >
       <div
         className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm cursor-pointer hover:bg-white hover:text-black transition-colors duration-300 shrink-0"
