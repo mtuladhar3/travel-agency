@@ -10,7 +10,7 @@ export default function SliderHeader({ onPrev, onNext }) {
         layout="editorial"
         className="mb-0 flex-1"
         label="Popular Treks"
-        title={["Popular", "Destination"]}
+        title={<>Popular <span className="italic font-serif font-normal text-orange-500">Destination </span></>}
       />
 
       <motion.div

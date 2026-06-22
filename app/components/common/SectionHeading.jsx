@@ -12,15 +12,18 @@ const lineVariants = {
 };
 
 export default function SectionHeading({ title, className = "", align = "left" }) {
+  // Normalize title into an array of lines to keep animations working smoothly
   const lines = Array.isArray(title) ? title : [title];
 
   return (
     <h2
-      className={`section-heading w-full ${align === "center" ? "text-center" : "text-left"} ${className}`}
+      className={`section-heading w-full text-balance text-4xl sm:text-5xl md:text-6xl text-[#0f2a22] font-semibold tracking-tight leading-[1.1] ${
+        align === "center" ? "text-center" : "text-left"
+      } ${className}`}
     >
       {lines.map((line, index) => (
         <motion.span
-          key={`${line}-${index}`}
+          key={index}
           custom={index}
           initial="hidden"
           whileInView="visible"

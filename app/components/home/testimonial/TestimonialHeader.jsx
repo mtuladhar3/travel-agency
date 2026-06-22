@@ -1,45 +1,38 @@
 "use client";
-import { motion } from "framer-motion";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import SectionHeading from "../../common/SectionHeading";// Adjust this import path to match your file structure
 
 export default function TestimonialHeader({ onPrev, onNext }) {
   return (
-    <div className="flex flex-col gap-6 mb-12 lg:mb-16">
-      {/* Tracker Section Badge */}
-      <div className="flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-orange-950/60">
-        <span className="h-[2px] w-6 bg-orange-500" />
-        Testimonial
-      </div>
+    <div className="relative mb-12 lg:mb-16">
+      {/* 🚀 Using your shared global SectionHeader component */}
+      <SectionHeading
+        label="Testimonial"
+        title={
+          <>
+            What clients say
+            <br />
+            about <span className="italic font-serif font-normal text-orange-500">our journeys</span>
+          </>
+        }
+      />
 
-      {/* Headline & Slider Controls Wrapper */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-        <motion.h2 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="section-heading leading-[1.1]"
+      {/* Controller Arrow Buttons absolute aligned matching your Team design slider layout */}
+      <div className="absolute bottom-1 right-0 flex gap-3 z-30">
+        <button
+          onClick={onPrev}
+          className="w-12 h-12 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-neutral-700 hover:bg-neutral-50 transition-all active:scale-95 shadow-sm"
+          aria-label="Previous testimonial"
         >
-          What Client Say <br /> About Us
-        </motion.h2>
-
-        {/* Controller Arrow Buttons */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={onPrev}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-orange-950/10 bg-white text-orange-950 shadow-sm transition-all hover:bg-orange-500 hover:text-white hover:border-orange-500 active:scale-95"
-            aria-label="Previous testimonial"
-          >
-            <FiArrowLeft className="h-5 w-5" />
-          </button>
-          <button
-            onClick={onNext}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-950 text-white shadow-sm transition-all hover:bg-orange-500 active:scale-95"
-            aria-label="Next testimonial"
-          >
-            <FiArrowRight className="h-5 w-5" />
-          </button>
-        </div>
+          <FiArrowLeft className="h-5 w-5" />
+        </button>
+        <button
+          onClick={onNext}
+          className="w-12 h-12 rounded-full bg-[#2b1408] flex items-center justify-center text-white hover:bg-[#3d1e0d] transition-all active:scale-95 shadow-sm"
+          aria-label="Next testimonial"
+        >
+          <FiArrowRight className="h-5 w-5" />
+        </button>
       </div>
     </div>
   );

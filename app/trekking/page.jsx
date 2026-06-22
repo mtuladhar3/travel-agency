@@ -71,7 +71,10 @@ export default function TrekkingMainPage() {
           priority
           className="object-cover object-center"
         />
-        
+        <div 
+    className="snow-effect-layer absolute inset-0 z-20 pointer-events-none" 
+    style={{ mixBlendMode: 'screen' }} 
+  />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-0" />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pb-16 sm:pb-24 flex flex-col items-start justify-end gap-4 text-white">

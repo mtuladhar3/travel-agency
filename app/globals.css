@@ -72,7 +72,7 @@ body {
 
 @layer components {
   .section-heading {
-    @apply font-serif text-3xl uppercase leading-[1.08] tracking-wide text-orange-950 sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl;
+    @apply font-serif text-3xl capitalize leading-[1.08] tracking-wide text-orange-950 sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl;
   }
 
   .section-heading-subtitle {
@@ -107,3 +107,13 @@ body {
   opacity: 0;
   animation: fadeInUp 0.4s ease-out forwards;
 }
+
+@keyframes snowAnimation {
+      0% { background-position: 0px 0px, 0px 0px; }
+      100% { background-position: 500px 1000px, 250px 500px; }
+    }
+    .snow-effect-layer {
+      background-image: url('/images/snow2.png'), url('/images/snow.png');
+      background-repeat: repeat;
+      animation: snowAnimation 20s linear infinite;
+    }

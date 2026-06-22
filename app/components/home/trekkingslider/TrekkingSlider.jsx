@@ -154,7 +154,7 @@ export default function TrekkingSlider() {
             dragElastic={0.08}
             onDragStart={pause}
             onDragEnd={resume}
-            className="flex w-max gap-6"
+            className="flex w-max gap-6  w-[var(--slide-width,290px)] sm:w-[350px] md:w-[380px]"
           >
             {trekkingSliderPackages.map((item) => (
               <PackageCard key={item.id} item={item} />

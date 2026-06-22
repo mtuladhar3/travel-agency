@@ -2,21 +2,24 @@
 
 import { motion } from "framer-motion";
 
-export default function SectionLabel({ label, className = "" }) {
+export default function SectionLabel({ label, className = "", centered = false }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`flex items-center gap-2.5 ${className}`}
+      className={`flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-[#bd7a5c] uppercase ${className}`}
     >
-      <span className="flex flex-col gap-1" aria-hidden="true">
-        <span className="h-0.5 w-5 rounded-full bg-orange-500" />
-      </span>
-      <span className="text-[16px] font-bold uppercase tracking-[0.22em] text-orange-950/70">
-        {label}
-      </span>
+      {/* Left accent bar */}
+      <span className="h-[2px] w-6 shrink-0 bg-[#bd7a5c]" aria-hidden="true" />
+      
+      <span>{label}</span>
+      
+      {/* Right accent bar (only visible if header is centered) */}
+      {centered && (
+        <span className="h-[2px] w-6 shrink-0 bg-[#bd7a5c]" aria-hidden="true" />
+      )}
     </motion.div>
   );
 }
