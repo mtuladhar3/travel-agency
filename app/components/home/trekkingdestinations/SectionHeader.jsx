@@ -7,10 +7,10 @@ export default function TrekkingSectionHeader() {
     <SectionHeader
       centered
       label="Trekking Regions"
-      title={<>Explore Popular <br/><span className="italic font-serif font-normal text-orange-500">Destinations</span></>}
+      title={<>Explore Popular <br/><span className="italic font-serif font-normal text-sky-700">Destinations</span></>}
       subtitle={
         <>
-          Over <span className="font-semibold text-orange-600">30,500+</span> most
+          Over <span className="font-semibold text-sky-700">30,500+</span> most
           popular trekking experiences you&apos;ll remember
         </>
       }

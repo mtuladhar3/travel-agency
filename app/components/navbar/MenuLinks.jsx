@@ -9,7 +9,7 @@ import { useNavbarScrolled } from "./NavbarScrollContext";
 import MegaMenu from "./MegaMenu";
 import DropdownMenu from "./DropdownMenu";
 
-export default function MenuLinks() {0
+export default function MenuLinks() {
   const [activeMenu, setActiveMenu] = useState(null);
   const isScrolled = useNavbarScrolled();
 
@@ -31,11 +31,13 @@ export default function MenuLinks() {0
             {/* Primary Main Route Path Option */}
             <Link
               href={item.href}
-              className={`flex items-center gap-1 text-sm font-semibold tracking-wide transition-colors ${
+              className={`flex items-center gap-1 text-sm font-semibold tracking-wide transition-colors group ${
                 isCurrentActive
-                  ? "text-[#FF4E25]"
+                  ? isScrolled 
+                    ? "text-sky-700" // 💡 Submenu open state color while header is scrolled
+                    : "text-sky-400" // Submenu open state color while header is transparent at top
                   : isScrolled
-                    ? "text-neutral-900 hover:text-[#FF4E25]"
+                    ? "text-neutral-900 hover:text-sky-700" // 💡 Sticky active hover state switched to sky-700
                     : "text-white hover:text-white/80"
               }`}
             >
@@ -44,9 +46,11 @@ export default function MenuLinks() {0
                 <ChevronDown
                   className={`h-3.5 w-3.5 transition-transform duration-200 ${
                     isCurrentActive
-                      ? "rotate-180 text-[#FF4E25]"
+                      ? isScrolled
+                        ? "rotate-180 text-sky-700" // 💡 Open arrow matching the sky-700 scroll theme
+                        : "rotate-180 text-sky-400"
                       : isScrolled
-                        ? "text-neutral-500"
+                        ? "text-neutral-500 group-hover:text-sky-700" // 💡 Added group-hover tracking to change arrow to sky-700 simultaneously
                         : "text-white/60"
                   }`}
                 />

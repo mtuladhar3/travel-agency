@@ -27,7 +27,7 @@ export default function DropdownMenu({ item, isOpen }) {
         {groups.map((group) => (
           <div key={group.label ?? "default"} className="min-w-0">
             {group.label && (
-              <p className="mb-3 px-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-orange-500">
+              <p className="mb-3 px-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-700">
                 {group.label}
               </p>
             )}
@@ -36,7 +36,7 @@ export default function DropdownMenu({ item, isOpen }) {
                 <li key={subItem.href}>
                   <Link
                     href={subItem.href}
-                    className={`block rounded-lg text-[15px] font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-orange-500 ${
+                    className={`block rounded-lg text-[15px] font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-sky-700 ${
                       isGrouped
                         ? "whitespace-nowrap px-3 py-2.5"
                         : "px-6 py-2.5"

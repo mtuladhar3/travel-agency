@@ -52,7 +52,7 @@ export default function CounterItem({ value, suffix, label, index }) {
               delay: index * 0.1 + charIndex * 0.08,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="counter-title m-0 font-sans text-[2.75rem] font-bold leading-none text-orange-950 sm:text-6xl md:text-7xl lg:text-[5rem]"
+            className="counter-title m-0 font-sans text-[2.75rem] font-bold leading-none text-blue-950 sm:text-6xl md:text-7xl lg:text-[5rem]"
           >
             {char}
           </motion.h2>
@@ -63,7 +63,7 @@ export default function CounterItem({ value, suffix, label, index }) {
         initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.55, delay: index * 0.1 + 0.35, ease: "easeOut" }}
-        className="counter-para m-0 mt-3 font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-orange-950/85 sm:mt-4 sm:text-[11px]"
+        className="counter-para m-0 mt-3 font-sans text-[14px] font-bold uppercase tracking-[0.22em] text-blue-950/85 sm:mt-4 sm:text-[14px]"
       >
         {label}
       </motion.p>

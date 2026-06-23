@@ -9,9 +9,9 @@ export default function CarouselPagination({ activeIndex, totalDots, onDotClick 
           type="button"
           onClick={() => onDotClick(index)}
           aria-label={`Go to slide ${index + 1}`}
-          className={`h-1.5 rounded-full transition-all duration-300 outline-none focus:ring-1 focus:ring-orange-500 ${
+          className={`h-1.5 rounded-full transition-all duration-300 outline-none focus:ring-1 focus:ring-sky-700 ${
             index === activeIndex 
-              ? "w-7 bg-orange-500" 
+              ? "w-7 bg-sky-700" 
               : "w-5 bg-gray-200 hover:bg-gray-300"
           }`}
         />

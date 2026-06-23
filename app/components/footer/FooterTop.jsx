@@ -24,7 +24,7 @@ export default function FooterTop() {
   }, []);
 
   return (
-    <div className="relative w-full flex flex-col items-center pt-24 pb-12 z-10 px-4">
+    <div className="relative w-full flex flex-col items-center pt-50 pb-12 z-10 px-4">
       
       {/* 1. Giant Background Text (FIXED: z-30 changed to z-0 so it stays behind the card) */}
       <div className="text-center w-full relative z-30">
@@ -59,7 +59,7 @@ export default function FooterTop() {
             Lock in your next adventure.
           </p>
           
-          <a href="/index-3" className="flex items-center justify-between bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 sm:py-3 pl-4 sm:pl-6 pr-2 rounded-full w-full transition-all duration-300 group shadow-lg shadow-orange-500/20 mb-6">
+          <a href="/index-3" className="flex items-center justify-between bg-sky-700 hover:bg-sky-700 text-white font-bold py-2 sm:py-3 pl-4 sm:pl-6 pr-2 rounded-full w-full transition-all duration-300 group shadow-lg shadow-sky-700/20 mb-6">
             <span className="text-xs sm:text-sm md:text-base">Book Your Tour</span>
             <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#171717] transform transition-transform group-hover:translate-x-1">
               ➔
@@ -67,9 +67,9 @@ export default function FooterTop() {
           </a>
 
           <div className="phone flex items-center justify-center gap-2 text-white font-semibold text-xs sm:text-sm md:text-base flex-wrap justify-center">
-            <span className="text-orange-500 text-lg">📞</span>
+            <span className="text-sky-700 text-lg">📞</span>
             <span className="italic font-light text-gray-400">Talk to Us</span> 
-            <a href="tel:+80045678901" className="hover:text-orange-500 transition-colors">
+            <a href="tel:+80045678901" className="hover:text-sky-700 transition-colors">
               +800 45 6789 01
             </a>
           </div>

@@ -50,8 +50,8 @@ export default function MegaMenu({ item, isOpen, onClose }) {
                       onFocus={() => setActiveRegionHref(region.href)}
                       className={`w-full text-left flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-[15px] font-medium transition-colors cursor-pointer ${
                         isActive
-                          ? "bg-white text-orange-500"
-                          : "text-[#1C2B2A] hover:bg-white/70 hover:text-orange-500"
+                          ? "bg-white text-sky-700"
+                          : "text-[#1C2B2A] hover:bg-white/70 hover:text-sky-700"
                       }`}
                     >
                       <span>{region.label}</span>
@@ -65,7 +65,7 @@ export default function MegaMenu({ item, isOpen, onClose }) {
             <div className="mt-4 border-t border-[#E0DBD2] pt-4">
               <button
                 onClick={(e) => handleNavigation(e, item.viewAllHref ?? item.href)}
-                className="w-full text-left px-3 text-sm font-bold text-[#1C2B2A] transition-colors hover:text-orange-500 cursor-pointer"
+                className="w-full text-left px-3 text-sm font-bold text-[#1C2B2A] transition-colors hover:text-sky-700 cursor-pointer"
               >
                 {item.viewAllLabel ?? "View all"}
               </button>
@@ -86,7 +86,7 @@ export default function MegaMenu({ item, isOpen, onClose }) {
                 <div
                   key={promo.ctaHref}
                   className={`flex flex-1 flex-col justify-between rounded-2xl p-5 text-white ${
-                    promo.variant === "green" ? "bg-[#2F4F44]" : "bg-orange-500"
+                    promo.variant === "green" ? "bg-sky-900" : "bg-sky-700"
                   }`}
                 >
                   <div>

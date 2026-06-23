@@ -75,9 +75,22 @@ export default function TrekkingMainPage() {
     className="snow-effect-layer absolute inset-0 z-20 pointer-events-none" 
     style={{ mixBlendMode: 'screen' }} 
   />
+   <div 
+        className="absolute bottom-0 left-0 w-full pointer-events-none overflow-hidden h-full z-[110]"
+      >
+        {/* Layer 1: Floating background cloud ribbon */}
+        <div 
+          className="absolute left-0 bottom-[0px] w-full h-[300px] opacity-100 bg-no-repeat bg-cover bg-top"
+          style={{ 
+            backgroundImage: "url('/images/full-cloud.png')",
+          }}
+        />
+
+       
+      </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-0" />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pb-16 sm:pb-24 flex flex-col items-start justify-end gap-4 text-white">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pb-50 sm:pb-50 flex flex-col items-start justify-end gap-4 text-white">
           
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#fdf5df] text-[#2b1408] text-xs font-semibold tracking-wider uppercase border border-amber-200/30 shadow-sm mb-2">
             <span className="text-[10px]">⚙</span>
@@ -98,7 +111,7 @@ export default function TrekkingMainPage() {
         </div>
       </section>
 
-      <section className="w-full bg-white px-6 py-16 sm:px-12 md:py-24 lg:px-20 xl:px-32">
+      <section className="w-full bg-white px-6 py-10 sm:px-12 md:py-16 lg:px-20 xl:px-32">
         <div className="mx-auto max-w-7xl">
 
           <motion.div 

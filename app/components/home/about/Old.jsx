@@ -64,7 +64,7 @@ export default function AboutSection() {
             <div>
               <Link 
                 href="/about" 
-                className="inline-flex items-center gap-2 bg-[#FF4E25] hover:bg-[#e23b14] text-white text-xs font-bold px-6 py-3.5 rounded-full shadow-md shadow-orange-500/10 transition-colors"
+                className="inline-flex items-center gap-2 bg-[#FF4E25] hover:bg-[#e23b14] text-white text-xs font-bold px-6 py-3.5 rounded-full shadow-md shadow-sky-700/10 transition-colors"
               >
                 <span>More About Us</span>
                 <ArrowRight className="w-3.5 h-3.5" />

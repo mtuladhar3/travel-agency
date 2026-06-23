@@ -43,7 +43,7 @@ export default function DestinationCard({ destination, index }) {
 
       {/* Text Interface Details */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex flex-col gap-1 p-6 text-white pointer-events-none">
-        <h3 className="text-xl font-bold tracking-wide transition-colors group-hover:text-orange-400 sm:text-2xl">
+        <h3 className="text-xl font-bold tracking-wide transition-colors group-hover:text-sky-700 sm:text-2xl">
           {destination.region}
         </h3>
         <p className="text-xs font-light tracking-wide text-neutral-300 opacity-90">

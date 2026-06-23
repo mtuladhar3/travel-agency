@@ -10,11 +10,11 @@ export default function FooterNav() {
       
       {/* Brand Identity Logo */}
       <div className="flex items-center gap-2 mb-8 cursor-pointer group">
-        <div className="w-7 h-7 rounded-full bg-orange-500 flex items-center justify-center transform transition-transform duration-500 group-hover:rotate-[360deg]">
+        <div className="w-7 h-7 rounded-full bg-sky-700 flex items-center justify-center transform transition-transform duration-500 group-hover:rotate-[360deg]">
           <span className="text-white text-[10px]">▲</span>
         </div>
         <span className="text-lg sm:text-xl font-black tracking-wider text-white uppercase">
-          Aven<span className="text-orange-500">tour</span>
+          Aven<span className="text-sky-700">tour</span>
         </span>
       </div>
 

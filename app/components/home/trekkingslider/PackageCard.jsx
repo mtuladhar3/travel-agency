@@ -1,70 +1,51 @@
 "use client";
-import { motion } from "framer-motion";
-// Importing clean, modern icons from react-icons
-import { HiOutlineLocationMarker } from "react-icons/hi";
-import { FiCalendar, FiDollarSign } from "react-icons/fi";
 
-export default function PackageCard({ item }) {
+import React from "react";
+import Link from "next/link";
+
+export default function PackageCard({ tour, regionHref }) {
+  // Fallback link in case regionHref isn't passed for some reason
+  const cardLink = regionHref || "/trekking";
+
   return (
-    <motion.div 
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.3 }}
-      className="flex-shrink-0 w-[var(--slide-width,290px)] rounded-3xl border border-orange-100 bg-white p-4 shadow-sm select-none sm:w-[350px] md:w-[380px]"
+    <Link 
+      href={cardLink}
+      className="tour-card-item group flex flex-col bg-[#F9F9F9] rounded-[2rem] border border-neutral-100 transition-all duration-300 hover:bg-white cursor-pointer"
     >
-      {/* Card Image Wrapper */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-orange-50">
+      {/* Image Window Container with Hover Scale */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.75rem] bg-neutral-200">
         <img
-          src={item.image}
-          alt={item.title}
-          className="h-full w-full object-cover pointer-events-none"
+          src={tour.image}
+          alt={tour.title}
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
+        
+        {/* Floating pill badge */}
+        <span className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm text-neutral-800 text-xs font-medium px-3 py-1.5 rounded-full shadow-sm">
+          {tour.location}
+        </span>
       </div>
 
-      {/* Meta Content Area */}
-      <div className="pt-5 pb-2 px-1 flex flex-col gap-4">
-        <div>
-          <h3 className="text-lg font-bold tracking-tight text-neutral-900 sm:text-xl">
-            {item.title}
-          </h3>
-        </div>
+      {/* Text Meta Fields */}
+      <div className="flex flex-col flex-grow p-6">
+        <h3 className="text-xl font-bold text-neutral-900 tracking-tight leading-tight mb-2 group-hover:text-sky-700 transition-colors duration-200">
+          {tour.title}
+        </h3>
+        <p className="text-sm text-neutral-500 leading-relaxed line-clamp-2 mb-6">
+          {tour.description}
+        </p>
 
-        {/* Info Rows */}
-        <div className="flex flex-col gap-2.5 text-xs sm:text-sm text-neutral-500 font-medium">
-          
-          {/* Location Vector Tag */}
-          <div className="flex items-center gap-2">
-            <HiOutlineLocationMarker className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500 flex-shrink-0" />
-            <span>{item.location}</span>
+        {/* Decorative separation baseline */}
+        <div className="w-full border-t border-dashed border-neutral-200 mt-auto pt-4 flex items-center justify-between">
+          <div className="flex items-baseline gap-1">
+            <span className="text-xl font-extrabold text-neutral-900">{tour.price}</span>
+            <span className="text-xs text-neutral-400 font-normal">/person</span>
           </div>
-
-          {/* Pricing & Duration Side-by-Side Row */}
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-            
-            {/* Price Vector Tag */}
-            <div className="flex items-center gap-1.5">
-              <FiDollarSign className="h-4 w-4 text-orange-500 flex-shrink-0" />
-              <span>
-                Start From <span className="text-neutral-800 font-semibold">{item.price}</span>
-              </span>
-            </div>
-
-            {/* Duration Vector Tag */}
-            <div className="flex items-center gap-2">
-              <FiCalendar className="h-4 w-4 text-orange-500 flex-shrink-0" />
-              <span>{item.duration}</span>
-            </div>
-
-          </div>
+          <span className="bg-black text-white text-xs font-bold tracking-wider px-3 py-1.5 rounded-md">
+            {tour.duration}
+          </span>
         </div>
-
-        {/* View Details Action Button */}
-        <motion.button 
-          whileTap={{ scale: 0.98 }}
-          className="w-full rounded-2xl bg-orange-50 py-3.5 text-center text-sm font-semibold text-orange-600 transition-colors hover:bg-orange-500 hover:text-white"
-        >
-          View Package Details
-        </motion.button>
       </div>
-    </motion.div>
+    </Link>
   );
 }

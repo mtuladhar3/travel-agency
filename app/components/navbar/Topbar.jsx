@@ -7,12 +7,12 @@ export default function Topbar() {
         
         {/* Contact Info (Centered on mobile, left-aligned on desktop) */}
         <div className="flex items-center space-x-4 mx-auto md:mx-0">
-          <a href="tel:+0012345688" className="flex items-center gap-1.5 hover:text-orange-500 transition-colors">
+          <a href="tel:+0012345688" className="flex items-center gap-1.5 hover:text-sky-700 transition-colors">
             <Phone className="w-3.5 h-3.5 text-gray-400" />
             <span>+00(123)45688</span>
           </a>
           <span className="text-gray-200">|</span>
-          <a href="mailto:turie@gmail.com" className="flex items-center gap-1.5 hover:text-orange-500 transition-colors">
+          <a href="mailto:turie@gmail.com" className="flex items-center gap-1.5 hover:text-sky-700 transition-colors">
             <Mail className="w-3.5 h-3.5 text-gray-400" />
             <span>turie@gmail.com</span>
           </a>
@@ -20,11 +20,11 @@ export default function Topbar() {
 
         {/* Promo Deal Offer (Hidden on mobile) */}
         <div className="hidden md:block font-medium">
-          <span className="text-orange-500 font-bold">Save 50%</span> on Multi - day tours
+          <span className="text-sky-700 font-bold">Save 50%</span> on Multi - day tours
         </div>
 
         {/* Language Selector (Hidden on mobile) */}
-        <button type="button" className="hidden md:flex items-center gap-1 hover:text-orange-500 transition-colors">
+        <button type="button" className="hidden md:flex items-center gap-1 hover:text-sky-700 transition-colors">
           <span>English</span>
           <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
         </button>

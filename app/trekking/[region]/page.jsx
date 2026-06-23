@@ -1,30 +1,42 @@
-"use client";
+import React from "react";
+// 💡 Safely adjust your imports according to your folder paths
+import { navItems } from "../../components/navbar/navItems"; 
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
-// 📁 Importing clean, modern vector design icons from react-icons
-import { HiOutlineLocationMarker } from "react-icons/hi";
-import { FiCalendar, FiDollarSign } from "react-icons/fi";
-import { navItems } from "../../components/navbar/navItems";
-// 📁 Importing your real package array containing Everest, Annapurna, Langtang, etc.
-import { trekkingSliderPackages } from "../../components/home/trekkingslider/trekkingSliderData";
+import PackageCard from "../../components/home/trekkingslider/PackageCard"; 
+import { trekkingSliderPackages } from "../../components/home/trekkingslider/trekkingSliderData"; 
 
-export default function RegionHubPage() {
-  const { region } = useParams(); 
-  const router = useRouter();
+// Helper function to turn "Everest Region, Nepal" into "everest"
+const getRegionSlug = (locationString) => {
+  if (!locationString) return "";
+  const primaryPart = locationString.split(",")[0];
+  return primaryPart
+    .replace(/region/i, "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-");
+};
 
-  // Find this specific region's data inside your main navItems array for headers
-  const currentCategory = navItems.find((item) => item.name === "Trekking");
-  const regionData = currentCategory?.regions?.find(
-    (r) => r.href === `/trekking/${region}`
+export default async function RegionHubPage({ params }) {
+  // 1. Await dynamic parameters from the URL slug route matching /[region]/
+  const { region } = await params;
+
+  // 2. Safely extract nav configuration data for our fallback headers
+  const trekkingData = navItems?.find((item) => item.name === "Trekking");
+  const fallbackRegionData = trekkingData?.regions?.find(
+    (r) => r.href === `/trekking/${region}` || r.label.toLowerCase().includes(region)
   );
 
-  // Pulls your real, distinct master array containing your core trekking packages
-  const packages = trekkingSliderPackages || [];
+  // 3. Define the dynamic fallback name to prevent a ReferenceError crash
+  const regionName = fallbackRegionData?.label || 
+    region.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+
+  // 4. Filter down packages targeting exclusively this directory structure
+  const filteredPackages = trekkingSliderPackages?.filter((pkg) => {
+    return getRegionSlug(pkg.location) === region.toLowerCase();
+  }) ?? [];
 
   return (
-    <main className="bg-neutral-50 min-h-screen">
-    
-      {/* Hero Header Banner */}
+    <main className="">
       <section className="relative isolate flex min-h-screen items-end overflow-hidden pt-24 sm:min-h-[75vh] lg:min-h-screen">
         <Image
           src="/images/about-banner.webp"
@@ -34,116 +46,80 @@ export default function RegionHubPage() {
           className="object-cover object-center"
         />
         <div 
-    className="snow-effect-layer absolute inset-0 z-20 pointer-events-none" 
-    style={{ mixBlendMode: 'screen' }} 
-  />
+          className="snow-effect-layer absolute inset-0 z-20 pointer-events-none" 
+          style={{ mixBlendMode: 'screen' }} 
+        />
+        <div 
+          className="absolute bottom-0 left-0 w-full pointer-events-none overflow-hidden h-full z-[110]"
+        >
+          {/* Layer 1: Floating background cloud ribbon */}
+          <div 
+            className="absolute left-0 bottom-[0px] w-full h-[300px] opacity-100 bg-no-repeat bg-cover bg-top"
+            style={{ 
+              backgroundImage: "url('/images/full-cloud.png')",
+            }}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-0" />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto pb-16 sm:pb-24 flex flex-col items-start justify-end gap-4 text-white">
-          
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pb-50 sm:pb-50 flex flex-col items-start justify-end gap-4 text-white">
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#fdf5df] text-[#2b1408] text-xs font-semibold tracking-wider uppercase border border-amber-200/30 shadow-sm mb-2">
             <span className="text-[10px]">⚙</span>
-            Trekking 
+            Trekking
             <span className="text-[10px]">⚙</span>
           </div>
 
-          <h1 className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] max-w-4xl text-left capitalize">
-            {regionData?.label || region}
+          <h1 className="text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] max-w-4xl text-left">
+            We curate raw
+            <br />
+            Himalayan <span className="italic font-serif font-normal text-white/95">expeditions</span>
           </h1>
           
           <p className="mt-2 max-w-xl text-xs sm:text-sm text-white/80 font-sans leading-relaxed text-left tracking-wide">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem sequi sint recusandae optio magni facere aspernatur autem rerum neque consectetur rem, deleniti dolores tenetur eligendi quam enim unde impedit dolorum.
+            From handpicked destinations to seamless logistics, our mission is to
+            make every journey personal, meaningful, and unforgettable.
           </p>
         </div>
       </section>
 
-      {/* Package Card Layout Grid */}
-      <section className="w-full bg-white px-6 py-16 sm:px-12 md:py-24 lg:px-20 xl:px-32">
+      <section className="w-full bg-white px-6 sm:px-12 md:py-10 lg:px-20 xl:px-32">
         <div className="mx-auto max-w-7xl">
           
-          <div className="mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
-              Available Expeditions
+          {/* Header Section */}
+          <div className="border-b border-neutral-100 pb-6 mb-12">
+            <h2 className="text-balance text-2xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-neutral-900 leading-[1.1]">
+              {regionName} <span className="font-serif italic font-normal text-sky-700">Expeditions</span>
             </h2>
-            <p className="text-sm text-neutral-500 mt-1">
-              Explore handpicked journeys across the {regionData?.label || region} range.
-            </p>
           </div>
 
-          {/* Grid setup mapping out the unified design profile card views */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
-            {packages.map((item, idx) => (
-              <div 
-                key={item.id || idx}
-                onClick={() => {
-  // Generates a clean URL slug out of your text title automatically
-  const packageSlug = item.title
-    .toLowerCase()
-    .replace(/ /g, "-")
-    .replace(/[^\w-]+/g, "");
-    
-  router.push(`/trekking/${region}/${packageSlug}`);
-}}
-                className="group w-full rounded-3xl border border-orange-100 bg-white p-4 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md cursor-pointer select-none"
-              >
-                {/* Card Image Wrapper */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-orange-50">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-full w-full object-cover pointer-events-none transition-transform duration-500 group-hover:scale-103"
+          {/* Package Route Listings Grid */}
+          {filteredPackages.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPackages.map((packageItem) => {
+                // Safely slice out the trailing route identifier phrase string segment
+                const trekSlug = packageItem.href.split("/").pop();
+                // 💡 Combines to point directly onto: trekking/[region]/[trekSlug]
+                const preciseTrekUrl = `/trekking/${region}/${trekSlug}`;
+
+                return (
+                  <PackageCard
+                    key={packageItem.id}
+                    tour={packageItem}
+                    regionHref={preciseTrekUrl} // Make sure PackageCard uses this prop for routing links
                   />
-                </div>
-
-                {/* Meta Content Area */}
-                <div className="pt-5 pb-2 px-1 flex flex-col gap-4">
-                  <div>
-                    <h3 className="text-lg font-bold tracking-tight text-neutral-900 sm:text-xl transition-colors group-hover:text-orange-500">
-                      {item.title}
-                    </h3>
-                  </div>
-
-                  {/* Info Rows */}
-                  <div className="flex flex-col gap-2.5 text-xs sm:text-sm text-neutral-500 font-medium">
-                    
-                    {/* Location Tag */}
-                    <div className="flex items-center gap-2">
-                      <HiOutlineLocationMarker className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500 flex-shrink-0" />
-                      <span>{item.location || `${regionData?.label || region}, Nepal`}</span>
-                    </div>
-
-                    {/* Pricing & Duration Row */}
-                    <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-                      
-                      {/* Price Tag */}
-                      <div className="flex items-center gap-1.5">
-                        <FiDollarSign className="h-4 w-4 text-orange-500 flex-shrink-0" />
-                        <span>
-                          Start From <span className="text-neutral-800 font-semibold">{item.price}</span>
-                        </span>
-                      </div>
-
-                      {/* Duration Tag */}
-                      <div className="flex items-center gap-2">
-                        <FiCalendar className="h-4 w-4 text-orange-500 flex-shrink-0" />
-                        <span>{item.duration}</span>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  {/* View Details Action Button Simulation */}
-                  <div className="w-full rounded-2xl bg-orange-50 py-3.5 text-center text-sm font-semibold text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-white">
-                    View Package Details
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="text-center py-20 border border-dashed border-neutral-200 rounded-3xl bg-neutral-50">
+              <p className="text-neutral-400 font-medium">
+                No trekking itineraries found under the "{regionName}".
+              </p>
+            </div>
+          )}
 
         </div>
       </section>
-      
     </main>
   );
 }

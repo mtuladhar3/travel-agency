@@ -31,7 +31,7 @@ export default function BannerImage({ onNext, numberSize }) {
         className="h-[2px] bg-white/20 relative rounded-full overflow-hidden shrink min-w-[80px]"
         style={{ width: "var(--banner-progress-width, 240px)" }}
       >
-        <div className="gProgF h-full bg-amber-500 w-0 rounded-full transition-all duration-300"></div>
+        <div className="gProgF h-full bg-white w-0 rounded-full transition-all duration-300"></div>
       </div>
 
       <div

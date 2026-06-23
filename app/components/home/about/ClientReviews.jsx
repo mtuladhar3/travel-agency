@@ -27,7 +27,7 @@ export default function ClientReviews() {
         {avatars.map((avatar, index) => (
           <div
             key={avatar.src}
-            className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-orange-50 shadow-sm sm:h-12 sm:w-12"
+            className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-blue-50 shadow-sm sm:h-12 sm:w-12"
           >
             <Image
               src={avatar.src}
@@ -38,14 +38,14 @@ export default function ClientReviews() {
             />
           </div>
         ))}
-        <div className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-orange-50 bg-orange-500 text-base font-semibold text-white shadow-sm sm:h-12 sm:w-12">
+        <div className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-blue-50 bg-sky-700 text-base font-semibold text-white shadow-sm sm:h-12 sm:w-12">
           +
         </div>
       </div>
 
-      <p className="max-w-47.5 text-sm font-medium leading-snug text-orange-950/75">
+      <p className="max-w-47.5 text-sm font-medium leading-snug text-blue-950/75">
         More than{" "}
-        <span className="font-bold text-orange-600">25K clients</span> Reviews
+        <span className="font-bold text-sky-700">25K clients</span> Reviews
       </p>
     </motion.div>
   );

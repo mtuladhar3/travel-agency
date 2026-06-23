@@ -6,9 +6,9 @@ import SectionLabel from "./SectionLabel";
 
 export default function AboutSection() {
   return (
-    <section className="relative w-full overflow-hidden px-6 pt-12 pb-12 sm:px-10 sm:pt-16 sm:pb-16 md:pb-0 md:pt-20 lg:px-16 lg:pt-24 lg:pb-0 xl:px-24">
+    <section className="relative bg-white w-full overflow-hidden px-6 pt-10 pb-12 sm:px-10 sm:pt-16 sm:pb-16 md:pb-0 md:pt-10 lg:px-16 lg:pt-14 lg:pb-0 xl:px-24">
       <div
-        className="pointer-events-none absolute inset-y-0 left-0 w-full max-w-[55%] bg-[url('/images/img-transparent.png')] bg-contain bg-bottom-left bg-no-repeat opacity-[0.42]"
+        className="pointer-events-none absolute inset-y-0 left-0 w-full max-w-[55%] bg-[url('/images/img-transparent.png')] bg-contain bg-bottom-left bg-no-repeat opacity-[0.62]"
         aria-hidden="true"
       />
 

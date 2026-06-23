@@ -16,7 +16,7 @@ export default function BlogHeaderSticky() {
           <>
             Our Update 
             <br />
-            blog & <span className="italic font-serif font-normal text-orange-500">news</span>
+            blog & <span className="italic font-serif font-normal text-sky-700">news</span>
           </>
         }
       />

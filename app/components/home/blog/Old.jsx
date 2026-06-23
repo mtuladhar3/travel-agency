@@ -8,7 +8,7 @@ import SidebarList from './SidebarList';
 
 export default function BlogSection() {
   return (
-    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 selection:bg-orange-100 overflow-hidden w-full">
+    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 selection:bg-blue-100 overflow-hidden w-full">
       <div className="max-w-7xl mx-auto">
 
       {/* Section Title */}
@@ -36,7 +36,7 @@ export default function BlogSection() {
         </p>
         <a 
           href="#" 
-          className="inline-flex items-center gap-1.5 text-base font-extrabold text-[#0B3558] hover:text-orange-500 transition-colors group border-b-2 border-transparent group-hover:border-orange-500 pb-1"
+          className="inline-flex items-center gap-1.5 text-base font-extrabold text-[#0B3558] hover:text-sky-700 transition-colors group border-b-2 border-transparent group-hover:border-sky-700 pb-1"
         >
           All Blog Post ➔
         </a>

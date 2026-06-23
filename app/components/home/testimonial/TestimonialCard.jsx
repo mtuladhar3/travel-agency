@@ -1,40 +1,22 @@
 "use client";
-import { motion } from "framer-motion";
-import { FaQuoteRight } from "react-icons/fa"; // Clean vector quote icon from react-icons
+
+import React from "react";
 
 export default function TestimonialCard({ review }) {
+  if (!review) return null;
   return (
-    <motion.div 
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.3 }}
-      className="flex flex-shrink-0 w-[var(--slide-width,300px)] flex-col justify-between gap-8 rounded-3xl border border-orange-100/30 bg-orange-50/50 p-6 shadow-sm select-none sm:w-[380px] sm:gap-12 sm:p-8 md:w-[420px] md:p-10"
-    >
-      {/* Testimonial Quote Message Text */}
-      <p className="text-base sm:text-lg leading-relaxed text-orange-950/80 font-medium">
-        "{review.quote}"
-      </p>
-
-      {/* User Information Profile Block & Accent Quote Icon */}
-      <div className="flex items-center justify-between gap-4 border-t border-orange-950/5 pt-6">
-        <div className="flex items-center gap-4">
-          <img
-            src={review.avatar}
-            alt={`${review.name}, ${review.role}`}
-            className="h-12 w-12 sm:h-14 sm:w-14 rounded-full object-cover border-2 border-white shadow-sm pointer-events-none"
-          />
-          <div className="flex flex-col">
-            <h3 className="font-serif text-base sm:text-lg font-bold tracking-wide text-orange-950 uppercase">
-              {review.name}
-            </h3>
-            <p className="text-xs font-bold tracking-wider text-orange-600 uppercase mt-0.5">
-              {review.role}
-            </p>
+    <div className="w-full bg-[#F4F4F4] rounded-[2rem] p-6 sm:p-8 border border-neutral-200/40 shadow-sm flex flex-col justify-between transition-all duration-300 hover:scale-[1.02] hover:shadow-md hover:bg-white">
+      <div>
+        <div className="flex items-center gap-4 mb-6">
+          <img src={review.avatar} alt={review.name} className="w-12 h-12 rounded-full object-cover" />
+          <div>
+            <h4 className="text-neutral-800 font-bold text-base leading-tight">{review.name}</h4>
+            <p className="text-neutral-400 text-xs mt-0.5">{review.role} · {review.location || "Explorer"}</p>
           </div>
         </div>
-
-        {/* Giant Dynamic Layout Styled Quote Mark */}
-        <FaQuoteRight className="h-8 w-8 sm:h-10 sm:w-10 text-orange-950/10 flex-shrink-0" />
+        <div className="w-full border-t border-dashed border-neutral-300/60 mb-6" />
+        <p className="text-neutral-500 text-sm leading-relaxed">"{review.quote}"</p>
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -31,7 +31,7 @@ export default function FeaturedPost() {
           <PostBadge>Travel Tips</PostBadge>
         </div>
         
-        <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#0B3558] leading-snug hover:text-orange-500 transition-colors cursor-pointer mb-4">
+        <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#0B3558] leading-snug hover:text-sky-700 transition-colors cursor-pointer mb-4">
           How to Travel in Style Without Breaking the Bank
         </h3>
 
@@ -45,7 +45,7 @@ export default function FeaturedPost() {
           Discover affordable ways to enjoy luxury travel – from stylish stays to secret booking hacks...
         </p>
 
-        <a href="#" className="inline-flex items-center gap-1 text-sm font-bold text-[#0B3558] hover:text-orange-500 transition-colors group">
+        <a href="#" className="inline-flex items-center gap-1 text-sm font-bold text-[#0B3558] hover:text-sky-700 transition-colors group">
           Read More 
           <span className="transform transition-transform group-hover:translate-x-1">➔</span>
         </a>

@@ -52,7 +52,7 @@ export default function SidebarList() {
             <PostBadge>{post.category}</PostBadge>
           </div>
 
-          <h4 className="text-base sm:text-lg font-bold text-[#0B3558] leading-snug hover:text-orange-500 transition-colors cursor-pointer mb-3 sm:mb-4 line-clamp-2">
+          <h4 className="text-base sm:text-lg font-bold text-[#0B3558] leading-snug hover:text-sky-700 transition-colors cursor-pointer mb-3 sm:mb-4 line-clamp-2">
             {post.title}
           </h4>
 
@@ -63,7 +63,7 @@ export default function SidebarList() {
               <span>✍️ {post.author}</span>
             </div>
             
-            <button type="button" className="w-8 h-8 rounded-full bg-[#EBF2F7] hover:bg-orange-500 text-[#0B3558] hover:text-white flex items-center justify-center transition-colors group" aria-label="View post">
+            <button type="button" className="w-8 h-8 rounded-full bg-[#EBF2F7] hover:bg-sky-700 text-[#0B3558] hover:text-white flex items-center justify-center transition-colors group" aria-label="View post">
               <span className="text-xs transform transition-transform group-hover:translate-x-0.5">➔</span>
             </button>
           </div>

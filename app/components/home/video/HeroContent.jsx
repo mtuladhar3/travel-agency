@@ -12,9 +12,9 @@ export default function HeroContent() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex items-center gap-2 text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-orange-400"
+        className="flex items-center gap-2 text-xs sm:text-sm font-bold tracking-[0.25em] uppercase text-blue-400"
       >
-        <span className="h-[2px] w-8 bg-orange-500" />
+        <span className="h-[2px] w-8 bg-sky-700" />
         Live The Adventure
       </motion.div>
 
@@ -48,7 +48,7 @@ export default function HeroContent() {
           <motion.button 
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-lg shadow-orange-600/20 transition-colors hover:bg-orange-600"
+            className="inline-flex items-center gap-2 rounded-full bg-sky-700 px-6 py-3.5 text-sm font-semibold uppercase tracking-wider text-white shadow-lg shadow-sky-700/20 transition-colors hover:bg-sky-700"
           >
             Book Expedition
             <FiArrowUpRight className="h-4 w-4" />
@@ -59,7 +59,7 @@ export default function HeroContent() {
             whileHover={{ scale: 1.05, textShadow: "0px 0px 8px rgba(255,255,255,0.5)" }}
             className="inline-flex items-center gap-2.5 px-4 py-3 text-sm font-medium tracking-wide text-white/90 hover:text-white"
           >
-            <FiPlayCircle className="h-6 w-6 text-orange-400" />
+            <FiPlayCircle className="h-6 w-6 text-blue-400" />
             Watch Trailer
           </motion.button>
         </div>

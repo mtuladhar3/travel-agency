@@ -28,7 +28,7 @@ export default function MegaMenuPackageCard({ pkg }) {
       <div className="border-t border-[#D5CFC3] pt-4">
         <Link
           href={pkg.ctaHref}
-          className="text-sm font-semibold text-[#1C2B2A] transition-colors hover:text-orange-500"
+          className="text-sm font-semibold text-[#1C2B2A] transition-colors hover:text-sky-700"
         >
           {pkg.ctaLabel}
         </Link>

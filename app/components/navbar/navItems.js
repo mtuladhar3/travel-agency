@@ -138,7 +138,7 @@ export const navItems = [
         ctaLabel: "Book a free call",
       },
       {
-        variant: "orange",
+        variant: "blue",
         title: "Season offer: up to 25% off",
         description:
           "Applied to select spring and autumn treks. Book early and save. Limited group sizes.",
@@ -251,7 +251,7 @@ export const navItems = [
         ctaLabel: "Book a briefing",
       },
       {
-        variant: "orange",
+        variant: "blue",
         title: "Spring & autumn windows open",
         description:
           "Prime climbing seasons for 8000 m and trekking peaks. Reserve your Sherpa team and base camp dates early.",

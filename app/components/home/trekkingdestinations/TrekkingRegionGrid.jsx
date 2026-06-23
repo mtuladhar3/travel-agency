@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { navItems } from "../../navbar/navItems";
+import { useRouter } from "next/navigation";
 import SectionHeader from "./SectionHeader";
 import DestinationCard from "./DestinationCard";
 
@@ -36,6 +37,10 @@ function getDisplayRegions(regions) {
 }
 
 export default function TrekkingRegionsGrid() {
+
+  // Grid wrapper animation logic for sequential children entrances
+ const router = useRouter(); // 💡 Step 2: Initialize the page router
+
   const destinations = getDisplayRegions(trekkingRegions).map((region, index) => ({
     id: index + 1,
     region: region.label,
@@ -45,7 +50,6 @@ export default function TrekkingRegionsGrid() {
     gridStyles: GRID_STYLES[index],
   }));
 
-  // Grid wrapper animation logic for sequential children entrances
   const containerVariants = {
     hidden: {},
     visible: {
@@ -56,7 +60,7 @@ export default function TrekkingRegionsGrid() {
   };
 
   return (
-    <section className="w-full bg-white px-6 py-16 sm:px-12 md:py-24 lg:px-20 xl:px-32">
+    <section className="w-full bg-gradient-to-t from-blue-100 via-sky-100 to-white  px-6 py-16 sm:px-12 md:py-16 lg:px-20 xl:px-32">
       <div className="mx-auto max-w-7xl">
         
         {/* Render Title & Counter Subtext */}
@@ -66,21 +70,27 @@ export default function TrekkingRegionsGrid() {
           A clean grid structure matching layout reference image_4a201c.jpg perfectly.
           Utilizes standard 12-column breakpoints to balance different sized items organically. 
         */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6"
-        >
-          {destinations.map((dest, index) => (
-            <DestinationCard 
-              key={dest.id} 
-              destination={dest} 
-              index={index} 
-            />
-          ))}
-        </motion.div>
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6"
+          >
+            {destinations.map((dest, index) => (
+              /* 💡 Step 3: Wrap the card in a div with a click handler to force navigation */
+              <div 
+                key={dest.id}
+                onClick={() => router.push(dest.href)}
+                className="cursor-pointer contents" 
+              >
+                <DestinationCard 
+                  destination={dest} 
+                  index={index} 
+                />
+              </div>
+            ))}
+          </motion.div>
 
       </div>
     </section>

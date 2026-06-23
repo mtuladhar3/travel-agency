@@ -19,6 +19,15 @@ html {
   margin: 0;
   padding: 0;
 }
+html {
+  /* 💡 Change this from 'smooth' to 'auto' for standard pages */
+  scroll-behavior: auto; 
+}
+
+/* 💡 Only apply smooth scrolling when explicitly targeting an id link (e.g., #itinerary) */
+html:has(html:focus-within) {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--background);
@@ -72,11 +81,11 @@ body {
 
 @layer components {
   .section-heading {
-    @apply font-serif text-3xl capitalize leading-[1.08] tracking-wide text-orange-950 sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl;
+    @apply font-serif text-3xl capitalize leading-[1.08] tracking-wide text-blue-950 sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl;
   }
 
   .section-heading-subtitle {
-    @apply text-sm leading-relaxed text-orange-950/75 sm:text-base md:text-lg;
+    @apply text-sm leading-relaxed text-blue-950/75 sm:text-base md:text-lg;
   }
 }
 @keyframes fadeInUp {
@@ -98,7 +107,7 @@ body {
 
 /* Reusable typewriter cursor */
 .typewriter-cursor {
-  border-right: 3px solid #f97316; /* orange-500 */
+  border-right: 3px solid #f97316; /* sky-700 */
   animation: blink 0.75s step-end infinite;
 }
 

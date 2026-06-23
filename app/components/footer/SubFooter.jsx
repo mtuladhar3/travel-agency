@@ -20,16 +20,16 @@ export default function SubFooter() {
 
       {/* Copy */}
       <div className="text-center sm:text-left order-3 sm:order-2">
-        Copyrights © <span className="text-orange-500">Aventour</span> 2026, All rights reserved.
+        Copyrights © <span className="text-sky-700">Aventour</span> 2026, All rights reserved.
       </div>
 
       {/* Scroll Up Control */}
       <button 
         onClick={scrollToTop}
-        className="flex items-center gap-1.5 bg-[#042d4f] hover:bg-orange-500 text-white border border-white/5 hover:border-transparent rounded-full px-3.5 py-1 transition-all duration-300 group order-2 sm:order-3"
+        className="flex items-center gap-1.5 bg-[#042d4f] hover:bg-sky-700 text-white border border-white/5 hover:border-transparent rounded-full px-3.5 py-1 transition-all duration-300 group order-2 sm:order-3"
       >
         <span>Back to Top</span>
-        <span className="w-3.5 h-3.5 rounded-full bg-white/10 group-hover:bg-white text-white group-hover:text-orange-500 flex items-center justify-center text-[9px] font-bold transform -rotate-90 transition-all duration-300">
+        <span className="w-3.5 h-3.5 rounded-full bg-white/10 group-hover:bg-white text-white group-hover:text-sky-700 flex items-center justify-center text-[9px] font-bold transform -rotate-90 transition-all duration-300">
           ➔
         </span>
       </button>

@@ -19,7 +19,7 @@ export default function FixedVideoBg() {
       </video>
 
       {/* Dark Overlay Filter locked safely inside this section block wrapper */}
-      {/* <div className="absolute inset-0 bg-gradient-to-b from-orange-950/40 via-black/40 to-neutral-900/60 z-[1]" /> */}
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-blue-950/40 via-black/40 to-neutral-900/60 z-[1]" /> */}
     </div>
   );
 }

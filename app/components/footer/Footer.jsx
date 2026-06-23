@@ -21,7 +21,12 @@ export default function Footer() {
         2. Gradient Overlay Layer
         Using the exact linear-gradient you requested, mapped to your black colors.
       */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(0deg,#0a0a0a_40%,#0a0a0a1a_100%)]"></div>
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(0deg,#0a0a0a_20%,#0a0a0a1a_100%)]"></div>
+
+      <div 
+        className="absolute top-[-30%] left-0 right-0 h-full bg-no-repeat bg-cover bg-top z-[1] select-none pointer-events-none scale-y-[-1]"
+        style={{ backgroundImage: 'url("/images/full-cloud.png")' }}
+      ></div>
 
       {/* Auto Container (Layout Wrapper) */}
       <div className="auto-container relative z-10 w-full">

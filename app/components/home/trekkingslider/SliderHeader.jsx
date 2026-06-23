@@ -1,44 +1,70 @@
 "use client";
 
-import { motion } from "framer-motion";
-import SectionHeader from "../../common/SectionHeader";
+import React, { useEffect, useRef } from "react";
+import Link from "next/link";
+import gsap from "gsap";
 
-export default function SliderHeader({ onPrev, onNext }) {
+export default function SectionHeader() {
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Reveal the heading title text blocks
+      gsap.fromTo(
+        ".animate-header-text",
+        { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+      );
+
+      // Reveal the localized sidebar statement and button parameters
+      gsap.fromTo(
+        ".animate-header-aside",
+        { opacity: 0, x: 30 },
+        { opacity: 1, x: 0, duration: 0.8, delay: 0.2, ease: "power3.out" }
+      );
+    }, headerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="mb-10 flex flex-col gap-6 md:mb-14 lg:flex-row lg:items-end lg:justify-between">
-      <SectionHeader
-        layout="editorial"
-        className="mb-0 flex-1"
-        label="Popular Treks"
-        title={<>Popular <span className="italic font-serif font-normal text-orange-500">Destination </span></>}
-      />
+    <div 
+      ref={headerRef} 
+      className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between w-full pb-6 border-b border-neutral-100"
+    >
+      {/* Target Content Header Block */}
+      <div className="flex flex-col max-w-xl">
+        <h2 className="animate-header-text text-4xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-neutral-900 leading-[1.1]">
+          Tours <span className="font-serif italic font-normal text-sky-700">Crafted</span> for Every Traveller
+        </h2>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="flex shrink-0 items-center gap-3 self-end lg:self-auto"
-      >
-        <button
-          onClick={onPrev}
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-orange-950/10 bg-white text-orange-950 shadow-sm transition-all hover:border-orange-500 hover:bg-orange-500 hover:text-white active:scale-95"
-          aria-label="Previous slide"
+      {/* Aside Right Description and Circular CTA */}
+      <div className="animate-header-aside flex flex-col items-start lg:items-end gap-5 max-w-sm lg:text-right">
+        <p className="text-neutral-500 text-sm sm:text-base leading-relaxed font-normal">
+          Each itinerary blends hidden gems with landmark experiences, guided by people who live and breathe these places.
+        </p>
+        
+        {/* Swapped button out for Link to go directly to /trekking */}
+        <Link 
+          href="/trekking"
+          className="group flex items-center gap-3 bg-black hover:bg-neutral-800 transition-all duration-300 text-white rounded-full pl-6 pr-2 py-2 text-sm font-semibold shadow-md cursor-pointer"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-5 w-5">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-          </svg>
-        </button>
-        <button
-          onClick={onNext}
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-950 text-white shadow-sm transition-all hover:bg-orange-500 active:scale-95"
-          aria-label="Next slide"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-5 w-5">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-          </svg>
-        </button>
-      </motion.div>
+          View All Tours
+          <div className="flex items-center justify-center bg-white text-black w-8 h-8 rounded-full transition-transform duration-300 group-hover:rotate-45">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              strokeWidth={2.5} 
+              stroke="currentColor" 
+              className="w-4 h-4"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+            </svg>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }

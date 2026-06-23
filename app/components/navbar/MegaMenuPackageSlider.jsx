@@ -125,7 +125,7 @@ export default function MegaMenuPackageSlider({
   return (
     <div className="flex min-h-[320px] flex-col">
       <div className="mb-3 flex items-center justify-between gap-4">
-        <p className="text-lg font-semibold uppercase tracking-[0.1em] text-orange-500">
+        <p className="text-lg font-semibold uppercase tracking-[0.1em] text-sky-700">
           {featuredEyebrow ?? "Most popular trek in"} {regionLabel}
         </p>
 
@@ -134,7 +134,7 @@ export default function MegaMenuPackageSlider({
             <button
               type="button"
               onClick={() => slide("prev")}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D5CFC3] bg-white text-[#1C2B2A] transition-colors hover:border-orange-500 hover:bg-orange-500 hover:text-white"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D5CFC3] bg-white text-[#1C2B2A] transition-colors hover:border-sky-700 hover:bg-sky-700 hover:text-white"
               aria-label="Previous package"
             >
               <svg
@@ -155,7 +155,7 @@ export default function MegaMenuPackageSlider({
             <button
               type="button"
               onClick={() => slide("next")}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1C2B2A] text-white transition-colors hover:bg-orange-500"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1C2B2A] text-white transition-colors hover:bg-sky-700"
               aria-label="Next package"
             >
               <svg

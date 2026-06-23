@@ -13,7 +13,7 @@ export default function FeaturedImage() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="relative aspect-4/5 w-full overflow-hidden rounded-t-3xl bg-orange-100 shadow-[0_20px_50px_rgba(234,88,12,0.12)] sm:aspect-5/6 lg:max-h-130 lg:aspect-auto lg:h-120 xl:h-130"
+      className="relative aspect-4/5 w-full overflow-hidden rounded-t-3xl bg-blue-100 shadow-[0_20px_50px_rgba(234,88,12,0.12)] sm:aspect-5/6 lg:max-h-130 lg:aspect-auto lg:h-120 xl:h-130"
     >
       <motion.div
         className="relative h-full w-full"

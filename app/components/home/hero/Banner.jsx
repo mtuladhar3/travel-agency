@@ -8,13 +8,13 @@ import { SLIDER_DATA } from "../../../data/sliderData";
 let cardWidth = 160;
 let cardHeight = 92;
 let cardGap = 28;
-const THUMB_ASPECT = 9 / 16; // landscape 16:9 (height / width)
+const THUMB_ASPECT = 9 / 16; 
 const getThumbContentY = (top) => top + cardHeight - Math.min(52, Math.round(cardHeight * 0.72));
 const numberSize = 50;
 const ease = "sine.inOut";
 const BG_Z = 10;
-const THUMB_Z = 45;
 const CONTENT_Z = 25;
+const THUMB_Z = 45;
 const VISIBLE_THUMBS = 3;
 
 const getThumbX = (offsetLeft, slotIndex) => offsetLeft + slotIndex * (cardWidth + cardGap);
@@ -68,7 +68,6 @@ export default function Banner() {
         top: 0,
       };
     }
-
     const rect = hero.getBoundingClientRect();
     return { width: rect.width, height: rect.height, left: rect.left, top: rect.top };
   };
@@ -76,32 +75,25 @@ export default function Banner() {
   const getLayoutCoords = () => {
     if (typeof window === "undefined") {
       return {
-        offsetTop: 0,
-        offsetLeft: 0,
-        viewportWidth: 1920,
-        viewportHeight: 1080,
-        progressBarWidth: 500,
-        paginationTop: 0,
-        paginationLeft: 0,
-        hideThumbLabels: false,
-        contentMaxWidth: 500
+        offsetTop: 0, offsetLeft: 0, viewportWidth: 1920, viewportHeight: 1080,
+        progressBarWidth: 500, paginationTop: 0, paginationLeft: 0, hideThumbLabels: false, contentMaxWidth: 500
       };
     }
 
     const { width, height } = getHeroMetrics();
-    const textInset =
-      width < 640 ? 16 : width < 1024 ? Math.round(width * 0.06) : width < 1440 ? Math.round(width * 0.08) : Math.round(width * 0.10);
+    const textInset = width < 640 ? 16 : width < 1024 ? Math.round(width * 0.06) : width < 1440 ? Math.round(width * 0.08) : Math.round(width * 0.10);
     const isLaptop = width >= 1024 && width < 1440;
     const sideMargin = width < 640 ? 16 : width < 1024 ? 24 : isLaptop ? 20 : 40;
+
+    // --- BOTTOM CLEARANCE ADJUSTMENT ---
+    // Shifting entire layout upwards by 180px to clear cloud graphic bounds completely
+    const offsetShift = 260; 
 
     const sizeThumbsToSpace = (gap, minContentWidth, contentGap, maxCardWidth, maxHeightRatio) => {
       cardGap = gap;
       const minThumbLeft = textInset + minContentWidth + contentGap;
       const availableStackWidth = width - minThumbLeft - sideMargin;
-      cardWidth = Math.min(
-        maxCardWidth,
-        Math.max(120, Math.floor((availableStackWidth - (VISIBLE_THUMBS - 1) * cardGap) / VISIBLE_THUMBS))
-      );
+      cardWidth = Math.min(maxCardWidth, Math.max(120, Math.floor((availableStackWidth - (VISIBLE_THUMBS - 1) * cardGap) / VISIBLE_THUMBS)));
       cardHeight = Math.min(Math.round(cardWidth * THUMB_ASPECT), Math.round(height * maxHeightRatio));
     };
 
@@ -120,46 +112,33 @@ export default function Banner() {
     const stackWidth = VISIBLE_THUMBS * cardWidth + (VISIBLE_THUMBS - 1) * cardGap;
     const paginationRowHeight = 48;
     const bottomSafe = Math.max(16, height * 0.02);
-    let progressBarWidth =
-      width < 640
-        ? Math.min(140, width - 196)
-        : width < 1024
-          ? 280
-          : isLaptop
-            ? 240
-            : 500;
+    let progressBarWidth = width < 640 ? Math.min(140, width - 196) : width < 1024 ? 280 : isLaptop ? 240 : 500;
 
-    let offsetTop;
-    let offsetLeft;
-    let paginationTop;
-    let paginationLeft;
+    let offsetTop; let offsetLeft; let paginationTop; let paginationLeft;
 
     if (width < 640) {
       const thumbNavGap = 14;
-      offsetTop = height - cardHeight - bottomSafe;
+      offsetTop = height - cardHeight - bottomSafe - offsetShift;
       offsetLeft = sideMargin;
       paginationTop = Math.max(96, offsetTop - paginationRowHeight - thumbNavGap);
       if (paginationTop + paginationRowHeight + thumbNavGap > offsetTop) {
         offsetTop = paginationTop + paginationRowHeight + thumbNavGap;
       }
-      const mobilePaginationWidth = Math.min(
-        width - sideMargin * 2,
-        36 + 36 + 12 + progressBarWidth + 12 + numberSize + 16
-      );
+      const mobilePaginationWidth = Math.min(width - sideMargin * 2, 36 + 36 + 12 + progressBarWidth + 12 + numberSize + 16);
       paginationLeft = Math.max(sideMargin, Math.round((width - mobilePaginationWidth) / 2));
     } else if (width < 1024) {
-      offsetTop = height - cardHeight - paginationRowHeight - bottomSafe - 20;
+      offsetTop = height - cardHeight - paginationRowHeight - bottomSafe - 20 - offsetShift;
       offsetLeft = Math.max(sideMargin, width - stackWidth - sideMargin);
       paginationTop = offsetTop + cardHeight + 14;
       paginationLeft = offsetLeft;
     } else if (isLaptop) {
-      offsetTop = height - cardHeight - 24;
+      offsetTop = height - cardHeight - 24 - offsetShift;
       offsetLeft = width - stackWidth - sideMargin;
-      paginationTop = height - paginationRowHeight - bottomSafe;
+      paginationTop = height - paginationRowHeight - bottomSafe - offsetShift;
       paginationLeft = Math.round(width * 0.08);
     } else {
       const bottomPadding = Math.max(48, Math.min(100, height * 0.08));
-      offsetTop = height - cardHeight - bottomPadding;
+      offsetTop = height - cardHeight - bottomPadding - offsetShift;
       offsetLeft = width - stackWidth - sideMargin;
       paginationTop = offsetTop + cardHeight + 24;
       paginationLeft = offsetLeft;
@@ -173,35 +152,18 @@ export default function Banner() {
     }
 
     const contentGap = width < 1024 ? 32 : width < 1440 ? 56 : 80;
-    const contentMaxWidth =
-      width < 640
-        ? width - 32
-        : Math.max(280, Math.min(width < 1024 ? 360 : 480, offsetLeft - textInset - contentGap));
+    const contentMaxWidth = width < 640 ? width - 32 : Math.max(280, Math.min(width < 1024 ? 360 : 480, offsetLeft - textInset - contentGap));
 
     return {
-      offsetTop,
-      offsetLeft,
-      viewportWidth: width,
-      viewportHeight: height,
-      progressBarWidth,
-      paginationTop,
-      paginationLeft,
-      hideThumbLabels: isLaptop,
-      contentMaxWidth
+      offsetTop, offsetLeft, viewportWidth: width, viewportHeight: height,
+      progressBarWidth, paginationTop, paginationLeft, hideThumbLabels: isLaptop, contentMaxWidth
     };
   };
 
   const positionCards = useCallback((order, detailsEven) => {
     const {
-      offsetTop,
-      offsetLeft,
-      viewportWidth,
-      viewportHeight,
-      progressBarWidth,
-      paginationTop,
-      paginationLeft,
-      hideThumbLabels,
-      contentMaxWidth
+      offsetTop, offsetLeft, viewportWidth, viewportHeight,
+      progressBarWidth, paginationTop, paginationLeft, hideThumbLabels, contentMaxWidth
     } = getLayoutCoords();
     const [active, ...rest] = order;
 
@@ -212,14 +174,7 @@ export default function Banner() {
     gsap.set(".cover", { x: viewportWidth + 400 });
 
     gsap.set(getCardSelector(active), {
-      x: 0,
-      y: 0,
-      width: viewportWidth,
-      height: viewportHeight,
-      borderRadius: 0,
-      opacity: 1,
-      scale: 1,
-      zIndex: BG_Z
+      x: 0, y: 0, width: viewportWidth, height: viewportHeight, borderRadius: 0, opacity: 1, scale: 1, zIndex: BG_Z
     });
     gsap.set(getCardContentSelector(active), { x: 0, y: 0, opacity: 0 });
 
@@ -236,31 +191,19 @@ export default function Banner() {
     gsap.set(".gProgF", { width: progressBarWidth * (1 / SLIDER_DATA.length) * (active + 1) });
 
     SLIDER_DATA.forEach((_, i) => {
-      gsap.set(getSliderItemSelector(i), {
-        x: i === active ? 0 : numberSize * 2,
-      });
+      gsap.set(getSliderItemSelector(i), { x: i === active ? 0 : numberSize * 2 });
     });
 
     rest.forEach((i, index) => {
       const isVisible = index < VISIBLE_THUMBS;
       const currentX = isVisible ? getThumbX(offsetLeft, index) : getHiddenThumbX(offsetLeft);
       gsap.set(getCardSelector(i), {
-        x: currentX,
-        y: offsetTop,
-        width: cardWidth,
-        height: cardHeight,
-        zIndex: THUMB_Z,
-        borderRadius: 12,
-        opacity: isVisible ? 1 : 0,
-        scale: 1,
-        visibility: isVisible ? "visible" : "hidden"
+        x: currentX, y: offsetTop, width: cardWidth, height: cardHeight, zIndex: THUMB_Z,
+        borderRadius: 12, opacity: isVisible ? 1 : 0, scale: 1, visibility: isVisible ? "visible" : "hidden"
       });
       gsap.set(getCardContentSelector(i), {
-        x: currentX,
-        zIndex: THUMB_Z,
-        y: getThumbContentY(offsetTop),
-        opacity: isVisible && !hideThumbLabels ? 1 : 0,
-        visibility: isVisible ? "visible" : "hidden"
+        x: currentX, zIndex: THUMB_Z, y: getThumbContentY(offsetTop),
+        opacity: isVisible && !hideThumbLabels ? 1 : 0, visibility: isVisible ? "visible" : "hidden"
       });
     });
   }, []);
@@ -359,15 +302,7 @@ export default function Banner() {
         overlayCanvas.remove();
 
         gsap.set(getCardSelector(incomingIndex), {
-          x: 0,
-          y: 0,
-          width: viewportWidth,
-          height: viewportHeight,
-          borderRadius: 0,
-          opacity: 1,
-          scale: 1,
-          zIndex: BG_Z,
-          visibility: "visible"
+          x: 0, y: 0, width: viewportWidth, height: viewportHeight, borderRadius: 0, opacity: 1, scale: 1, zIndex: BG_Z, visibility: "visible"
         });
         gsap.set(getCardContentSelector(incomingIndex), { x: 0, y: 0, opacity: 0, visibility: "hidden" });
 
@@ -375,22 +310,12 @@ export default function Banner() {
           const isVisible = index < VISIBLE_THUMBS;
           const thumbX = isVisible ? getThumbX(offsetLeft, index) : hiddenThumbX;
           gsap.set(getCardSelector(idx), {
-            x: thumbX,
-            y: offsetTop,
-            width: cardWidth,
-            height: cardHeight,
-            zIndex: THUMB_Z,
-            borderRadius: 12,
-            opacity: isVisible ? 1 : 0,
-            scale: 1,
-            visibility: isVisible ? "visible" : "hidden"
+            x: thumbX, y: offsetTop, width: cardWidth, height: cardHeight, zIndex: THUMB_Z,
+            borderRadius: 12, opacity: isVisible ? 1 : 0, scale: 1, visibility: isVisible ? "visible" : "hidden"
           });
           gsap.set(getCardContentSelector(idx), {
-            x: thumbX,
-            y: getThumbContentY(offsetTop),
-            zIndex: THUMB_Z,
-            opacity: isVisible && !hideThumbLabels ? 1 : 0,
-            visibility: isVisible ? "visible" : "hidden"
+            x: thumbX, y: getThumbContentY(offsetTop), zIndex: THUMB_Z,
+            opacity: isVisible && !hideThumbLabels ? 1 : 0, visibility: isVisible ? "visible" : "hidden"
           });
           gsap.set(getSliderItemSelector(idx), {
             x: isVisible ? (index + 1) * numberSize : (VISIBLE_THUMBS + 1) * numberSize
@@ -405,59 +330,25 @@ export default function Banner() {
     });
 
     tl.to(overlayCanvas, {
-      left: 0,
-      top: 0,
-      width: heroMetrics.width,
-      height: heroMetrics.height,
-      borderRadius: 0,
-      duration: 0.8,
-      ease: ease
+      left: 0, top: 0, width: heroMetrics.width, height: heroMetrics.height, borderRadius: 0, duration: 0.8, ease: ease
     }, 0);
 
     tl.to(currentDetailsSelector, { opacity: 0, duration: 0.3, ease: ease }, 0);
 
     tl.to(getCardSelector(activeIndex), {
-      x: hiddenThumbX,
-      y: offsetTop,
-      width: cardWidth,
-      height: cardHeight,
-      scale: 1,
-      opacity: 0,
-      borderRadius: 12,
-      zIndex: BG_Z,
-      visibility: "hidden",
-      duration: 0.8,
-      ease: ease
+      x: hiddenThumbX, y: offsetTop, width: cardWidth, height: cardHeight, scale: 1, opacity: 0, borderRadius: 12, zIndex: BG_Z, visibility: "hidden", duration: 0.8, ease: ease
     }, 0);
     tl.to(getCardContentSelector(activeIndex), {
-      x: hiddenThumbX,
-      y: getThumbContentY(offsetTop),
-      opacity: 0,
-      visibility: "hidden",
-      duration: 0.8,
-      ease: ease
+      x: hiddenThumbX, y: getThumbContentY(offsetTop), opacity: 0, visibility: "hidden", duration: 0.8, ease: ease
     }, 0);
 
     slidesOrder.slice(2).forEach((idx, index) => {
       const targetX = getThumbX(offsetLeft, index);
       tl.to(getCardSelector(idx), {
-        x: targetX,
-        y: offsetTop,
-        width: cardWidth,
-        height: cardHeight,
-        opacity: 1,
-        zIndex: THUMB_Z,
-        visibility: "visible",
-        ease: ease,
-        duration: 0.8
+        x: targetX, y: offsetTop, width: cardWidth, height: cardHeight, opacity: 1, zIndex: THUMB_Z, visibility: "visible", ease: ease, duration: 0.8
       }, 0);
       tl.to(getCardContentSelector(idx), {
-        x: targetX,
-        y: getThumbContentY(offsetTop),
-        opacity: hideThumbLabels ? 0 : 1,
-        visibility: "visible",
-        ease: ease,
-        duration: 0.8
+        x: targetX, y: getThumbContentY(offsetTop), opacity: hideThumbLabels ? 0 : 1, visibility: "visible", ease: ease, duration: 0.8
       }, 0);
       tl.to(getSliderItemSelector(idx), { x: (index + 1) * numberSize, ease: ease, duration: 0.8 }, 0);
     });
@@ -469,9 +360,7 @@ export default function Banner() {
     tl.to(`${nextDetailsSelector} .gCta`, { y: 0, duration: 0.4, ease: ease }, 0.65);
 
     tl.to(".gProgF", {
-      width: progressBarWidth * (1 / SLIDER_DATA.length) * (incomingIndex + 1),
-      ease: ease,
-      duration: 0.8
+      width: progressBarWidth * (1 / SLIDER_DATA.length) * (incomingIndex + 1), ease: ease, duration: 0.8
     }, 0);
 
     tl.to(getSliderItemSelector(incomingIndex), { x: 0, ease: ease, duration: 0.8 }, 0);
@@ -501,7 +390,7 @@ export default function Banner() {
   return (
     <main
       ref={heroRef}
-      className="relative isolate w-full h-[100dvh] min-h-[100svh] overflow-hidden select-none bg-black m-0 p-0"
+      className="relative isolate w-full h-[130vh] min-h-[100svh] overflow-hidden select-none bg-black m-0 p-0"
       style={{ "--banner-content-max": "340px", "--banner-progress-width": "240px" }}
     >
       <div
@@ -535,6 +424,19 @@ export default function Banner() {
 
       <BannerContent />
       <BannerImage onNext={handleNext} numberSize={numberSize} />
+
+      {/* FIXED FOREGROUND CLOUD LAYER OVER ALL CONTENT */}
+      <div 
+        className="absolute bottom-0 left-0 w-full pointer-events-none overflow-hidden h-full z-[110]"
+      >
+        {/* Layer 1: Floating background cloud ribbon */}
+        <div 
+          className="absolute left-0 bottom-[0px] w-full h-[300px] opacity-100 bg-no-repeat bg-cover bg-top"
+          style={{ 
+            backgroundImage: "url('/images/full-cloud.png')",
+          }}
+        />
+      </div>
 
       <div className="indicator absolute bottom-0 left-0 h-[4px] bg-amber-500 z-[99] w-full origin-left scale-x-0" style={{ willChange: "transform" }}></div>
       <div className="cover absolute z-[100]" id="cover"></div>

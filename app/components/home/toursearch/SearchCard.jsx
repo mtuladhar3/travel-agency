@@ -11,7 +11,7 @@ export default function SearchCard() {
             Where do you want to go?
           </label>
           <div className="relative">
-            <select className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 appearance-none outline-none focus:border-orange-500 transition-colors cursor-pointer">
+            <select className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 appearance-none outline-none focus:border-sky-700 transition-colors cursor-pointer">
               <option value="">Destination</option>
               <option value="nepal">Nepal Trekking</option>
               <option value="europe">Europe Tour</option>
@@ -34,7 +34,7 @@ export default function SearchCard() {
               <input 
                 type="date" 
                 placeholder="dd/mm/yyyy"
-                className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 outline-none focus:border-orange-500 transition-colors"
+                className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 outline-none focus:border-sky-700 transition-colors"
               />
             </div>
           </div>
@@ -45,7 +45,7 @@ export default function SearchCard() {
               Duration
             </label>
             <div className="relative">
-              <select className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 appearance-none outline-none focus:border-orange-500 transition-colors cursor-pointer">
+              <select className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 appearance-none outline-none focus:border-sky-700 transition-colors cursor-pointer">
                 <option value="1-3">1 days - 3 days</option>
                 <option value="4-7">4 days - 7 days</option>
                 <option value="8+">8 days +</option>
@@ -63,7 +63,7 @@ export default function SearchCard() {
             Number of Travelers
           </label>
           <div className="relative">
-            <select className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 appearance-none outline-none focus:border-orange-500 transition-colors cursor-pointer">
+            <select className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 appearance-none outline-none focus:border-sky-700 transition-colors cursor-pointer">
               <option value="1">1 People</option>
               <option value="2">2 People</option>
               <option value="3-5">3 - 5 People</option>
@@ -79,10 +79,10 @@ export default function SearchCard() {
         <div className="pt-2">
           <button 
             type="submit" 
-            className="group flex items-center justify-between pl-6 pr-2 h-12 bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm rounded-full w-48 shadow-md shadow-orange-500/20 transition-all duration-300"
+            className="group flex items-center justify-between pl-6 pr-2 h-12 bg-sky-700 hover:bg-sky-700 text-white font-bold text-sm rounded-full w-48 shadow-md shadow-sky-700/20 transition-all duration-300"
           >
             <span>Search Tours</span>
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-orange-500 transition-transform group-hover:translate-x-0.5">
+            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-sky-700 transition-transform group-hover:translate-x-0.5">
               <svg className="w-4 h-4 stroke-current fill-none" viewBox="0 0 24 24" strokeWidth="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </button>

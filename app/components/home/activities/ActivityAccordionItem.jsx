@@ -16,7 +16,7 @@ export default function ActivityAccordionItem({ item, isActive, onClick }) {
           </span>
           {/* Interactive Title Tag */}
           <h3 className={`text-lg font-bold tracking-wide transition-colors sm:text-xl md:text-2xl ${
-            isActive ? "text-orange-500" : "text-neutral-500 group-hover:text-neutral-800"
+            isActive ? "text-sky-700" : "text-neutral-500 group-hover:text-neutral-800"
           }`}>
             {item.title}
           </h3>
@@ -26,7 +26,7 @@ export default function ActivityAccordionItem({ item, isActive, onClick }) {
         <motion.div
           animate={{ rotate: isActive ? 45 : 0 }}
           transition={{ type: "spring", stiffness: 200, damping: 15 }}
-          className={`rounded-full p-2 ${isActive ? "text-orange-500" : "text-neutral-500 group-hover:text-neutral-900"}`}
+          className={`rounded-full p-2 ${isActive ? "text-sky-700" : "text-neutral-500 group-hover:text-neutral-900"}`}
         >
           <FiArrowRight className="h-5 w-5 sm:h-6 sm:w-6" />
         </motion.div>

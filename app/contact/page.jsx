@@ -66,12 +66,22 @@ export default function ContactPage() {
           priority
           className="object-cover object-center"
         />
-        
+        <div 
+        className="absolute bottom-0 left-0 w-full pointer-events-none overflow-hidden h-full z-[110]"
+      >
+        {/* Layer 1: Floating background cloud ribbon */}
+        <div 
+          className="absolute left-0 bottom-[0px] w-full h-[300px] opacity-100 bg-no-repeat bg-cover bg-top"
+          style={{ 
+            backgroundImage: "url('/images/full-cloud.png')",
+          }}
+        />
+      </div>
         {/* Dark bottom-heavy gradient vignette overlay to guarantee clear text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-0" />
 
         {/* Content Container - Placed max-w-7xl, left aligned with padding matching the sections below */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pb-16 sm:pb-24 flex flex-col items-start justify-end gap-4 text-white">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pb-50 sm:pb-50 flex flex-col items-start justify-end gap-4 text-white">
           
           {/* Top Left Mini floating Pill Badge */}
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#fdf5df] text-[#2b1408] text-xs font-semibold tracking-wider uppercase border border-amber-200/30 shadow-sm mb-2">
@@ -98,20 +108,20 @@ export default function ContactPage() {
       {/* --- CHANNELS DIRECTORY SECTION --- */}
       <section 
         ref={containerRef}
-        className="w-full bg-[#fcfcfc] text-[#0f2a22] py-16 px-6 md:py-16 md:px-16 font-sans selection:bg-orange-100"
+        className="w-full bg-white text-[#0f2a22] py-16 px-6 md:py-16 md:px-16 font-sans selection:bg-blue-100"
       >
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
           
           {/* --- LEFT SIDEBAR: EDITORIAL HEADLINE & METRICS --- */}
           <div ref={leftSideRef} className="lg:col-span-5 space-y-12">
             <div ref={(el) => (elementsRef.current[0] = el)} className="space-y-4">
-              <span className="text-[14px] font-bold tracking-[0.25em] text-[#bd7a5c] uppercase block">
+              <span className="text-[14px] font-bold tracking-[0.25em] text-sky-600 uppercase block">
                 // Get In Touch
               </span>
 
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-normal text-black tracking-tight leading-[1.1]">
                 We're here to <br />
-                <span className="italic font-normal text-orange-600">plan your path</span>
+                <span className="italic font-normal text-sky-700">plan your path</span>
               </h2>
               
               <p className="text-neutral-600 text-sm md:text-base max-w-sm leading-relaxed pt-2">
@@ -128,13 +138,13 @@ export default function ContactPage() {
               ref={(el) => (elementsRef.current[2] = el)}
               className="py-8 grid grid-cols-1 sm:grid-cols-12 gap-4 items-baseline group"
             >
-              <span className="sm:col-span-3 text-[14px] font-bold tracking-widest text-neutral-400 uppercase flex items-center gap-2">
-                <Phone className="w-5 h-5 text-neutral-300 group-hover:text-orange-500 transition-colors" /> Call Us
+              <span className="sm:col-span-3 text-[14px] font-bold tracking-widest group-hover:text-sky-700 text-neutral-400 uppercase flex items-center gap-2">
+                <Phone className="w-5 h-5 text-neutral-300 group-hover:text-sky-700 transition-colors" /> Call Us
               </span>
               <div className="sm:col-span-9 space-y-1">
                 <a 
                   href="tel:+12345678900" 
-                  className="text-xl md:text-2xl font-serif text-black hover:text-orange-600 transition-colors block font-light"
+                  className="text-xl md:text-2xl font-serif text-black hover:text-sky-700 transition-colors block font-light"
                 >
                   +1 (234) 567-8900
                 </a>
@@ -147,13 +157,13 @@ export default function ContactPage() {
               ref={(el) => (elementsRef.current[3] = el)}
               className="py-8 grid grid-cols-1 sm:grid-cols-12 gap-4 items-baseline group"
             >
-              <span className="sm:col-span-3 text-[14px] font-bold tracking-widest text-neutral-400 uppercase flex items-center gap-2">
-                <Mail className="w-5 h-5 text-neutral-300 group-hover:text-orange-500 transition-colors" /> Email
+              <span className="sm:col-span-3 text-[14px] font-bold tracking-widest group-hover:text-sky-700 text-neutral-400 uppercase flex items-center gap-2">
+                <Mail className="w-5 h-5 text-neutral-300 group-hover:text-sky-700 transition-colors" /> Email
               </span>
               <div className="sm:col-span-9 space-y-1">
                 <a 
                   href="mailto:info@example.com" 
-                  className="text-xl md:text-2xl font-serif text-black hover:text-orange-600 transition-colors block font-light"
+                  className="text-xl md:text-2xl font-serif text-black hover:text-sky-700 transition-colors block font-light"
                 >
                   info@example.com
                 </a>
@@ -166,8 +176,8 @@ export default function ContactPage() {
               ref={(el) => (elementsRef.current[4] = el)}
               className="py-8 grid grid-cols-1 sm:grid-cols-12 gap-4 items-start group"
             >
-              <span className="sm:col-span-3 text-[14px] font-bold tracking-widest text-neutral-400 uppercase flex items-center gap-2 pt-1">
-                <MessageCircle className="w-5 h-5 text-neutral-300 group-hover:text-orange-500 transition-colors" /> Support
+              <span className="sm:col-span-3 text-[14px] font-bold group-hover:text-sky-700 tracking-widest text-neutral-400 uppercase flex items-center gap-2 pt-1">
+                <MessageCircle className="w-5 h-5 text-neutral-300 group-hover:text-sky-700 transition-colors" /> Support
               </span>
               <div className="sm:col-span-9 space-y-3">
                 <p className="text-sm text-neutral-600 font-light max-w-md leading-relaxed">
@@ -176,7 +186,7 @@ export default function ContactPage() {
                 <Link 
                   href="https://wa.me/12345678900" 
                   target="_blank"
-                  className="inline-flex items-center gap-1 text-xs font-bold text-black border-b border-black pb-0.5 hover:text-orange-600 hover:border-orange-600 transition-all uppercase tracking-wider"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-black border-b border-black pb-0.5 hover:text-sky-700 hover:border-sky-700 transition-all uppercase tracking-wider"
                 >
                   Open WhatsApp Chat
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -189,8 +199,8 @@ export default function ContactPage() {
               ref={(el) => (elementsRef.current[5] = el)}
               className="py-8 grid grid-cols-1 sm:grid-cols-12 gap-4 items-start group"
             >
-              <span className="sm:col-span-3 text-[14px] font-bold tracking-widest text-neutral-400 uppercase flex items-center gap-2 pt-1">
-                <MapPin className="w-5 h-5 text-neutral-300 group-hover:text-orange-500 transition-colors" /> Offices
+              <span className="sm:col-span-3 text-[14px] font-bold group-hover:text-sky-700 tracking-widest text-neutral-400 uppercase flex items-center gap-2 pt-1">
+                <MapPin className="w-5 h-5 text-neutral-300 group-hover:text-sky-700 transition-colors" /> Offices
               </span>
               
               <div className="sm:col-span-9 grid grid-cols-1 sm:grid-cols-2 gap-8 pt-1 sm:pt-0">
@@ -260,7 +270,7 @@ export default function ContactPage() {
                     type="text"
                     placeholder="Enter your full name"
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/60 focus:bg-white/10 transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-sky-700/60 focus:bg-white/10 transition-all"
                   />
                 </div>
 
@@ -270,7 +280,7 @@ export default function ContactPage() {
                     type="email"
                     placeholder="hello@yourbrand.com"
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/60 focus:bg-white/10 transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-sky-700/60 focus:bg-white/10 transition-all"
                   />
                 </div>
               </div>
@@ -281,7 +291,7 @@ export default function ContactPage() {
                   <input
                     type="tel"
                     placeholder="Your contact number"
-                    className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/60 focus:bg-white/10 transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-sky-700/60 focus:bg-white/10 transition-all"
                   />
                 </div>
 
@@ -290,7 +300,7 @@ export default function ContactPage() {
                   <input
                     type="text"
                     placeholder="How can we help you?"
-                    className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/60 focus:bg-white/10 transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-sky-700/60 focus:bg-white/10 transition-all"
                   />
                 </div>
               </div>
@@ -300,7 +310,7 @@ export default function ContactPage() {
                 <textarea
                   rows={4}
                   placeholder="Write your message here..."
-                  className="w-full bg-white/5 border border-white/10 rounded-[1.5rem] py-4 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500/60 focus:bg-white/10 transition-all resize-none"
+                  className="w-full bg-white/5 border border-white/10 rounded-[1.5rem] py-4 px-5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-sky-700/60 focus:bg-white/10 transition-all resize-none"
                 />
               </div>
 
@@ -321,7 +331,7 @@ export default function ContactPage() {
                         }`}
                       >
                         <span className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                          isSelected ? "bg-orange-600" : "bg-neutral-600"
+                          isSelected ? "bg-sky-700" : "bg-neutral-600"
                         }`} />
                         {cat}
                       </button>
@@ -339,7 +349,7 @@ export default function ContactPage() {
                 </button>
                 
                 <p className="text-[11px] text-neutral-400 flex items-center gap-1.5 pl-1">
-                  <span className="text-orange-500 text-xs">🔒</span> 
+                  <span className="text-xs">*</span> 
                   Your information is safe and never shared.
                 </p>
               </div>

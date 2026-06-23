@@ -1,178 +1,110 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useMotionValue, animate } from "framer-motion";
+import React from "react";
 import TestimonialHeader from "./TestimonialHeader";
 import TestimonialCard from "./TestimonialCard";
 
-const GAP_PX = 24;
-const MOBILE_BREAKPOINT = 768;
-
 export default function TestimonialSlider() {
-  const sectionRef = useRef(null);
-  const viewportRef = useRef(null);
-  const trackRef = useRef(null);
-  const [maxScroll, setMaxScroll] = useState(0);
-  const [slideWidth, setSlideWidth] = useState(0);
-  const x = useMotionValue(0);
-
   const reviewsData = [
     {
       id: 1,
       name: "David Fincher",
       role: "Founder & CEO",
-      avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
-      quote:
-        "Get Expert Guidance For Seamless Stress-Free Travel Experience. Let Our Professionals Plan Your Perfect Trip With Insider Tips And Personalized Recommendations.",
+      location: "New York",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80",
+      quote: "Get Expert Guidance For Seamless Stress-Free Travel Experience. Let Our Professionals Plan Your Perfect Trip With Insider Tips And Personalized Recommendations.",
     },
     {
       id: 2,
       name: "Dianne Russell",
       role: "Founder & CEO",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
-      quote:
-        "Get Expert Guidance For Seamless Stress-Free Travel Experience. Let Our Professionals Plan Your Perfect Trip With Insider Tips And Personalized Recommendations.",
+      location: "Paris",
+      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&auto=format&fit=crop&q=80",
+      quote: "Get Expert Guidance For Seamless Stress-Free Travel Experience. Let Our Professionals Plan Your Perfect Trip With Insider Tips And Personalized Recommendations.",
     },
     {
       id: 3,
       name: "David Luic",
       role: "Founder & CEO",
-      avatar:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
-      quote:
-        "Get Expert Guidance For Seamless Stress-Free Travel Experience. Let Our Professionals Plan Your Perfect Trip With Insider Tips And Personalized Recommendations.",
+      location: "London",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80",
+      quote: "Get Expert Guidance For Seamless Stress-Free Travel Experience. Let Our Professionals Plan Your Perfect Trip With Insider Tips And Personalized Recommendations.",
     },
     {
       id: 4,
       name: "Sarah Jenkins",
       role: "Operations Director",
-      avatar:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
-      quote:
-        "The personalized trekking routes and local safety guide support exceeded all expectations. Our expedition felt incredibly professional from start to finish.",
+      location: "Berlin",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80",
+      quote: "The personalized trekking routes and local safety guide support exceeded all expectations. Our expedition felt incredibly professional from start to finish.",
     },
+    {
+      id: 5,
+      name: "Liam O'Connor",
+      role: "Road Trip Explorer",
+      location: "Dublin",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&auto=format&fit=crop&q=80",
+      quote: "Our road trip across New Zealand was seamless. Every stop was well planned, and the natural beauty we experienced was absolutely incredible.",
+    },
+    {
+      id: 6,
+      name: "Emily Dubois",
+      role: "Honeymoon Traveller",
+      location: "Paris",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&auto=format&fit=crop&q=80",
+      quote: "We celebrated our anniversary in Santorini, and it was beyond perfect. The sunset views and private dinner arrangements were simply breathtaking.",
+    }
   ];
 
-  const getVisibleWidth = useCallback(() => {
-    const viewport = viewportRef.current;
-    const section = sectionRef.current;
-    if (!viewport) return 0;
-
-    const viewportRect = viewport.getBoundingClientRect();
-
-    if (window.innerWidth < MOBILE_BREAKPOINT) {
-      return viewport.offsetWidth;
-    }
-
-    const sectionRect = section?.getBoundingClientRect();
-    const rightEdge = sectionRect?.right ?? window.innerWidth;
-
-    return Math.max(viewport.offsetWidth, rightEdge - viewportRect.left);
-  }, []);
-
-  const getStep = useCallback(() => {
-    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-    if (isMobile && slideWidth > 0) return slideWidth + GAP_PX;
-
-    const firstCard = trackRef.current?.firstElementChild;
-    if (!firstCard) return 420;
-    return firstCard.getBoundingClientRect().width + GAP_PX;
-  }, [slideWidth]);
-
-  const updateBounds = useCallback(() => {
-    const track = trackRef.current;
-    const viewport = viewportRef.current;
-    if (!track || !viewport) return;
-
-    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-    setSlideWidth(isMobile ? viewport.offsetWidth : 0);
-
-    const trackWidth = track.scrollWidth;
-    const visibleWidth = getVisibleWidth();
-    const max = Math.min(0, visibleWidth - trackWidth);
-
-    setMaxScroll(max);
-
-    const current = x.get();
-    if (current < max) x.set(max);
-    if (current > 0) x.set(0);
-  }, [getVisibleWidth, x]);
-
-  const handleSlide = useCallback(
-    (direction) => {
-      const step = getStep();
-      if (!step) return;
-
-      const currentX = x.get();
-      const currentIndex = Math.round(-currentX / step);
-      const maxIndex = Math.max(0, Math.round(-maxScroll / step));
-      let nextIndex =
-        direction === "next" ? currentIndex + 1 : currentIndex - 1;
-
-      if (nextIndex > maxIndex) nextIndex = maxIndex;
-      if (nextIndex < 0) nextIndex = 0;
-
-      animate(x, -nextIndex * step, {
-        type: "spring",
-        stiffness: 220,
-        damping: 28,
-      });
-    },
-    [getStep, maxScroll, x]
-  );
-
-  useEffect(() => {
-    updateBounds();
-
-    const viewport = viewportRef.current;
-    const track = trackRef.current;
-
-    const resizeObserver = new ResizeObserver(() => updateBounds());
-    if (viewport) resizeObserver.observe(viewport);
-    if (track) resizeObserver.observe(track);
-
-    window.addEventListener("resize", updateBounds);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", updateBounds);
-    };
-  }, [updateBounds, reviewsData.length]);
+  // Distribute variations cleanly across the columns
+  const col1Data = [reviewsData[0], reviewsData[3], reviewsData[4]];
+  const col2Data = [reviewsData[1], reviewsData[5], reviewsData[2]];
+  const col3Data = [reviewsData[2], reviewsData[1], reviewsData[0]];
 
   return (
-    <section
-      ref={sectionRef}
-      className="w-full overflow-hidden bg-white px-6 py-16 sm:px-12 md:py-24 lg:px-20 xl:px-32"
-    >
-      <div className="mx-auto max-w-7xl">
-        <TestimonialHeader
-          onPrev={() => handleSlide("prev")}
-          onNext={() => handleSlide("next")}
-        />
+    <section className="w-full bg-[#FAFAFA] py-16 px-4">
+      <div className="max-w-[1200px] mx-auto flex flex-col">
+        
+        {/* Unmasked Header Layer (Stays fully visible, responsive, and unaffected by the background cloud fade) */}
+        <div className="relative z-30 mb-8">
+          <TestimonialHeader />
+        </div>
+<div className="relative w-full h-[650px] overflow-hidden rounded-b-[2rem]">
+          
+          {/* ─── BLENDING GRADIENTS TARGETING ONLY CARDS ─── */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#FAFAFA] via-[#FAFAFA]/95 to-transparent z-20 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA]/95 to-transparent z-20 pointer-events-none" />
+        {/* 3-Column Sliding Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-hidden flex-grow h-full mt-4">
+          
+          {/* COLUMN 1: Sliding Upwards */}
+          <div className="relative flex flex-col gap-6 overflow-hidden h-full">
+            <div className="flex flex-col gap-6 animate-slide-up hover:[animation-play-state:paused]">
+              {[...col1Data, ...col1Data, ...col1Data].map((review, idx) => (
+                <TestimonialCard key={`c1-${review.id}-${idx}`} review={review} />
+              ))}
+            </div>
+          </div>
 
-        <div
-          ref={viewportRef}
-          style={
-            slideWidth > 0
-              ? { "--slide-width": `${slideWidth}px` }
-              : undefined
-          }
-          className="w-full overflow-hidden md:overflow-visible"
-        >
-          <motion.div
-            ref={trackRef}
-            style={{ x }}
-            drag="x"
-            dragConstraints={{ left: maxScroll, right: 0 }}
-            dragElastic={0.08}
-            className="flex w-max cursor-grab gap-6 active:cursor-grabbing"
-          >
-            {reviewsData.map((review) => (
-              <TestimonialCard key={review.id} review={review} />
-            ))}
-          </motion.div>
+          {/* COLUMN 2: Sliding Downwards */}
+          <div className="relative flex flex-col gap-6 overflow-hidden h-full hidden md:flex">
+            <div className="flex flex-col gap-6 animate-slide-down hover:[animation-play-state:paused]">
+              {[...col2Data, ...col2Data, ...col2Data].map((review, idx) => (
+                <TestimonialCard key={`c2-${review.id}-${idx}`} review={review} />
+              ))}
+            </div>
+          </div>
+
+          {/* COLUMN 3: Sliding Upwards (Slower) */}
+          <div className="relative flex flex-col gap-6 overflow-hidden h-full hidden lg:flex">
+            <div className="flex flex-col gap-6 animate-slide-up hover:[animation-play-state:paused]">
+              {[...col3Data, ...col3Data, ...col3Data].map((review, idx) => (
+                <TestimonialCard key={`c3-${review.id}-${idx}`} review={review} />
+              ))}
+            </div>
+          </div>
+
+        </div>
         </div>
       </div>
     </section>

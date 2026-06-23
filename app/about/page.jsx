@@ -152,12 +152,25 @@ export default function AboutPage() {
           priority
           className="object-cover object-center"
         />
+         <div 
+        className="absolute bottom-0 left-0 w-full pointer-events-none overflow-hidden h-full z-[110]"
+      >
+        {/* Layer 1: Floating background cloud ribbon */}
+        <div 
+          className="absolute left-0 bottom-[0px] w-full h-[300px] opacity-100 bg-no-repeat bg-cover bg-top"
+          style={{ 
+            backgroundImage: "url('/images/full-cloud.png')",
+          }}
+        />
+
+      
+      </div>
         
         {/* Dark bottom-heavy gradient vignette overlay to guarantee clear text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-0" />
 
         {/* Content Container - Placed max-w-7xl, left aligned with padding matching the sections below */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pb-16 sm:pb-24 flex flex-col items-start justify-end gap-4 text-white">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pb-50 sm:pb-50 flex flex-col items-start justify-end gap-4 text-white">
           
           {/* Top Left Mini floating Pill Badge */}
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#fdf5df] text-[#2b1408] text-xs font-semibold tracking-wider uppercase border border-amber-200/30 shadow-sm mb-2">
@@ -187,7 +200,7 @@ export default function AboutPage() {
           <div>
             <h2 className="text-4xl md:text-5xl lg:text-5xl text-[#0f2a22] leading-tight">
               Our mission to create <br />
-              <span className="italic text-orange-500 font-normal">unforgettable journeys</span>
+              <span className="italic text-sky-700 font-normal">unforgettable journeys</span>
             </h2>
           </div>
           <div className="space-y-6 text-slate-600 text-base md:text-lg max-w-xl">
@@ -206,7 +219,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center lg:text-left border-b border-slate-100 pb-16 mb-16">
           {stats.map((stat, index) => (
             <div key={index} className="space-y-2">
-              <div className="text-4xl md:text-5xl lg:text-6xl font-serif text-orange-500">
+              <div className="text-4xl md:text-5xl lg:text-6xl font-serif text-sky-700">
                 {stat.value}
               </div>
               <div className="text-xs md:text-sm text-slate-500 font-medium tracking-wide">
@@ -250,7 +263,10 @@ export default function AboutPage() {
 
       {/* --- VIDEO SECTION & FLOATING CARDS --- */}
       <section className="relative w-full bg-[#f4f1ea]">
+        
         <div className="relative h-[550px] md:h-[600px] w-full flex flex-col items-center justify-start text-center pt-16 md:pt-24 px-4 overflow-hidden">
+          {/* <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white  via-white/80 to-transparent z-20 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f4f1ea] via-[#f4f1ea]/5 to-transparent z-20 pointer-events-none" /> */}
           <video
             autoPlay
             loop
@@ -331,7 +347,7 @@ export default function AboutPage() {
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#0f2a22] tracking-tight leading-[1.1]">
               The ones who planned <br />
-              a surf camp, <span className="italic text-orange-500 font-normal">not a photoshoot</span>
+              a surf camp, <span className="italic text-sky-700 font-normal">not a photoshoot</span>
             </h2>
           </div>
           

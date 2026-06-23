@@ -9,16 +9,16 @@ export default function SectionLabel({ label, className = "", centered = false }
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-[#bd7a5c] uppercase ${className}`}
+      className={`flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-sky-600 uppercase ${className}`}
     >
       {/* Left accent bar */}
-      <span className="h-[2px] w-6 shrink-0 bg-[#bd7a5c]" aria-hidden="true" />
+      <span className="h-[2px] w-6 shrink-0 bg-sky-600" aria-hidden="true" />
       
       <span>{label}</span>
       
       {/* Right accent bar (only visible if header is centered) */}
       {centered && (
-        <span className="h-[2px] w-6 shrink-0 bg-[#bd7a5c]" aria-hidden="true" />
+        <span className="h-[2px] w-6 shrink-0 bg-sky-600" aria-hidden="true" />
       )}
     </motion.div>
   );
